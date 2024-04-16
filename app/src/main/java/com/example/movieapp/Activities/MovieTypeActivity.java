@@ -93,7 +93,6 @@ public class MovieTypeActivity extends AppCompatActivity {
             showPagination();
         }, error -> {
             loading1.setVisibility(View.GONE);
-            Log.i("UILover", "onErrorResponse: " + error.toString());
         });
         mRequestQueue.add(mStringRequest1);
     }
@@ -181,20 +180,6 @@ public class MovieTypeActivity extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
-        switch (type) {
-            case "new":
-                sendRequestNewestMovies();
-                break;
-            case "single":
-                sendRequestSingleMovies();
-                break;
-            case "series":
-                sendRequestSeriesMovies();
-                break;
-            case "hoathinh":
-                sendRequestCartoon();
-                break;
-        }
     }
 
     private void initView() {

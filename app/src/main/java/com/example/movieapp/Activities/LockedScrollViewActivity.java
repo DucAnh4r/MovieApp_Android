@@ -26,11 +26,9 @@ public class LockedScrollViewActivity extends ScrollView {
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-        // Nếu đang ở chế độ full screen, không cho phép cuộn màn hình
         if (isFullScreen) {
             return false;
         }
-        // Ngược lại, cho phép cuộn bình thường
         return super.onTouchEvent(ev);
     }
 }

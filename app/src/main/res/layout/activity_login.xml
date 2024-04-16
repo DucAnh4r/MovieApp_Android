@@ -32,7 +32,7 @@
                 android:id="@+id/editTextText"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:hint="UserName"
+                android:hint="Email"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"
@@ -58,7 +58,7 @@
                 android:inputType="textPassword" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/ForgetPass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Forget Your Password?"
@@ -81,6 +81,26 @@
                 android:layout_height="wrap_content"
                 android:text="Login" />
 
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/googleSignInBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="32dp"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/login_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="32dp"
+                android:text="Log in with Facebook" />
+
             <TextView
                 android:id="@+id/textView7"
                 android:layout_width="match_parent"
@@ -101,6 +121,7 @@
                 android:textStyle="bold"
                 android:textAlignment="center"
                 />
+
 
         </LinearLayout>
     </ScrollView>

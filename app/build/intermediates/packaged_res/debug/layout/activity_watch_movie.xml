@@ -29,17 +29,36 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.exoplayer2.ui.PlayerView
-                android:id="@+id/videoView2"
-                android:layout_width="fill_parent"
-                android:layout_height="260dp"
-                android:background="@color/black"
-                app:controller_layout_id="@layout/custom_controller"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/backimg">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            </com.google.android.exoplayer2.ui.PlayerView>
+                <ImageView
+                    android:id="@+id/backimg"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="6dp"
+                    android:background="@drawable/oval_btn_background"
+                    android:padding="8dp"
+                    android:src="@drawable/back"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.exoplayer2.ui.PlayerView
+                    android:id="@+id/videoView2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="260dp"
+                    android:background="@color/black"
+                    app:controller_layout_id="@layout/custom_controller"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/backimg" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintInfo"
@@ -48,7 +67,7 @@
                 android:padding="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/videoView2">
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
 
                 <TextView
                     android:id="@+id/textView20"
@@ -194,19 +213,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/episodeCountTextView" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <ImageView
-                android:id="@+id/backimg"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/oval_btn_background"
-                android:padding="8dp"
-                android:src="@drawable/back"
-                app:layout_constraintEnd_toEndOf="@+id/videoView2"
-                app:layout_constraintHorizontal_bias="0.042"
-                app:layout_constraintStart_toStartOf="@+id/videoView2"
-                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

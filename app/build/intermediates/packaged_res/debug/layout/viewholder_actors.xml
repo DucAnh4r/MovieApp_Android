@@ -7,7 +7,6 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/itemImages"
-        app:shapeAppearanceOverlay="@style/roundedImageView"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_margin="5dp"
@@ -16,5 +15,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/roundedImageView"
         tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/actorNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/itemImages"
+        app:layout_constraintStart_toStartOf="@+id/itemImages"
+        app:layout_constraintTop_toBottomOf="@+id/itemImages" />
 </androidx.constraintlayout.widget.ConstraintLayout>

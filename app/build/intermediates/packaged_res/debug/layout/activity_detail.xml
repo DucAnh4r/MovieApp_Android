@@ -172,24 +172,22 @@
                 app:layout_constraintStart_toStartOf="@+id/textView22"
                 app:layout_constraintTop_toBottomOf="@+id/movieSummery" />
 
-            <TextView
-                android:id="@+id/movieActorInfo"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/actorRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:text="Test"
-                android:textColor="@color/white"
+                android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView24"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
             <TextView
                 android:id="@+id/textView17"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:text="Director"
                 android:textColor="@color/yellow"
@@ -197,33 +195,30 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/textView24"
-                app:layout_constraintTop_toBottomOf="@+id/movieActorInfo" />
+                app:layout_constraintTop_toBottomOf="@+id/actorRecyclerView" />
 
-            <TextView
-                android:id="@+id/movieDirector"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/directorsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:text="Test"
-                android:textColor="@color/white"
+                android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView17"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
             <TextView
                 android:id="@+id/episodeCountTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:text="Episode"
                 android:textColor="@color/yellow"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/movieDirector"
-                app:layout_constraintTop_toBottomOf="@+id/movieDirector" />
+                app:layout_constraintStart_toStartOf="@+id/textView17"
+                app:layout_constraintTop_toBottomOf="@+id/directorsRecyclerView" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/episodeRecyclerView"
@@ -237,18 +232,17 @@
                 app:layout_constraintTop_toBottomOf="@+id/episodeCountTextView" />
 
 
-
             <Button
                 android:id="@+id/playBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/orange_button_background"
                 android:text="Play"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/movieDirector" />
+                app:layout_constraintTop_toBottomOf="@+id/directorsRecyclerView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

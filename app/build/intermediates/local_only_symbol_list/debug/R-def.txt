@@ -63,6 +63,7 @@ drawable star
 drawable time
 id CartoonView
 id FavouriteListView
+id ForgetPass
 id HistoryListView
 id LatestMovieType
 id NewestMovieView
@@ -71,6 +72,8 @@ id SeriesMovieView
 id SingleMovieView
 id TitleTxt
 id WatchListView
+id actorNameTextView
+id actorRecyclerView
 id backimg
 id bottomNavigationMenu
 id bt_fullscreen
@@ -83,8 +86,11 @@ id cfPassTxt
 id constraintInfo
 id constraintLayout
 id constraintLayout2
+id constraintLayout3
+id constraintLayout4
 id coordinatorLayout3
 id country
+id directorsRecyclerView
 id editTextPassword
 id editTextText
 id email
@@ -106,6 +112,7 @@ id favBtn
 id flag
 id genreView
 id getInBtn
+id googleSignInBtn
 id heart
 id imageSlide
 id imageView
@@ -119,6 +126,7 @@ id itemImages
 id listBtn
 id logOutBtn
 id loginBtn
+id login_button
 id mainLayout
 id message
 id more
@@ -126,8 +134,6 @@ id moreCartoon_btn
 id moreNew_btn
 id moreSeries_btn
 id moreSingle_btn
-id movieActorInfo
-id movieDirector
 id movieLink
 id movieName
 id movieNameTxt
@@ -141,6 +147,7 @@ id newMovie
 id newSeries
 id newSingle
 id notification
+id notificationRecycleView
 id oTitleTxt
 id originalMovieName
 id passTxt
@@ -183,13 +190,14 @@ id textView24
 id textView3
 id textView4
 id textView5
-id textView6
 id textView7
 id textView8
 id titleTxt
 id tvTap
 id type
 id uName
+id updateFilmCount
+id updateFilmCountCard
 id userName
 id videoView2
 id view
@@ -223,7 +231,12 @@ layout viewholder_search
 mipmap ic_launcher
 mipmap ic_launcher_foreground
 mipmap ic_launcher_round
+string API_KEY
+string CSE_ID
 string app_name
+string default_web_client_id
+string facebook_app_id
+string facebook_client_token
 string firebase_database_url
 string gcm_defaultSenderId
 string google_api_key

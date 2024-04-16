@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.text.HtmlCompat;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -15,6 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.movieapp.R;
+import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -22,19 +24,25 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 
 public class ProfileActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     private TextView username, email, fav, movieWatch, watchList;
     private Button logOutBtn;
-    private  CardView cardList, cardFav, cardRecent;
+    private CardView cardList, cardFav, cardRecent;
+    private GoogleSignInClient mGoogleSignInClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
         mAuth = FirebaseAuth.getInstance();
+        mGoogleSignInClient = GoogleSignIn.getClient(this, GoogleSignInOptions.DEFAULT_SIGN_IN);
+
         username = findViewById(R.id.uName);
         email = findViewById(R.id.email);
         movieWatch = findViewById(R.id.movieWatch);
@@ -63,7 +71,7 @@ public class ProfileActivity extends AppCompatActivity {
                         fav.setGravity(Gravity.CENTER);
                         movieWatch.setGravity(Gravity.CENTER);
                         watchList.setGravity(Gravity.CENTER);
-                        fav.setText(HtmlCompat.fromHtml("Favourites<br><strong>" + favouriteCount, HtmlCompat.FROM_HTML_MODE_LEGACY));
+                        fav.setText(HtmlCompat.fromHtml("FAVOURITES<br><strong>" + favouriteCount, HtmlCompat.FROM_HTML_MODE_LEGACY));
                         movieWatch.setText(HtmlCompat.fromHtml("MOVIES<br><strong>" + watchCount, HtmlCompat.FROM_HTML_MODE_LEGACY));
                         watchList.setText(HtmlCompat.fromHtml("WATCHLIST<br><strong>" + listCount, HtmlCompat.FROM_HTML_MODE_LEGACY));
 
@@ -81,35 +89,58 @@ public class ProfileActivity extends AppCompatActivity {
             Toast.makeText(ProfileActivity.this, "Please login first", Toast.LENGTH_SHORT).show();
         }
 
-            cardList = findViewById(R.id.cardList);
-            cardList.setOnClickListener(v -> {
-                Intent intent = new Intent(ProfileActivity.this, WatchListActivity.class);
-                startActivity(intent);
-            });
+        cardList = findViewById(R.id.cardList);
+        cardList.setOnClickListener(v -> {
+            Intent intent = new Intent(ProfileActivity.this, WatchListActivity.class);
+            startActivity(intent);
+        });
 
-            cardFav = findViewById(R.id.cardFav);
-            cardFav.setOnClickListener(v -> {
-                Intent intent = new Intent(ProfileActivity.this, FavouriteActivity.class);
-                startActivity(intent);
-            });
+        cardFav = findViewById(R.id.cardFav);
+        cardFav.setOnClickListener(v -> {
+            Intent intent = new Intent(ProfileActivity.this, FavouriteActivity.class);
+            startActivity(intent);
+        });
 
-            cardRecent = findViewById(R.id.cardRecent);
-            cardRecent.setOnClickListener(v -> {
-                Intent intent = new Intent(ProfileActivity.this, HistoryActivity.class);
-                startActivity(intent);
-            });
+        cardRecent = findViewById(R.id.cardRecent);
+        cardRecent.setOnClickListener(v -> {
+            Intent intent = new Intent(ProfileActivity.this, HistoryActivity.class);
+            startActivity(intent);
+        });
 
-            logOutBtn.setOnClickListener(v -> {
-                mAuth.signOut();
-                SharedPreferences preferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putBoolean("isLoggedIn", false);
-                editor.putString("userId", null);
-                editor.apply();
-                startActivity(new Intent(ProfileActivity.this, LoginActivity.class));
-                finish();
-            });
+        logOutBtn.setOnClickListener(v -> {
+            mAuth.signOut();
+            SharedPreferences preferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putBoolean("isLoggedIn", false);
+            editor.putString("userId", null);
+            editor.apply();
+
+            signOutFromGoogle();
+            signOutFromFacebook();
+        });
     }
+
+    private void signOutFromGoogle() {
+        mGoogleSignInClient.signOut()
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Đăng xuất thành công, chuyển hướng đến trang đăng nhập
+                        startActivity(new Intent(ProfileActivity.this, LoginActivity.class));
+                        finish(); // Đóng activity hiện tại
+                    } else {
+                        // Đăng xuất thất bại, hiển thị thông báo lỗi
+                        Toast.makeText(ProfileActivity.this, "Sign out failed.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void signOutFromFacebook() {
+        LoginManager.getInstance().logOut(); // Đăng xuất khỏi Facebook
+        // Chuyển hướng đến trang đăng nhập
+        startActivity(new Intent(ProfileActivity.this, LoginActivity.class));
+        finish(); // Đóng activity hiện tại
+    }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
