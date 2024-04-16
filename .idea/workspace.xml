@@ -125,7 +125,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[LMV600VM085a22b8]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[41e1782e]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -149,19 +149,6 @@
                 <item name="MovieApp" type="f1a62948:ProjectNode" />
                 <item name="app" type="2d1252cf:ModuleNode" />
               </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="MovieApp" type="f1a62948:ProjectNode" />
-                <item name="app" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="MovieApp" type="f1a62948:ProjectNode" />
-                <item name="app" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="other" type="c8890929:TasksNode$1" />
-              </path>
             </expand>
             <select />
           </tree_state>
@@ -175,6 +162,9 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
@@ -195,11 +185,13 @@
     "android-custom-viewD:/Download/MovieApp-master/app/src/main/java/com/example/movieapp/Activities/BottomNavigationActivity.java_SELECTED": "BottomNavigationActivity",
     "android-custom-viewD:/Download/MovieApp-master/app/src/main/java/com/example/movieapp/Activities/LockedScrollViewActivity.java_SELECTED": "LockedScrollViewActivity",
     "android-custom-viewD:/Download/MovieApp-master/app/src/main/java/com/example/movieapp/Activities/SearchBarActivity.java_SELECTED": "SearchBarActivity",
+    "android-custom-viewE:/MovieApp_Android/app/src/main/java/com/example/movieapp/Activities/LockedScrollViewActivity.java_SELECTED": "LockedScrollViewActivity",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "com.android.tools.idea.common.error.DesignerCommonIssuePanel_detail_visibility": "true",
+    "git-widget-placeholder": "ducky-the-duck",
     "last_directory_selection": "D:/Download/MovieApp-master/app/src/main/res/drawable-xhdpi",
-    "last_opened_file_path": "D:/Download/MovieApp-master/app/src/main/res/drawable-xhdpi"
+    "last_opened_file_path": "E:/MovieApp"
   }
 }]]></component>
   <component name="RecentsManager">
