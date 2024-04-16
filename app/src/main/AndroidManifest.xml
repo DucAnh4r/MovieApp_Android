@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MovieApp"
+        tools:targetApi="31">
+        <activity
+            android:name=".Activities.NotificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.WatchListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.HistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.FavouriteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.SearchBarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.MovieTypeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.SearchPageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.WatchMovieActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="false"
+            android:screenOrientation="unspecified" />
+        <activity
+            android:name=".Activities.SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.DetailActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.LoginActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.MainActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.IntroActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
