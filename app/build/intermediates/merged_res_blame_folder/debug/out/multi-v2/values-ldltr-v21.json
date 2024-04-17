@@ -4,7 +4,7 @@
             "outputFile": "com.example.movieapp-mergeDebugResources-46:/values-ldltr-v21/values-ldltr-v21.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\HP\\.gradle\\caches\\transforms-4\\5ae02024b2712b2d213cc6fa166b9603\\transformed\\appcompat-1.6.1\\res\\values-ldltr-v21\\values-ldltr-v21.xml",
+                    "source": "C:\\Users\\ADMIN\\.gradle\\caches\\transforms-4\\5ae02024b2712b2d213cc6fa166b9603\\transformed\\appcompat-1.6.1\\res\\values-ldltr-v21\\values-ldltr-v21.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

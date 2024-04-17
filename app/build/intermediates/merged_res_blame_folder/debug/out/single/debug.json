@@ -1,702 +1,698 @@
 [
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable_slider9.jpg.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable\\slider9.jpg"
+        "merged": "com.example.movieapp-merged_res-48:/mipmap-xxxhdpi_ic_launcher_foreground.png.flat",
+        "source": "com.example.movieapp-main-50:/mipmap-xxxhdpi/ic_launcher_foreground.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-hdpi_intro_pic.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-hdpi\\intro_pic.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-hdpi_btn_3.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-hdpi/btn_3.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-mdpi_time.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-mdpi\\time.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xxxhdpi_ava.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xxxhdpi/ava.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xxhdpi_bookmark.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xxhdpi\\bookmark.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xxxhdpi_intro_pic.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xxxhdpi/intro_pic.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xxxhdpi_btn_4.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xxxhdpi\\btn_4.png"
+        "merged": "com.example.movieapp-merged_res-48:/layout_activity_detail.xml.flat",
+        "source": "com.example.movieapp-main-50:/layout/activity_detail.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable_edittext_background.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable\\edittext_background.xml"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-v24_ic_baseline_replay.xml.flat",
+        "source": "com.example.movieapp-main-50:/drawable-v24/ic_baseline_replay.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-hdpi_btn_3.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-hdpi\\btn_3.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-mdpi_btn_1.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-mdpi/btn_1.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xxhdpi_btn_2.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xxhdpi\\btn_2.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable_slider6.jpg.flat",
+        "source": "com.example.movieapp-main-50:/drawable/slider6.jpg"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\layout_slide_item_container.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\layout\\slide_item_container.xml"
+        "merged": "com.example.movieapp-merged_res-48:/xml_data_extraction_rules.xml.flat",
+        "source": "com.example.movieapp-main-50:/xml/data_extraction_rules.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-mdpi_btn_1.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-mdpi\\btn_1.png"
+        "merged": "com.example.movieapp-merged_res-48:/mipmap-xxhdpi_ic_launcher_foreground.png.flat",
+        "source": "com.example.movieapp-main-50:/mipmap-xxhdpi/ic_launcher_foreground.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xxxhdpi_ava.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xxxhdpi\\ava.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-hdpi_fav.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-hdpi/fav.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xxxhdpi_back.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xxxhdpi\\back.png"
+        "merged": "com.example.movieapp-merged_res-48:/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "com.example.movieapp-main-50:/mipmap-xxhdpi/ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-mdpi_fav_act.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-mdpi\\fav_act.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-ldpi_intro_pic.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-ldpi/intro_pic.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-ldpi_bookmark.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-ldpi\\bookmark.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xxxhdpi_search.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xxxhdpi/search.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-mdpi_microphone.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-mdpi\\microphone.png"
+        "merged": "com.example.movieapp-merged_res-48:/layout_activity_search_page.xml.flat",
+        "source": "com.example.movieapp-main-50:/layout/activity_search_page.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\layout_custom_controller.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\layout\\custom_controller.xml"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xxxhdpi_btn_2.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xxxhdpi/btn_2.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\mipmap-hdpi_ic_launcher_foreground.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\mipmap-hdpi\\ic_launcher_foreground.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xxxhdpi_microphone.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xxxhdpi/microphone.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xxxhdpi_fav_act.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xxxhdpi\\fav_act.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-v24_ic_baseline_play_arrow.xml.flat",
+        "source": "com.example.movieapp-main-50:/drawable-v24/ic_baseline_play_arrow.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\layout_activity_search_bar.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\layout\\activity_search_bar.xml"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-hdpi_btn_4.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-hdpi/btn_4.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-v24_ic_launcher_foreground.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-v24\\ic_launcher_foreground.xml"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-ldpi_back.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-ldpi/back.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xxxhdpi_bell.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xxxhdpi\\bell.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xhdpi_bell.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xhdpi/bell.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-mdpi_btn_5.webp.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-mdpi\\btn_5.webp"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xhdpi_btn_4.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xhdpi/btn_4.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable_slider2.jpg.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable\\slider2.jpg"
+        "merged": "com.example.movieapp-merged_res-48:/layout_activity_notification.xml.flat",
+        "source": "com.example.movieapp-main-50:/layout/activity_notification.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable_slider8.jpg.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable\\slider8.jpg"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-hdpi_time.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-hdpi/time.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\mipmap-xxxhdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\mipmap-xxxhdpi\\ic_launcher.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-ldpi_btn_5.webp.flat",
+        "source": "com.example.movieapp-main-50:/drawable-ldpi/btn_5.webp"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xxxhdpi_btn_3.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xxxhdpi\\btn_3.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xhdpi_fav.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xhdpi/fav.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\mipmap-xxxhdpi_ic_launcher_foreground.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\mipmap-xxxhdpi\\ic_launcher_foreground.png"
+        "merged": "com.example.movieapp-merged_res-48:/mipmap-xhdpi_ic_launcher_foreground.png.flat",
+        "source": "com.example.movieapp-main-50:/mipmap-xhdpi/ic_launcher_foreground.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-ldpi_microphone.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-ldpi\\microphone.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-ldpi_microphone.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-ldpi/microphone.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-ldpi_btn_2.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-ldpi\\btn_2.png"
+        "merged": "com.example.movieapp-merged_res-48:/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "com.example.movieapp-main-50:/mipmap-hdpi/ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xhdpi_btn_4.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xhdpi\\btn_4.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xxxhdpi_fav_act.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xxxhdpi/fav_act.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable_slider1.jpg.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable\\slider1.jpg"
+        "merged": "com.example.movieapp-merged_res-48:/drawable_slider5.jpg.flat",
+        "source": "com.example.movieapp-main-50:/drawable/slider5.jpg"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-v24_ic_baseline_play_arrow.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-v24\\ic_baseline_play_arrow.xml"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xxxhdpi_btn_1.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xxxhdpi/btn_1.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xxhdpi_btn_1.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xxhdpi\\btn_1.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-mdpi_intro_pic.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-mdpi/intro_pic.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-mdpi_btn_2.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-mdpi\\btn_2.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xxhdpi_fav_act.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xxhdpi/fav_act.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-hdpi_btn_2.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-hdpi\\btn_2.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-ldpi_btn_3.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-ldpi/btn_3.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-mdpi_fav.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-mdpi\\fav.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable_orange_button_background.xml.flat",
+        "source": "com.example.movieapp-main-50:/drawable/orange_button_background.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-ldpi_time.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-ldpi\\time.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xxhdpi_btn_4.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xxhdpi/btn_4.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-mdpi_bookmark.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-mdpi\\bookmark.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xxhdpi_btn_5.webp.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xxhdpi/btn_5.webp"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-mdpi_bell.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-mdpi\\bell.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-v24_ic_baseline_pause.xml.flat",
+        "source": "com.example.movieapp-main-50:/drawable-v24/ic_baseline_pause.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable_cat_background.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable\\cat_background.xml"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xxxhdpi_btn_4.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xxxhdpi/btn_4.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\layout_activity_profile.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\layout\\activity_profile.xml"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-ldpi_time.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-ldpi/time.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xhdpi_ava.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xhdpi\\ava.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-ldpi_btn_1.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-ldpi/btn_1.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xhdpi_fav_act.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xhdpi\\fav_act.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable_oval_btn_background.xml.flat",
+        "source": "com.example.movieapp-main-50:/drawable/oval_btn_background.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-ldpi_btn_5.webp.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-ldpi\\btn_5.webp"
+        "merged": "com.example.movieapp-merged_res-48:/mipmap-mdpi_ic_launcher_foreground.png.flat",
+        "source": "com.example.movieapp-main-50:/mipmap-mdpi/ic_launcher_foreground.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-ldpi_fav_act.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-ldpi\\fav_act.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-ldpi_fav_act.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-ldpi/fav_act.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\xml_backup_rules.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\xml\\backup_rules.xml"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xhdpi_home.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xhdpi/home.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\layout_activity_history.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\layout\\activity_history.xml"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-hdpi_btn_1.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-hdpi/btn_1.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable_slider7.jpg.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable\\slider7.jpg"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-mdpi_btn_6.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-mdpi/btn_6.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-mdpi_star.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-mdpi\\star.png"
+        "merged": "com.example.movieapp-merged_res-48:/layout_activity_sign_up.xml.flat",
+        "source": "com.example.movieapp-main-50:/layout/activity_sign_up.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\mipmap-hdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\mipmap-hdpi\\ic_launcher.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-hdpi_search.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-hdpi/search.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xxxhdpi_intro_pic.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xxxhdpi\\intro_pic.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-mdpi_fav.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-mdpi/fav.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-mdpi_btn_6.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-mdpi\\btn_6.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xxhdpi_btn_2.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xxhdpi/btn_2.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xxxhdpi_btn_6.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xxxhdpi\\btn_6.png"
+        "merged": "com.example.movieapp-merged_res-48:/layout_activity_login.xml.flat",
+        "source": "com.example.movieapp-main-50:/layout/activity_login.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable_ic_outline_lock_open.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable\\ic_outline_lock_open.xml"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-hdpi_bell.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-hdpi/bell.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable_episodes_background.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable\\episodes_background.xml"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xhdpi_back.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xhdpi/back.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xxhdpi_star.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xxhdpi\\star.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xxhdpi_ava.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xxhdpi/ava.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-hdpi_star.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-hdpi\\star.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable_slider7.jpg.flat",
+        "source": "com.example.movieapp-main-50:/drawable/slider7.jpg"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-ldpi_bell.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-ldpi\\bell.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable_slider11.jpg.flat",
+        "source": "com.example.movieapp-main-50:/drawable/slider11.jpg"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable_oval_btn_background.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable\\oval_btn_background.xml"
+        "merged": "com.example.movieapp-merged_res-48:/drawable_home.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable/home.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable_slider4.jpg.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable\\slider4.jpg"
+        "merged": "com.example.movieapp-merged_res-48:/drawable_page_button_bg.xml.flat",
+        "source": "com.example.movieapp-main-50:/drawable/page_button_bg.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable_slider10.jpg.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable\\slider10.jpg"
+        "merged": "com.example.movieapp-merged_res-48:/drawable_slider4.jpg.flat",
+        "source": "com.example.movieapp-main-50:/drawable/slider4.jpg"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-mdpi_intro_pic.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-mdpi\\intro_pic.png"
+        "merged": "com.example.movieapp-merged_res-48:/xml_backup_rules.xml.flat",
+        "source": "com.example.movieapp-main-50:/xml/backup_rules.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\layout_activity_notification.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\layout\\activity_notification.xml"
+        "merged": "com.example.movieapp-merged_res-48:/layout_activity_search_bar.xml.flat",
+        "source": "com.example.movieapp-main-50:/layout/activity_search_bar.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable_gradient_background.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable\\gradient_background.xml"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-ldpi_btn_4.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-ldpi/btn_4.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xxxhdpi_fav.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xxxhdpi\\fav.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-ldpi_fav.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-ldpi/fav.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable_ic_launcher_background.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable\\ic_launcher_background.xml"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xhdpi_btn_2.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xhdpi/btn_2.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-v24_ic_baseline_fullscreen.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-v24\\ic_baseline_fullscreen.xml"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-mdpi_bell.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-mdpi/bell.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xhdpi_btn_3.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xhdpi\\btn_3.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-mdpi_microphone.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-mdpi/microphone.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xxhdpi_btn_3.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xxhdpi\\btn_3.png"
+        "merged": "com.example.movieapp-merged_res-48:/layout_viewholder_item_page.xml.flat",
+        "source": "com.example.movieapp-main-50:/layout/viewholder_item_page.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xhdpi_bell.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xhdpi\\bell.png"
+        "merged": "com.example.movieapp-merged_res-48:/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "com.example.movieapp-main-50:/mipmap-mdpi/ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xhdpi_fav.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xhdpi\\fav.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xxhdpi_search.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xxhdpi/search.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xxhdpi_fav.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xxhdpi\\fav.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xxxhdpi_btn_5.webp.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xxxhdpi/btn_5.webp"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-hdpi_btn_6.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-hdpi\\btn_6.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xhdpi_microphone.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xhdpi/microphone.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\mipmap-mdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\mipmap-mdpi\\ic_launcher.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-hdpi_ava.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-hdpi/ava.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\mipmap-xhdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\mipmap-xhdpi\\ic_launcher.png"
+        "merged": "com.example.movieapp-merged_res-48:/layout_viewholder_film.xml.flat",
+        "source": "com.example.movieapp-main-50:/layout/viewholder_film.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xxxhdpi_btn_1.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xxxhdpi\\btn_1.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-mdpi_bookmark.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-mdpi/bookmark.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xhdpi_btn_6.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xhdpi\\btn_6.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xxhdpi_bookmark.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xxhdpi/bookmark.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable_home.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable\\home.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xxxhdpi_time.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xxxhdpi/time.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\mipmap-mdpi_ic_launcher_foreground.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\mipmap-mdpi\\ic_launcher_foreground.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xxhdpi_time.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xxhdpi/time.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-mdpi_back.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-mdpi\\back.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-hdpi_microphone.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-hdpi/microphone.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-ldpi_search.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-ldpi\\search.png"
+        "merged": "com.example.movieapp-merged_res-48:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.example.movieapp-main-50:/mipmap-xxhdpi/ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\layout_activity_search_page.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\layout\\activity_search_page.xml"
+        "merged": "com.example.movieapp-merged_res-48:/drawable_ic_outline_lock_open.xml.flat",
+        "source": "com.example.movieapp-main-50:/drawable/ic_outline_lock_open.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\layout_viewholder_search.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\layout\\viewholder_search.xml"
+        "merged": "com.example.movieapp-merged_res-48:/drawable_episodes_background.xml.flat",
+        "source": "com.example.movieapp-main-50:/drawable/episodes_background.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-mdpi_search.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-mdpi\\search.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xxxhdpi_bookmark.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xxxhdpi/bookmark.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\mipmap-xxxhdpi_ic_launcher_round.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\mipmap-xxxhdpi\\ic_launcher_round.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xhdpi_bookmark.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xhdpi/bookmark.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xxhdpi_intro_pic.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xxhdpi\\intro_pic.png"
+        "merged": "com.example.movieapp-merged_res-48:/mipmap-hdpi_ic_launcher_foreground.png.flat",
+        "source": "com.example.movieapp-main-50:/mipmap-hdpi/ic_launcher_foreground.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-ldpi_btn_3.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-ldpi\\btn_3.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xhdpi_search.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xhdpi/search.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-ldpi_fav.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-ldpi\\fav.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xxhdpi_microphone.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xxhdpi/microphone.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\mipmap-mdpi_ic_launcher_round.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\mipmap-mdpi\\ic_launcher_round.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable_slider2.jpg.flat",
+        "source": "com.example.movieapp-main-50:/drawable/slider2.jpg"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-mdpi_btn_3.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-mdpi\\btn_3.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xxxhdpi_btn_6.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xxxhdpi/btn_6.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\layout_activity_watch_list.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\layout\\activity_watch_list.xml"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-ldpi_star.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-ldpi/star.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-ldpi_intro_pic.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-ldpi\\intro_pic.png"
+        "merged": "com.example.movieapp-merged_res-48:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "com.example.movieapp-main-50:/mipmap-xxxhdpi/ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xhdpi_btn_1.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xhdpi\\btn_1.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable_cat_background.xml.flat",
+        "source": "com.example.movieapp-main-50:/drawable/cat_background.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\layout_activity_login.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\layout\\activity_login.xml"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-mdpi_star.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-mdpi/star.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xxhdpi_btn_6.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xxhdpi\\btn_6.png"
+        "merged": "com.example.movieapp-merged_res-48:/layout_viewholder_category.xml.flat",
+        "source": "com.example.movieapp-main-50:/layout/viewholder_category.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable_slider5.jpg.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable\\slider5.jpg"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-ldpi_btn_6.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-ldpi/btn_6.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-hdpi_ava.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-hdpi\\ava.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xhdpi_star.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xhdpi/star.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-mdpi_btn_4.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-mdpi\\btn_4.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-v24_ic_baseline_fullscreen.xml.flat",
+        "source": "com.example.movieapp-main-50:/drawable-v24/ic_baseline_fullscreen.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\layout_viewholder_actors.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\layout\\viewholder_actors.xml"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-hdpi_btn_5.webp.flat",
+        "source": "com.example.movieapp-main-50:/drawable-hdpi/btn_5.webp"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-hdpi_fav_act.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-hdpi\\fav_act.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xhdpi_btn_5.webp.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xhdpi/btn_5.webp"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-ldpi_btn_6.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-ldpi\\btn_6.png"
-    },
-    {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xhdpi_star.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xhdpi\\star.png"
-    },
-    {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-hdpi_back.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-hdpi\\back.png"
-    },
-    {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xxhdpi_back.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xxhdpi\\back.png"
-    },
-    {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xxhdpi_fav_act.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xxhdpi\\fav_act.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-hdpi_btn_6.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-hdpi/btn_6.png"
     },
     {
         "merged": "com.example.movieapp-merged_res-48:/layout_activity_profile.xml.flat",
         "source": "com.example.movieapp-main-50:/layout/activity_profile.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-hdpi_btn_5.webp.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-hdpi\\btn_5.webp"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xhdpi_btn_1.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xhdpi/btn_1.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\layout_activity_movie_type.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\layout\\activity_movie_type.xml"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-mdpi_btn_4.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-mdpi/btn_4.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xhdpi_bookmark.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xhdpi\\bookmark.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable_slider9.jpg.flat",
+        "source": "com.example.movieapp-main-50:/drawable/slider9.jpg"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-hdpi_bell.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-hdpi\\bell.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xxhdpi_back.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xxhdpi/back.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\layout_activity_sign_up.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\layout\\activity_sign_up.xml"
+        "merged": "com.example.movieapp-merged_res-48:/layout_activity_favourite.xml.flat",
+        "source": "com.example.movieapp-main-50:/layout/activity_favourite.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\layout_viewholder_category.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\layout\\viewholder_category.xml"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-hdpi_bookmark.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-hdpi/bookmark.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\layout_activity_main.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\layout\\activity_main.xml"
+        "merged": "com.example.movieapp-merged_res-48:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.example.movieapp-main-50:/mipmap-hdpi/ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xxhdpi_bell.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xxhdpi\\bell.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xxhdpi_btn_1.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xxhdpi/btn_1.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\layout_viewholder_episode.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\layout\\viewholder_episode.xml"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-mdpi_time.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-mdpi/time.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xxhdpi_search.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xxhdpi\\search.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-ldpi_ava.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-ldpi/ava.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\layout_activity_watch_movie.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\layout\\activity_watch_movie.xml"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xxxhdpi_star.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xxxhdpi/star.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\layout_viewholder_film.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\layout\\viewholder_film.xml"
+        "merged": "com.example.movieapp-merged_res-48:/layout_activity_main.xml.flat",
+        "source": "com.example.movieapp-main-50:/layout/activity_main.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xxxhdpi_star.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xxxhdpi\\star.png"
+        "merged": "com.example.movieapp-merged_res-48:/layout_activity_movie_type.xml.flat",
+        "source": "com.example.movieapp-main-50:/layout/activity_movie_type.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xhdpi_intro_pic.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xhdpi\\intro_pic.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xxhdpi_bell.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xxhdpi/bell.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\layout_activity_intro.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\layout\\activity_intro.xml"
+        "merged": "com.example.movieapp-merged_res-48:/drawable_slider1.jpg.flat",
+        "source": "com.example.movieapp-main-50:/drawable/slider1.jpg"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\layout_activity_favourite.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\layout\\activity_favourite.xml"
+        "merged": "com.example.movieapp-merged_res-48:/layout_viewholder_actors.xml.flat",
+        "source": "com.example.movieapp-main-50:/layout/viewholder_actors.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\layout_activity_bottom_navigation.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\layout\\activity_bottom_navigation.xml"
+        "merged": "com.example.movieapp-merged_res-48:/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "com.example.movieapp-main-50:/mipmap-xhdpi/ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable_slider11.jpg.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable\\slider11.jpg"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xxhdpi_fav.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xxhdpi/fav.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-hdpi_fav.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-hdpi\\fav.png"
+        "merged": "com.example.movieapp-merged_res-48:/layout_activity_intro.xml.flat",
+        "source": "com.example.movieapp-main-50:/layout/activity_intro.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-v24_ic_baseline_forward.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-v24\\ic_baseline_forward.xml"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xxxhdpi_back.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xxxhdpi/back.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable_orange_button_background.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable\\orange_button_background.xml"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-v24_ic_baseline_forward.xml.flat",
+        "source": "com.example.movieapp-main-50:/drawable-v24/ic_baseline_forward.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xxhdpi_btn_4.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xxhdpi\\btn_4.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable_slider10.jpg.flat",
+        "source": "com.example.movieapp-main-50:/drawable/slider10.jpg"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\mipmap-hdpi_ic_launcher_round.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\mipmap-hdpi\\ic_launcher_round.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable_gradient_background.xml.flat",
+        "source": "com.example.movieapp-main-50:/drawable/gradient_background.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\mipmap-xhdpi_ic_launcher_foreground.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\mipmap-xhdpi\\ic_launcher_foreground.png"
+        "merged": "com.example.movieapp-merged_res-48:/layout_activity_bottom_navigation.xml.flat",
+        "source": "com.example.movieapp-main-50:/layout/activity_bottom_navigation.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\layout_activity_detail.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\layout\\activity_detail.xml"
+        "merged": "com.example.movieapp-merged_res-48:/drawable_edittext_background.xml.flat",
+        "source": "com.example.movieapp-main-50:/drawable/edittext_background.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xhdpi_home.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xhdpi\\home.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.example.movieapp-main-50:/drawable/ic_launcher_background.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-hdpi_search.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-hdpi\\search.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-mdpi_btn_3.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-mdpi/btn_3.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-ldpi_ava.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-ldpi\\ava.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable_slider8.jpg.flat",
+        "source": "com.example.movieapp-main-50:/drawable/slider8.jpg"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\mipmap-xhdpi_ic_launcher_round.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\mipmap-xhdpi\\ic_launcher_round.png"
+        "merged": "com.example.movieapp-merged_res-48:/layout_viewholder_episode.xml.flat",
+        "source": "com.example.movieapp-main-50:/layout/viewholder_episode.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\mipmap-xxhdpi\\ic_launcher.png"
+        "merged": "com.example.movieapp-merged_res-48:/layout_activity_history.xml.flat",
+        "source": "com.example.movieapp-main-50:/layout/activity_history.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-hdpi_btn_1.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-hdpi\\btn_1.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xhdpi_btn_3.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xhdpi/btn_3.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\mipmap-xxhdpi_ic_launcher_round.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\mipmap-xxhdpi\\ic_launcher_round.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xxxhdpi_bell.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xxxhdpi/bell.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xhdpi_back.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xhdpi\\back.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-hdpi_back.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-hdpi/back.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-ldpi_btn_1.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-ldpi\\btn_1.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-v24_ic_baseline_lock.xml.flat",
+        "source": "com.example.movieapp-main-50:/drawable-v24/ic_baseline_lock.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xxxhdpi_btn_5.webp.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xxxhdpi\\btn_5.webp"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-v24_ic_baseline_fullscreen_exit.xml.flat",
+        "source": "com.example.movieapp-main-50:/drawable-v24/ic_baseline_fullscreen_exit.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xxhdpi_microphone.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xxhdpi\\microphone.png"
+        "merged": "com.example.movieapp-merged_res-48:/layout_activity_watch_list.xml.flat",
+        "source": "com.example.movieapp-main-50:/layout/activity_watch_list.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xxhdpi_ava.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xxhdpi\\ava.png"
+        "merged": "com.example.movieapp-merged_res-48:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "com.example.movieapp-main-50:/mipmap-mdpi/ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xhdpi_btn_5.webp.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xhdpi\\btn_5.webp"
+        "merged": "com.example.movieapp-merged_res-48:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.example.movieapp-main-50:/mipmap-anydpi-v26/ic_launcher_round.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xhdpi_time.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xhdpi\\time.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-mdpi_search.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-mdpi/search.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\layout_viewholder_item_page.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\layout\\viewholder_item_page.xml"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-mdpi_fav_act.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-mdpi/fav_act.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\mipmap-xxhdpi_ic_launcher_foreground.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\mipmap-xxhdpi\\ic_launcher_foreground.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xhdpi_btn_6.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xhdpi/btn_6.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xhdpi_microphone.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xhdpi\\microphone.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-hdpi_fav_act.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-hdpi/fav_act.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xxxhdpi_btn_2.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xxxhdpi\\btn_2.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-v24_ic_launcher_foreground.xml.flat",
+        "source": "com.example.movieapp-main-50:/drawable-v24/ic_launcher_foreground.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-mdpi_ava.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-mdpi\\ava.png"
+        "merged": "com.example.movieapp-merged_res-48:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.example.movieapp-main-50:/mipmap-xhdpi/ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-ldpi_btn_4.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-ldpi\\btn_4.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xhdpi_time.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xhdpi/time.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-hdpi_btn_4.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-hdpi\\btn_4.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-ldpi_bookmark.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-ldpi/bookmark.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\xml_data_extraction_rules.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\xml\\data_extraction_rules.xml"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xxxhdpi_fav.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xxxhdpi/fav.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-v24_ic_baseline_fullscreen_exit.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-v24\\ic_baseline_fullscreen_exit.xml"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xxhdpi_star.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xxhdpi/star.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable_slider6.jpg.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable\\slider6.jpg"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xhdpi_intro_pic.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xhdpi/intro_pic.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-hdpi_microphone.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-hdpi\\microphone.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-mdpi_back.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-mdpi/back.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xxxhdpi_bookmark.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xxxhdpi\\bookmark.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xhdpi_ava.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xhdpi/ava.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-v24_ic_baseline_replay.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-v24\\ic_baseline_replay.xml"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-hdpi_intro_pic.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-hdpi/intro_pic.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-hdpi_bookmark.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-hdpi\\bookmark.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-hdpi_star.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-hdpi/star.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xxxhdpi_microphone.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xxxhdpi\\microphone.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xxhdpi_intro_pic.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xxhdpi/intro_pic.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xxhdpi_time.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xxhdpi\\time.png"
+        "merged": "com.example.movieapp-merged_res-48:/layout_slide_item_container.xml.flat",
+        "source": "com.example.movieapp-main-50:/layout/slide_item_container.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable_slider3.jpg.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable\\slider3.jpg"
+        "merged": "com.example.movieapp-merged_res-48:/layout_custom_controller.xml.flat",
+        "source": "com.example.movieapp-main-50:/layout/custom_controller.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-ldpi_back.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-ldpi\\back.png"
+        "merged": "com.example.movieapp-merged_res-48:/layout_viewholder_search.xml.flat",
+        "source": "com.example.movieapp-main-50:/layout/viewholder_search.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xxxhdpi_time.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xxxhdpi\\time.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-ldpi_search.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-ldpi/search.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-v24_ic_baseline_lock.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-v24\\ic_baseline_lock.xml"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xxhdpi_btn_3.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xxhdpi/btn_3.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable_page_button_bg.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable\\page_button_bg.xml"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-mdpi_btn_2.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-mdpi/btn_2.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xxxhdpi_search.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xxxhdpi\\search.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-mdpi_btn_5.webp.flat",
+        "source": "com.example.movieapp-main-50:/drawable-mdpi/btn_5.webp"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xhdpi_btn_2.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xhdpi\\btn_2.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xhdpi_fav_act.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xhdpi/fav_act.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-ldpi_btn_2.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-ldpi/btn_2.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-v24_ic_baseline_pause.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-v24\\ic_baseline_pause.xml"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-hdpi_btn_2.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-hdpi/btn_2.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-hdpi_time.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-hdpi\\time.png"
+        "merged": "com.example.movieapp-merged_res-48:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.example.movieapp-main-50:/mipmap-anydpi-v26/ic_launcher.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xxhdpi_btn_5.webp.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xxhdpi\\btn_5.webp"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xxhdpi_btn_6.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xxhdpi/btn_6.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\mipmap-anydpi-v26\\ic_launcher.xml"
+        "merged": "com.example.movieapp-merged_res-48:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.example.movieapp-main-50:/mipmap-xxxhdpi/ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-xhdpi_search.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-xhdpi\\search.png"
+        "merged": "com.example.movieapp-merged_res-48:/layout_activity_watch_movie.xml.flat",
+        "source": "com.example.movieapp-main-50:/layout/activity_watch_movie.xml"
     },
     {
-        "merged": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-merged_res-48:\\drawable-ldpi_star.png.flat",
-        "source": "C:\\Users\\HP\\.gradle\\daemon\\8.6\\com.example.movieapp-main-50:\\drawable-ldpi\\star.png"
+        "merged": "com.example.movieapp-merged_res-48:/drawable-ldpi_bell.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-ldpi/bell.png"
+    },
+    {
+        "merged": "com.example.movieapp-merged_res-48:/drawable_slider3.jpg.flat",
+        "source": "com.example.movieapp-main-50:/drawable/slider3.jpg"
+    },
+    {
+        "merged": "com.example.movieapp-merged_res-48:/drawable-xxxhdpi_btn_3.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-xxxhdpi/btn_3.png"
+    },
+    {
+        "merged": "com.example.movieapp-merged_res-48:/drawable-mdpi_ava.png.flat",
+        "source": "com.example.movieapp-main-50:/drawable-mdpi/ava.png"
     }
 ]

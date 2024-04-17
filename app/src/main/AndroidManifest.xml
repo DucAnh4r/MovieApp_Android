@@ -85,7 +85,7 @@
             android:name=".Activities.WatchMovieActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
-            android:screenOrientation="sensor" />
+            android:screenOrientation="unspecified" />
         <activity
             android:name=".Activities.SignUpActivity"
             android:exported="false" />

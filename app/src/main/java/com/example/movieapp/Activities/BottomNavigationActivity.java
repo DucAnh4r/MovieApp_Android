@@ -46,7 +46,12 @@ public class BottomNavigationActivity extends ConstraintLayout {
     private void onExplorerClicked() {
         if (!(getContext() instanceof MainActivity)) {
             Context context = getContext();
+            if (context instanceof MainActivity) {
+                // MainActivity is already visible, do nothing
+                return;
+            }
             Intent intent = new Intent(context, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             context.startActivity(intent);
         }
     }
@@ -54,7 +59,12 @@ public class BottomNavigationActivity extends ConstraintLayout {
     private void onSearchClicked() {
         if (!(getContext() instanceof SearchPageActivity)) {
             Context context = getContext();
+            if (context instanceof SearchPageActivity) {
+                // MainActivity is already visible, do nothing
+                return;
+            }
             Intent intent = new Intent(context, SearchPageActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             context.startActivity(intent);
         }
     }
@@ -62,7 +72,12 @@ public class BottomNavigationActivity extends ConstraintLayout {
     private void onNotificationClicked() {
         if (!(getContext() instanceof NotificationActivity)) {
             Context context = getContext();
+            if (context instanceof NotificationActivity) {
+                // MainActivity is already visible, do nothing
+                return;
+            }
             Intent intent = new Intent(context, NotificationActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             context.startActivity(intent);
         }
     }
@@ -70,8 +85,14 @@ public class BottomNavigationActivity extends ConstraintLayout {
     private void onProfileClicked() {
         if (!(getContext() instanceof ProfileActivity)) {
             Context context = getContext();
+            if (context instanceof ProfileActivity) {
+                // MainActivity is already visible, do nothing
+                return;
+            }
             Intent intent = new Intent(context, ProfileActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             context.startActivity(intent);
         }
     }
+
 }

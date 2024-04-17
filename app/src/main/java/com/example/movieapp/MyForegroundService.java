@@ -76,7 +76,7 @@ public class MyForegroundService extends Service {
                     calendar.set(Calendar.SECOND, 0);
 
                     Intent updateIntent = new Intent(this, AlarmReceiver.class);
-                    PendingIntent updatePendingIntent = PendingIntent.getBroadcast(this, UPDATE_REQUEST_CODE, updateIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    PendingIntent updatePendingIntent = PendingIntent.getBroadcast(this, UPDATE_REQUEST_CODE, updateIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
                     alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, updatePendingIntent);
                     isScheduled = true;
@@ -85,6 +85,7 @@ public class MyForegroundService extends Service {
             }
         }
     }
+
 
     public static boolean isServiceRunning(Context context) {
         ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
