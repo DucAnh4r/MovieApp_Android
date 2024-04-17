@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.movieapp">
+    package="com.example.movieapp" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -23,22 +23,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieApp"
-        tools:targetApi="31">
+        tools:targetApi="31" >
+
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
-
+            android:value="@string/facebook_app_id" />
         <meta-data
             android:name="com.facebook.sdk.ClientToken"
             android:value="@string/facebook_client_token" />
-
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.gms.signin.API_KEY"
             android:value="@string/default_web_client_id" />
-
 
         <receiver
             android:name=".AlarmReceiver"
@@ -49,74 +47,60 @@
             android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
             android:exported="true"
             android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION" />
-
         <service
             android:name=".MyForegroundService"
-            android:foregroundServiceType="location|dataSync"
             android:enabled="true"
-            android:exported="false" />
+            android:exported="false"
+            android:foregroundServiceType="location|dataSync" />
 
         <activity
             android:name=".Activities.NotificationActivity"
             android:exported="false" />
-
         <activity
             android:name=".Activities.WatchListActivity"
             android:exported="false" />
-
         <activity
             android:name=".Activities.HistoryActivity"
             android:exported="false" />
-
         <activity
             android:name=".Activities.FavouriteActivity"
             android:exported="false" />
-
         <activity
             android:name=".Activities.ProfileActivity"
             android:exported="false" />
-
         <activity
             android:name=".Activities.SearchBarActivity"
             android:exported="false" />
-
         <activity
             android:name=".Activities.MovieTypeActivity"
             android:exported="false" />
-
         <activity
             android:name=".Activities.SearchPageActivity"
             android:exported="false" />
-
+        <activity
+            android:name=".Activities.DetailActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="false" />
         <activity
             android:name=".Activities.WatchMovieActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:screenOrientation="sensor" />
-
         <activity
             android:name=".Activities.SignUpActivity"
             android:exported="false" />
-
-        <activity
-            android:name=".Activities.DetailActivity"
-            android:configChanges="orientation|screenSize"
-            android:exported="false" />
-
         <activity
             android:name=".Activities.LoginActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false" />
-
         <activity
             android:name=".Activities.MainActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false" />
-
         <activity
             android:name=".Activities.IntroActivity"
             android:configChanges="orientation|screenSize"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,6 +1,5 @@
 package com.example.movieapp.Adapters;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,8 +38,7 @@ public class ActorsListAdapter extends RecyclerView.Adapter<ActorsListAdapter.Ac
                 .load(actor.getImageUrl())
                 .into(holder.actorImageView);
 
-        // Tạo một ImageSearchTask để tải hình ảnh của diễn viên và gán vào ImageView
-        DetailActivity.ImageSearchTask imageSearchTask = new DetailActivity.ImageSearchTask(actor, holder.actorImageView);
+       DetailActivity.ImageSearchTask imageSearchTask = new DetailActivity.ImageSearchTask(actor, holder.actorImageView);
         imageSearchTask.execute();
     }
 

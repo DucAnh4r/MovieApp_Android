@@ -89,6 +89,7 @@ id constraintLayout2
 id constraintLayout3
 id constraintLayout4
 id constraintLayout5
+id constraintLayout6
 id coordinatorLayout3
 id country
 id directorsRecyclerView
@@ -165,7 +166,6 @@ id progressBarWatch
 id recyclerViewPagination
 id scrollView2
 id scrollView3
-id scrollView4
 id scrollViewW
 id search
 id searchBar
@@ -232,8 +232,6 @@ layout viewholder_search
 mipmap ic_launcher
 mipmap ic_launcher_foreground
 mipmap ic_launcher_round
-string API_KEY
-string CSE_ID
 string app_name
 string default_web_client_id
 string facebook_app_id

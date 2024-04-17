@@ -3,6 +3,4 @@
     <string name="default_web_client_id" translatable="false">747433782292-j111oqdfdrio65qll3412pvbo8qfnvtp.apps.googleusercontent.com</string>
     <string name="facebook_app_id">7351271474922424</string>
     <string name="facebook_client_token">01dfe5b4877f4f280e71d97630ec620e</string>
-    <string name="API_KEY">AIzaSyDQkN7XLr-tUL7hhjvGSzJRXZ1G-dZ93nU</string>
-    <string name="CSE_ID">c661a0dcf8ca6464d</string>
 </resources>

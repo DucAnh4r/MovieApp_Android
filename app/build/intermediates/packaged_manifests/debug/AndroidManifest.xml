@@ -106,16 +106,16 @@
             android:name="com.example.movieapp.Activities.SearchPageActivity"
             android:exported="false" />
         <activity
+            android:name="com.example.movieapp.Activities.DetailActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="false" />
+        <activity
             android:name="com.example.movieapp.Activities.WatchMovieActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:screenOrientation="sensor" />
         <activity
             android:name="com.example.movieapp.Activities.SignUpActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.example.movieapp.Activities.DetailActivity"
-            android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
             android:name="com.example.movieapp.Activities.LoginActivity"

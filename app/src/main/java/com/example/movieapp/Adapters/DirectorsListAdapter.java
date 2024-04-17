@@ -38,7 +38,6 @@ public class DirectorsListAdapter extends RecyclerView.Adapter<DirectorsListAdap
                 .load(actor.getImageUrl())
                 .into(holder.actorImageView);
 
-        // Tạo một ImageSearchTask để tải hình ảnh của diễn viên và gán vào ImageView
         DetailActivity.ImageSearchTask imageSearchTask = new DetailActivity.ImageSearchTask(actor, holder.actorImageView);
         imageSearchTask.execute();
     }

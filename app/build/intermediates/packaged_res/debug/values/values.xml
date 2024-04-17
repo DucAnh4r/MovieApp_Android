@@ -15,8 +15,6 @@
     <color name="teal_700">#FF018786</color>
     <color name="white">#FFFFFFFF</color>
     <color name="yellow">#FFC107</color>
-    <string name="API_KEY">AIzaSyDQkN7XLr-tUL7hhjvGSzJRXZ1G-dZ93nU</string>
-    <string name="CSE_ID">c661a0dcf8ca6464d</string>
     <string name="app_name">MovieApp</string>
     <string name="default_web_client_id" translatable="false">747433782292-j111oqdfdrio65qll3412pvbo8qfnvtp.apps.googleusercontent.com</string>
     <string name="facebook_app_id">7351271474922424</string>

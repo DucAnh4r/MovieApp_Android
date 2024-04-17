@@ -1,11 +1,5 @@
 package com.example.movieapp.Activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.widget.NestedScrollView;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,6 +13,12 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.NestedScrollView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -80,9 +80,11 @@ public class DetailActivity extends AppCompatActivity {
 
             LinkFilm item = gson.fromJson(response, LinkFilm.class);
 
-            Glide.with(DetailActivity.this)
-                    .load(item.getMovie().getPosterUrl())
-                    .into(pic2);
+            if (!isDestroyed()) {
+                Glide.with(DetailActivity.this)
+                        .load(item.getMovie().getPosterUrl())
+                        .into(pic2);
+            }
 
             titleTxt.setText(item.getMovie().getName());
             movieTimeTxt.setText(item.getMovie().getTime());
@@ -411,5 +413,4 @@ public class DetailActivity extends AppCompatActivity {
             }
         }
     }
-
 }

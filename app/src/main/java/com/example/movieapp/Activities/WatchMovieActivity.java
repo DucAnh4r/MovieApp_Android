@@ -13,7 +13,6 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -51,12 +50,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 
 import java.util.HashMap;
 import java.util.List;
@@ -363,9 +361,11 @@ public class WatchMovieActivity extends AppCompatActivity {
 
             LinkFilm item = gson.fromJson(response, LinkFilm.class);
 
-            Glide.with(WatchMovieActivity.this)
-                    .load(item.getMovie().getPosterUrl())
-                    .into(pic2);
+            if (!isDestroyed()) {
+                Glide.with(WatchMovieActivity.this)
+                        .load(item.getMovie().getPosterUrl())
+                        .into(pic2);
+            }
             movieType = item.getMovie().getType();
             titleTxt.setText(item.getMovie().getName());
             oMovieName.setText(item.getMovie().getOriginName());
