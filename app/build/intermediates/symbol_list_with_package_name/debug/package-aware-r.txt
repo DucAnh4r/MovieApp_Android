@@ -3517,6 +3517,7 @@ id autoComplete
 id autoCompleteToEnd
 id autoCompleteToStart
 id automatic
+id avatar
 id backimg
 id barrier
 id baseline

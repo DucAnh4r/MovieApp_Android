@@ -36,6 +36,7 @@ android {
 
 
 dependencies {
+    implementation ("com.google.firebase:firebase-storage:20.3.0")
     implementation ("com.facebook.android:facebook-android-sdk:latest.release")
     implementation ("com.facebook.android:facebook-login:latest.release")
     implementation ("com.google.gms:google-services:4.4.1")

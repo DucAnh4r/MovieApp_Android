@@ -74,6 +74,7 @@ id TitleTxt
 id WatchListView
 id actorNameTextView
 id actorRecyclerView
+id avatar
 id backimg
 id bottomNavigationMenu
 id bt_fullscreen

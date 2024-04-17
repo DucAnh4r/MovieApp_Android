@@ -21,7 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
@@ -431,7 +430,7 @@ public class WatchMovieActivity extends AppCompatActivity {
                 textView.setVisibility(View.GONE);
             }
             if (!foundLinkEmbed) {
-                showAlertDialog("Không tìm thấy link_embed phù hợp với slug");
+                Toast.makeText(WatchMovieActivity.this,"Không tìm thấy link_embed phù hợp với slug", Toast.LENGTH_SHORT);
             }
             FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
             String userId = null;
@@ -441,18 +440,9 @@ public class WatchMovieActivity extends AppCompatActivity {
             saveWatchedMovie(titleTxt, userId, tap, movieType);
         }, error -> {
             progressBar.setVisibility(View.GONE);
-            showAlertDialog("Đã xảy ra lỗi khi truy cập dữ liệu từ máy chủ");
+            Toast.makeText(WatchMovieActivity.this,"Đã xảy ra lỗi khi truy cập dữ liệu từ máy chủ", Toast.LENGTH_SHORT);
         });
         mRequestQueue.add(mStringRequest);
-    }
-
-    private void showAlertDialog(String message) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(message)
-                .setCancelable(false)
-                .setPositiveButton("OK", (dialog, id) -> dialog.dismiss());
-        AlertDialog alert = builder.create();
-        alert.show();
     }
 
     private void initView() {
