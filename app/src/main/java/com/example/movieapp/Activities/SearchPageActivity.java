@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -50,8 +49,12 @@ public class SearchPageActivity extends AppCompatActivity {
         EditText editText = findViewById(R.id.searchInput);
         editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
         editText.setOnEditorActionListener((v, actionId, event) -> {
+
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 String searchData = editText.getText().toString().trim();
+                if(searchData.isEmpty()){
+                    return false;
+                }
                 Intent newIntent = new Intent(SearchPageActivity.this, SearchPageActivity.class);
                 newIntent.putExtra("searchData", searchData);
                 startActivity(newIntent);

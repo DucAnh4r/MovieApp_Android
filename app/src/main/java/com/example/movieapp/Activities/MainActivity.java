@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -60,11 +59,17 @@ public class MainActivity extends AppCompatActivity {
         sendRequestSeriesMovies();
         sendRequestCartoon();
 
-        EditText editText = findViewById(R.id.searchInput);
+        SearchBarActivity searchBar = findViewById(R.id.searchBar);
+        EditText editText = searchBar.findViewById(R.id.searchInput);
+
         editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
         editText.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 String searchData = editText.getText().toString().trim();
+                if(searchData.isEmpty()){
+                    return false;
+                }
+
                 Intent intent = new Intent(MainActivity.this, SearchPageActivity.class);
                 intent.putExtra("searchData", searchData);
                 startActivity(intent);
