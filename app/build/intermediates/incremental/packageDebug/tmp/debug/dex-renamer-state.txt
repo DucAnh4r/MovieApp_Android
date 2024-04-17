@@ -1,14 +1,14 @@
-#Tue Apr 16 23:17:52 ICT 2024
-base.0=E\:\\MovieApp_Android\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
-base.1=E\:\\MovieApp_Android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
-base.2=E\:\\MovieApp_Android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\1\\classes.dex
-base.3=E\:\\MovieApp_Android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\2\\classes.dex
-base.4=E\:\\MovieApp_Android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\3\\classes.dex
-base.5=E\:\\MovieApp_Android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\5\\classes.dex
-base.6=E\:\\MovieApp_Android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\7\\classes.dex
-base.7=E\:\\MovieApp_Android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\8\\classes.dex
-base.8=E\:\\MovieApp_Android\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
-base.9=E\:\\MovieApp_Android\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes3.dex
+#Wed Apr 17 11:19:10 ICT 2024
+base.0=D\:\\WORKSPACE\\AndroidstudioProjects\\MovieApp_Android\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
+base.1=D\:\\WORKSPACE\\AndroidstudioProjects\\MovieApp_Android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
+base.2=D\:\\WORKSPACE\\AndroidstudioProjects\\MovieApp_Android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\1\\classes.dex
+base.3=D\:\\WORKSPACE\\AndroidstudioProjects\\MovieApp_Android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\2\\classes.dex
+base.4=D\:\\WORKSPACE\\AndroidstudioProjects\\MovieApp_Android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\3\\classes.dex
+base.5=D\:\\WORKSPACE\\AndroidstudioProjects\\MovieApp_Android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\5\\classes.dex
+base.6=D\:\\WORKSPACE\\AndroidstudioProjects\\MovieApp_Android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\7\\classes.dex
+base.7=D\:\\WORKSPACE\\AndroidstudioProjects\\MovieApp_Android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\8\\classes.dex
+base.8=D\:\\WORKSPACE\\AndroidstudioProjects\\MovieApp_Android\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
+base.9=D\:\\WORKSPACE\\AndroidstudioProjects\\MovieApp_Android\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes3.dex
 path.0=classes.dex
 path.1=0/classes.dex
 path.2=1/classes.dex

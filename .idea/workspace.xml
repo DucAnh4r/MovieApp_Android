@@ -65,6 +65,11 @@
           <theme>@style/Theme.MovieApp</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_watch_list.xml">
+        <config>
+          <theme>@style/Theme.MovieApp</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_watch_movie.xml">
         <config>
           <theme>@style/Theme.MovieApp</theme>
@@ -116,7 +121,12 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="acf5a44b-b602-43c4-8967-2a86f7ee4c43" name="Changes" comment="" />
+    <list default="true" id="acf5a44b-b602-43c4-8967-2a86f7ee4c43" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_favourite.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_favourite.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_history.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_history.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_watch_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_watch_list.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -125,7 +135,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[41e1782e]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[LMV600VM085a22b8]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -164,6 +174,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProblemsViewState">
@@ -185,17 +200,20 @@
     "android-custom-viewD:/Download/MovieApp-master/app/src/main/java/com/example/movieapp/Activities/BottomNavigationActivity.java_SELECTED": "BottomNavigationActivity",
     "android-custom-viewD:/Download/MovieApp-master/app/src/main/java/com/example/movieapp/Activities/LockedScrollViewActivity.java_SELECTED": "LockedScrollViewActivity",
     "android-custom-viewD:/Download/MovieApp-master/app/src/main/java/com/example/movieapp/Activities/SearchBarActivity.java_SELECTED": "SearchBarActivity",
+    "android-custom-viewD:/WORKSPACE/AndroidstudioProjects/MovieApp_Android/app/src/main/java/com/example/movieapp/Activities/BottomNavigationActivity.java_SELECTED": "BottomNavigationActivity",
+    "android-custom-viewD:/WORKSPACE/AndroidstudioProjects/MovieApp_Android/app/src/main/java/com/example/movieapp/Activities/LockedScrollViewActivity.java_SELECTED": "LockedScrollViewActivity",
     "android-custom-viewE:/MovieApp_Android/app/src/main/java/com/example/movieapp/Activities/LockedScrollViewActivity.java_SELECTED": "LockedScrollViewActivity",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "com.android.tools.idea.common.error.DesignerCommonIssuePanel_detail_visibility": "true",
-    "git-widget-placeholder": "ducky-the-duck",
-    "last_directory_selection": "D:/Download/MovieApp-master/app/src/main/res/drawable-xhdpi",
-    "last_opened_file_path": "E:/MovieApp"
+    "git-widget-placeholder": "ducanh4r",
+    "last_directory_selection": "D:/WORKSPACE/AndroidstudioProjects/MovieApp_Android/app/src/main/res/drawable",
+    "last_opened_file_path": "D:/WORKSPACE/AndroidstudioProjects/MovieApp_Android/app/src/main/res/drawable"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\WORKSPACE\AndroidstudioProjects\MovieApp_Android\app\src\main\res\drawable" />
       <recent name="D:\Download\MovieApp-master\app\src\main\res\drawable-xhdpi" />
     </key>
   </component>
@@ -291,6 +309,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.MovieApp-master:app [testDebugUnitTest]" />
         <item itemvalue="Gradle.MovieApp-master:app [testDebugUnitTest]" />
       </list>
     </recent_temporary>
