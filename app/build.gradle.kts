@@ -36,6 +36,7 @@ android {
 
 
 dependencies {
+    implementation ("com.squareup.okhttp3:okhttp:4.9.1")
     implementation ("com.google.firebase:firebase-storage:20.3.0")
     implementation ("com.facebook.android:facebook-android-sdk:latest.release")
     implementation ("com.facebook.android:facebook-login:latest.release")

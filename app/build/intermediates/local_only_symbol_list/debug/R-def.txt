@@ -28,6 +28,7 @@ drawable btn_6
 drawable cat_background
 drawable edittext_background
 drawable episodes_background
+drawable episodes_background_watched
 drawable fav
 drawable fav_act
 drawable gradient_background

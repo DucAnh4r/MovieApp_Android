@@ -176,7 +176,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             // Upload the resized image to Firebase Storage
             StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-            StorageReference imageRef = storageRef.child("avatars");
+            StorageReference imageRef = storageRef.child("avatars").child(mAuth.getCurrentUser().getUid());
             imageRef.putBytes(imageData)
                     .addOnSuccessListener(taskSnapshot -> {
                         // Image uploaded successfully
@@ -192,7 +192,9 @@ public class ProfileActivity extends AppCompatActivity {
                             userRef.child("avatarUrl").setValue(imageUrl);
 
                             // Display the uploaded image
-                            Glide.with(this).load(imageUrl).into(avatar);
+                            if (!isDestroyed()) {
+                                Glide.with(this).load(imageUrl).into(avatar);
+                            }
                         }).addOnFailureListener(e -> {
                             // Handle failure to get image URL
                             Toast.makeText(ProfileActivity.this, "Error getting image URL: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -207,8 +209,6 @@ public class ProfileActivity extends AppCompatActivity {
             Toast.makeText(ProfileActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
-
-
 
     private void displayAvatarFromURL(String imageURL) {
         if (!isDestroyed()) {

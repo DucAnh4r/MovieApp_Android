@@ -3202,6 +3202,7 @@ int drawable design_password_eye 0x7f0800ba
 int drawable design_snackbar_background 0x7f0800bb
 int drawable edittext_background 0x7f0800bc
 int drawable episodes_background 0x7f0800bd
+int drawable episodes_background_watched 0x7f08018f
 int drawable exo_controls_fastforward 0x7f0800be
 int drawable exo_controls_fullscreen_enter 0x7f0800bf
 int drawable exo_controls_fullscreen_exit 0x7f0800c0

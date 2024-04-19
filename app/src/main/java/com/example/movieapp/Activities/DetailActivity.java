@@ -2,7 +2,6 @@ package com.example.movieapp.Activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -22,6 +21,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
@@ -45,13 +46,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class DetailActivity extends AppCompatActivity {
     private ProgressBar progressBar;
@@ -364,53 +362,63 @@ public class DetailActivity extends AppCompatActivity {
 
         private ActorModel actorModel;
         private ImageView imageView;
+        private RequestQueue requestQueue;
 
         public ImageSearchTask(ActorModel actorModel, ImageView imageView) {
+            this.requestQueue = Volley.newRequestQueue(imageView.getContext());
             this.actorModel = actorModel;
             this.imageView = imageView;
         }
 
         @Override
         protected Bitmap doInBackground(Void... params) {
-            Bitmap bitmap = null;
+            final AtomicReference<Bitmap> bitmapReference = new AtomicReference<>(null);
 
-            try {
-                String searchQuery = actorModel.getName() + " image";
-                URL url = new URL("https://www.googleapis.com/customsearch/v1?key=" + API_KEY + "&cx=" + CSE_ID + "&q=" + searchQuery + "&searchType=image&num=1");
-                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                try {
-                    InputStream in = urlConnection.getInputStream();
-                    JSONObject jsonObject = new JSONObject(readStream(in));
-                    JSONArray items = jsonObject.getJSONArray("items");
-                    if (items.length() > 0) {
-                        JSONObject item = items.getJSONObject(0);
-                        String imageUrl = item.getString("link");
-                        bitmap = BitmapFactory.decodeStream(new URL(imageUrl).openStream());
-                    }
-                } finally {
-                    urlConnection.disconnect();
-                }
-            } catch (IOException | JSONException e) {
-                Log.e(TAG, "Error fetching image: " + e.getMessage());
-            }
+            String searchQuery = actorModel.getName() + " image";
+            String url = "https://www.googleapis.com/customsearch/v1?key=" + API_KEY + "&cx=" + CSE_ID + "&q=" + searchQuery + "&searchType=image&num=1";
 
-            return bitmap;
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                    response -> {
+                        try {
+                            JSONArray items = response.getJSONArray("items");
+                            if (items.length() > 0) {
+                                JSONObject item = items.getJSONObject(0);
+                                String imageUrl = item.getString("link");
+                                loadBitmap(imageUrl, bitmapReference);
+                            }
+                        } catch (JSONException e) {
+                            Log.e(TAG, "Error parsing JSON response: " + e.getMessage());
+                        }
+                    },
+                    error -> Log.e(TAG, "Error fetching image: " + error.getMessage())
+            );
+
+            requestQueue.add(request);
+
+            return bitmapReference.get();
         }
 
-        private String readStream(InputStream inputStream) throws IOException {
-            StringBuilder stringBuilder = new StringBuilder();
-            byte[] buffer = new byte[1024];
-            int bytesRead;
-            while ((bytesRead = inputStream.read(buffer)) != -1) {
-                stringBuilder.append(new String(buffer, 0, bytesRead));
-            }
-            return stringBuilder.toString();
+        private void loadBitmap(String imageUrl, AtomicReference<Bitmap> bitmapReference) {
+            ImageRequest imageRequest = new ImageRequest(imageUrl,
+                    response -> {
+                        Bitmap bitmap = response;
+                        bitmapReference.set(bitmap);
+                        if (bitmap != null) {
+                            imageView.setImageBitmap(bitmap);
+                        }
+                    },
+                    0,
+                    0,
+                    null,
+                    error -> Log.e(TAG, "Error loading bitmap: " + error.getMessage())
+            );
+
+            requestQueue.add(imageRequest);
         }
+
         @Override
         protected void onPostExecute(Bitmap bitmap) {
-            if (bitmap != null) {
-                imageView.setImageBitmap(bitmap);
-            }
+            // No need to set bitmap here as it's already set in loadBitmap method
         }
     }
 }

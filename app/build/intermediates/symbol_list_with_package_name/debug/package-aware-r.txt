@@ -3203,6 +3203,7 @@ drawable design_password_eye
 drawable design_snackbar_background
 drawable edittext_background
 drawable episodes_background
+drawable episodes_background_watched
 drawable exo_controls_fastforward
 drawable exo_controls_fullscreen_enter
 drawable exo_controls_fullscreen_exit

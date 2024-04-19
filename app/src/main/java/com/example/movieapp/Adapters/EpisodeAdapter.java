@@ -18,7 +18,6 @@ import com.example.movieapp.Domain.movieDetail.Episode;
 import com.example.movieapp.Domain.movieDetail.ServerDatum;
 import com.example.movieapp.R;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,32 +32,21 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.ViewHold
     private Context context;
     private String slug;
     private String currentEpisodeName;
-
     private String userId;
-
-    private List<String> watchedEpisodes = new ArrayList<>(); // Khởi tạo mảng watchedEpisodes
-
+    private List<String> watchedEpisodes = new ArrayList<>();
     private FirebaseAuth mAuth;
-
-
+    private boolean[] itemClickedArray;
     public void setCurrentEpisodeName(String currentEpisodeName) {
         this.currentEpisodeName = currentEpisodeName;
     }
 
-
-    private boolean[] itemClickedArray;
-
-    // Constructor
     public EpisodeAdapter(Context context, List<Episode> episodeList, String slug) {
         this.context = context;
         this.episodeList = episodeList;
         this.slug = slug;
         itemClickedArray = new boolean[episodeList.size()];
 
-        // Khởi tạo FirebaseAuth
         mAuth = FirebaseAuth.getInstance();
-
-        // Kiểm tra xem FirebaseAuth có null hay không trước khi sử dụng
         if (mAuth.getCurrentUser() != null) {
             userId = mAuth.getCurrentUser().getUid();
             getWatchedEpisodesFromFirebase();
@@ -74,10 +62,6 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null) {
-            String userId = currentUser.getUid();
-        }
         Episode episode = episodeList.get(position);
         List<ServerDatum> serverDataList = episode.getServerData();
         if (serverDataList != null && !serverDataList.isEmpty()) {
@@ -103,13 +87,12 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.ViewHold
                 // Kiểm tra xem tập đang được xem có trùng với episodeName không
                 if (episodeName.equals(currentEpisodeName)) {
                     // Nếu có, đổi màu của button
-                    button.setTextColor(context.getResources().getColor(android.R.color.holo_green_light));
+                    button.setTextColor(context.getResources().getColor(android.R.color.holo_orange_dark));
                 }
 
                 // Kiểm tra xem tập có trong danh sách tập đã xem không
                 if (watchedEpisodes.contains(episodeName)) {
-                    // Nếu tên tập tồn tại trong mảng watchedEpisodes, đổi màu nền của button thành xám
-                    button.setBackgroundColor(context.getResources().getColor(android.R.color.darker_gray));
+                    button.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.episodes_background_watched));
                 }
 
                 int buttonPosition = serverDataList.indexOf(serverDatum);
