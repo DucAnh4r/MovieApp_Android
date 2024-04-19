@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -57,6 +58,7 @@ public class DetailActivity extends AppCompatActivity {
     private String idFilm;
     private ImageView pic2, favBtn, listBtn;
     private NestedScrollView scrollView;
+    private SwipeRefreshLayout swipeRefreshLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +67,12 @@ public class DetailActivity extends AppCompatActivity {
         idFilm = getIntent().getStringExtra("slug");
         initView();
         sendRequest();
+        swipeRefreshLayout.setOnRefreshListener(this::reloadContent);
+    }
+
+    private void reloadContent() {
+        sendRequest();
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     private void sendRequest() {
@@ -313,6 +321,7 @@ public class DetailActivity extends AppCompatActivity {
         ImageView backImg = findViewById(R.id.backimg);
         RecyclerView recyclerViewCategory = findViewById(R.id.genreView);
         recyclerViewCategory.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
 
         backImg.setOnClickListener(v -> finish());
 
@@ -414,11 +423,6 @@ public class DetailActivity extends AppCompatActivity {
             );
 
             requestQueue.add(imageRequest);
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            // No need to set bitmap here as it's already set in loadBitmap method
         }
     }
 }
