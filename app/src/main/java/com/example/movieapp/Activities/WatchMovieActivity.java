@@ -51,10 +51,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -72,6 +74,8 @@ public class WatchMovieActivity extends AppCompatActivity {
     boolean isFullScreen=false;
     boolean isLock = false;
     private int originalPlayerViewHeight;
+
+    private String currentEpisodeName; // Khai báo biến currentEpisodeName ở mức lớp
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +87,9 @@ public class WatchMovieActivity extends AppCompatActivity {
         ProgressBar progressBar = findViewById(R.id.progressBarWatch);
         bt_fullscreen = findViewById(R.id.bt_fullscreen);
         ImageView bt_lockscreen = findViewById(R.id.exo_lock);
+
+        // Lấy giá trị currentEpisodeName từ Intent và gán cho biến currentEpisodeName
+        currentEpisodeName = getIntent().getStringExtra("currentEpisodeName");
 
         // Định nghĩa onTouchListener
         View.OnTouchListener scrollViewTouchListener = new View.OnTouchListener() {
@@ -170,6 +177,8 @@ public class WatchMovieActivity extends AppCompatActivity {
         tap = getIntent().getStringExtra("tap");
         idFilm = getIntent().getStringExtra("slug");
         movieType = getIntent().getStringExtra("movieType");
+
+
         tvTap.setText(tap);
         initView();
         initializePlayerComponents();
@@ -187,6 +196,18 @@ public class WatchMovieActivity extends AppCompatActivity {
                         String existingSlug = movieSnapshot.child("slug").getValue(String.class);
                         if (existingSlug != null && existingSlug.equals(titleTxt.getText().toString())) {
                             isAlreadySaved = true;
+                            if (movieType != null && (movieType.equals("series") || movieType.equals("hoathinh") || movieType.equals("tvshows"))) {
+                                ArrayList<String> tapList = new ArrayList<>();
+                                DataSnapshot tapSnapshot = movieSnapshot.child("tap");
+                                if (tapSnapshot.exists()) {
+                                    GenericTypeIndicator<ArrayList<String>> t = new GenericTypeIndicator<ArrayList<String>>() {};
+                                    tapList = tapSnapshot.getValue(t);
+                                }
+                                if (!tapList.contains(tap)) {
+                                    tapList.add(tap);
+                                }
+                                movieSnapshot.getRef().child("tap").setValue(tapList);
+                            }
                             movieSnapshot.getRef().child("addTime").setValue(ServerValue.TIMESTAMP);
                             break;
                         }
@@ -199,7 +220,9 @@ public class WatchMovieActivity extends AppCompatActivity {
                         movieData.put("slug", titleTxt.getText().toString());
                         movieData.put("addTime", ServerValue.TIMESTAMP);
                         if (movieType != null && (movieType.equals("series") || movieType.equals("hoathinh") || movieType.equals("tvshows"))) {
-                            movieData.put("tap", tap);
+                            ArrayList<String> tapList = new ArrayList<>();
+                            tapList.add(tap);
+                            movieData.put("tap", tapList);
                         }
                         userRef.child("watchedMovies").child(movieNodeKey).setValue(movieData);
                         Toast.makeText(WatchMovieActivity.this, "Lưu thành công", Toast.LENGTH_SHORT).show();
@@ -210,6 +233,7 @@ public class WatchMovieActivity extends AppCompatActivity {
                     Toast.makeText(WatchMovieActivity.this, "Phim đã được lưu trước đó", Toast.LENGTH_SHORT).show();
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.w("saveWatchedMovie", "Error saving data", error.toException());
@@ -398,6 +422,8 @@ public class WatchMovieActivity extends AppCompatActivity {
                 if (Cepisodes != null && !Cepisodes.isEmpty()) {
                     RecyclerView episodeRecyclerView = findViewById(R.id.episodeRecyclerView);
                     EpisodeAdapter episodeAdapter = new EpisodeAdapter(this, Cepisodes, idFilm);
+                    // Thực hiện các hành động cần thiết với currentEpisodeName
+                    episodeAdapter.setCurrentEpisodeName(currentEpisodeName);
                     episodeRecyclerView.setLayoutManager(new LinearLayoutManager(this));
                     episodeRecyclerView.setAdapter(episodeAdapter);
                 }
