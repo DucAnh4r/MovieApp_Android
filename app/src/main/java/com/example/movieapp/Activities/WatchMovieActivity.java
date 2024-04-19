@@ -26,6 +26,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -74,9 +75,8 @@ public class WatchMovieActivity extends AppCompatActivity {
     boolean isFullScreen=false;
     boolean isLock = false;
     private int originalPlayerViewHeight;
-
-    private String currentEpisodeName; // Khai báo biến currentEpisodeName ở mức lớp
-    @SuppressLint("MissingInflatedId")
+    private String currentEpisodeName;
+    private SwipeRefreshLayout swipeRefreshLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,19 +88,13 @@ public class WatchMovieActivity extends AppCompatActivity {
         bt_fullscreen = findViewById(R.id.bt_fullscreen);
         ImageView bt_lockscreen = findViewById(R.id.exo_lock);
 
-        // Lấy giá trị currentEpisodeName từ Intent và gán cho biến currentEpisodeName
         currentEpisodeName = getIntent().getStringExtra("currentEpisodeName");
 
-        // Định nghĩa onTouchListener
-        View.OnTouchListener scrollViewTouchListener = new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (!isFullScreen) {
-                    return  false;
-
-                }
-                return true;
+        View.OnTouchListener scrollViewTouchListener = (v, event) -> {
+            if (!isFullScreen) {
+                return  false;
             }
+            return true;
         };
 
         bt_fullscreen.setOnClickListener(view -> {
@@ -122,39 +116,26 @@ public class WatchMovieActivity extends AppCompatActivity {
 
                 hideSystemUI();
 
-                // Set onTouchListener chỉ khi isFullScreen là true
                 scrollView.setOnTouchListener(scrollViewTouchListener);
 
-                scrollView.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        int[] location = new int[2];
-                        playerView.getLocationOnScreen(location);
-                        scrollView.smoothScrollTo(0, location[1]);
-                    }
+                scrollView.post(() -> {
+                    int[] location = new int[2];
+                    playerView.getLocationOnScreen(location);
+                    scrollView.smoothScrollTo(0, location[1]);
                 });
             } else {
                 bt_fullscreen.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_baseline_fullscreen));
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-                // Gỡ bỏ onTouchListener khi chuyển về chế độ bình thường
                 scrollView.setOnTouchListener(null);
                 params.height = originalPlayerViewHeight;
                 params.width = MATCH_PARENT;
                 showSystemUI();
-
-
-
-
-
             }
             playerView.setLayoutParams(params);
-
         });
 
-
         bt_lockscreen.setOnClickListener(view -> {
-            //change icon base on toggle lock screen or unlock screen
             if (!isLock)
             {
                 bt_lockscreen.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_baseline_lock));
@@ -163,7 +144,6 @@ public class WatchMovieActivity extends AppCompatActivity {
                 bt_lockscreen.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_outline_lock_open));
             }
             isLock = !isLock;
-            //method for toggle will do next
             lockScreen(isLock);
         });
 
@@ -183,6 +163,12 @@ public class WatchMovieActivity extends AppCompatActivity {
         initView();
         initializePlayerComponents();
         sendRequest();
+        swipeRefreshLayout.setOnRefreshListener(this::reloadContent);
+    }
+
+    private void reloadContent() {
+        sendRequest();
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     private void saveWatchedMovie(TextView titleTxt, String userId, String tap, String movieType) {
@@ -478,6 +464,7 @@ public class WatchMovieActivity extends AppCompatActivity {
         pic2 = findViewById(R.id.watchImage);
         oMovieName = findViewById(R.id.originalMovieName);
         playerView = findViewById(R.id.videoView2);
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
         ImageView backImg = findViewById(R.id.backimg);
         backImg.setOnClickListener(v -> finish());
     }

@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private AppCompatButton newBtn, singleBtn, seriesBtn, cartoonBtn;
     private ViewPager2 viewPager2;
     private Handler slideHandle = new Handler();
-    private TextView newMovie, newSingle, newSeries, newCartoon;
+    private SwipeRefreshLayout swipeRefreshLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,8 +83,18 @@ public class MainActivity extends AppCompatActivity {
         setTextViewClickListener(singleBtn, "single");
         setTextViewClickListener(seriesBtn, "series");
         setTextViewClickListener(cartoonBtn, "hoathinh");
+
+        swipeRefreshLayout.setOnRefreshListener(this::reloadContent);
     }
 
+    private void reloadContent() {
+        sendRequestNewestMovies();
+        sendRequestSingleMovies();
+        sendRequestSeriesMovies();
+        sendRequestCartoon();
+        banners();
+        swipeRefreshLayout.setRefreshing(false);
+    }
 
     private void setTextViewClickListener(TextView textView, String type) {
         textView.setOnClickListener(v -> {
@@ -264,9 +275,6 @@ public class MainActivity extends AppCompatActivity {
         seriesBtn = findViewById(R.id.moreSeries_btn);
         cartoonBtn = findViewById(R.id.moreCartoon_btn);
 
-        newMovie = findViewById(R.id.newMovie);
-        newSingle = findViewById(R.id.newSingle);
-        newSeries = findViewById(R.id.newSeries);
-        newCartoon = findViewById(R.id.newCartoon);
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
     }
 }

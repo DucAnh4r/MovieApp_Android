@@ -35,7 +35,6 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.ViewHold
     private String userId;
     private List<String> watchedEpisodes = new ArrayList<>();
     private FirebaseAuth mAuth;
-    private boolean[] itemClickedArray;
     public void setCurrentEpisodeName(String currentEpisodeName) {
         this.currentEpisodeName = currentEpisodeName;
     }
@@ -44,7 +43,6 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.ViewHold
         this.context = context;
         this.episodeList = episodeList;
         this.slug = slug;
-        itemClickedArray = new boolean[episodeList.size()];
 
         mAuth = FirebaseAuth.getInstance();
         if (mAuth.getCurrentUser() != null) {
@@ -77,20 +75,15 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.ViewHold
 
             for (ServerDatum serverDatum : serverDataList) {
                 String episodeName = serverDatum.getName();
-                // Inflate layout viewholder_episode
                 View view2 = LayoutInflater.from(context).inflate(R.layout.viewholder_episode, linearLayout, false);
-                // Tìm button từ view đã inflate
                 AppCompatButton button = view2.findViewById(R.id.episode);
                 button.setText(episodeName);
                 linearLayout.addView(view2);
 
-                // Kiểm tra xem tập đang được xem có trùng với episodeName không
                 if (episodeName.equals(currentEpisodeName)) {
-                    // Nếu có, đổi màu của button
                     button.setTextColor(context.getResources().getColor(android.R.color.holo_orange_dark));
                 }
 
-                // Kiểm tra xem tập có trong danh sách tập đã xem không
                 if (watchedEpisodes.contains(episodeName)) {
                     button.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.episodes_background_watched));
                 }
@@ -104,17 +97,14 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.ViewHold
                         Intent intent = new Intent(context, WatchMovieActivity.class);
                         intent.putExtra("tap", tap);
                         intent.putExtra("slug", slug);
-                        intent.putExtra("currentEpisodeName", tap); // Truyền currentEpisodeName
+                        intent.putExtra("currentEpisodeName", tap);
                         context.startActivity(intent);
-                    } else {
-                        // Do nothing if it's the currently playing episode
                     }
                 });
             }
         }
     }
 
-    // Phương thức để lấy danh sách tập đã xem từ Firebase
     private void getWatchedEpisodesFromFirebase() {
         DatabaseReference watchedMoviesRef = FirebaseDatabase.getInstance().getReference().child("users").child(userId);
         watchedMoviesRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -125,9 +115,7 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.ViewHold
                     for (DataSnapshot movieSnapshot : watchedMoviesSnapshot.getChildren()) {
                         if (movieSnapshot.hasChild("tap")) {
                             DataSnapshot tapSnapshot = movieSnapshot.child("tap");
-                            // Kiểm tra xem mảng "tap" có giá trị hay không
                             if (tapSnapshot.exists()) {
-                                // Duyệt qua các giá trị của mảng "tap" và lưu vào mảng của bạn
                                 for (DataSnapshot tapDataSnapshot : tapSnapshot.getChildren()) {
                                     String tap = tapDataSnapshot.getValue(String.class);
                                     watchedEpisodes.add(tap);
@@ -136,12 +124,11 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.ViewHold
                         }
                     }
                 }
-                notifyDataSetChanged(); // Sau khi lấy danh sách tập đã xem xong, thông báo cho adapter biết để cập nhật giao diện
+                notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Xử lý khi có lỗi xảy ra
                 Log.e("Firebase", "Error fetching data", databaseError.toException());
             }
         });
@@ -153,12 +140,9 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        AppCompatButton episode;
         LinearLayout episodeContainer;
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            episode = itemView.findViewById(R.id.episode);
             episodeContainer = itemView.findViewById(R.id.episodeContainer);
         }
     }
