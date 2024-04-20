@@ -1,5 +1,6 @@
 <!-- item_page.xml -->
-<Button xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.AppCompatButton
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/btnPage"
     android:layout_width="50dp"
     android:layout_height="wrap_content"

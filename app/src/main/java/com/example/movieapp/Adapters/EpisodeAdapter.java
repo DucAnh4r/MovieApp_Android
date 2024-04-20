@@ -125,7 +125,7 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.ViewHold
                                     }
                                 }
                             }
-                            break; // Kết thúc vòng lặp sau khi tìm thấy phim có cùng slug
+                            break;
                         }
                     }
                 }

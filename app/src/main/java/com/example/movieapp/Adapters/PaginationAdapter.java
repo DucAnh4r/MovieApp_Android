@@ -1,12 +1,12 @@
 package com.example.movieapp.Adapters;
 
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.movieapp.R;
@@ -36,11 +36,9 @@ public class PaginationAdapter extends RecyclerView.Adapter<PaginationAdapter.Vi
             holder.btnPage.setText(String.valueOf(displayPage));
 
             if (displayPage == page) {
-                holder.btnPage.setBackgroundColor(Color.RED);
-            } else {
-                holder.btnPage.setBackgroundColor(Color.TRANSPARENT);
+                int color = ContextCompat.getColor(holder.itemView.getContext(), R.color.light_pink);
+                holder.btnPage.setBackgroundColor(color);
             }
-
             holder.btnPage.setOnClickListener(v -> {
                 if (paginationClickListener != null) {
                     paginationClickListener.onPageClicked(displayPage);
@@ -50,7 +48,6 @@ public class PaginationAdapter extends RecyclerView.Adapter<PaginationAdapter.Vi
             holder.btnPage.setVisibility(View.GONE);
         }
     }
-
 
     public void setPage(int page) {
         if (page >= 1 && page <= totalPages) {
@@ -78,7 +75,7 @@ public class PaginationAdapter extends RecyclerView.Adapter<PaginationAdapter.Vi
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        Button btnPage;
+        AppCompatButton btnPage;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
