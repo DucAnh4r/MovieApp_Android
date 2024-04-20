@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,7 +31,9 @@ public class SearchPageActivity extends AppCompatActivity {
     private StringRequest mStringRequest1;
     private ProgressBar loading1;
     private String searchData;
-    private TextView more, message;
+    private TextView message;
+
+    private AppCompatButton more;
     private int maxItemCount = 10;
 
     @Override

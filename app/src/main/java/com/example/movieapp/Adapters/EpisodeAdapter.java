@@ -47,7 +47,7 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.ViewHold
         mAuth = FirebaseAuth.getInstance();
         if (mAuth.getCurrentUser() != null) {
             userId = mAuth.getCurrentUser().getUid();
-            getWatchedEpisodesFromFirebase();
+            getWatchedEpisodesFromFirebase(slug);
         }
     }
 
@@ -105,7 +105,7 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.ViewHold
         }
     }
 
-    private void getWatchedEpisodesFromFirebase() {
+    private void getWatchedEpisodesFromFirebase(String movieSlug) {
         DatabaseReference watchedMoviesRef = FirebaseDatabase.getInstance().getReference().child("users").child(userId);
         watchedMoviesRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -113,14 +113,19 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.ViewHold
                 if (dataSnapshot.hasChild("watchedMovies")) {
                     DataSnapshot watchedMoviesSnapshot = dataSnapshot.child("watchedMovies");
                     for (DataSnapshot movieSnapshot : watchedMoviesSnapshot.getChildren()) {
-                        if (movieSnapshot.hasChild("tap")) {
-                            DataSnapshot tapSnapshot = movieSnapshot.child("tap");
-                            if (tapSnapshot.exists()) {
-                                for (DataSnapshot tapDataSnapshot : tapSnapshot.getChildren()) {
-                                    String tap = tapDataSnapshot.getValue(String.class);
-                                    watchedEpisodes.add(tap);
+                        // Kiểm tra xem phim trong snapshot có cùng slug với phim hiện tại không
+                        String movieSlugFromSnapshot = movieSnapshot.child("id").getValue(String.class);
+                        if (movieSlugFromSnapshot != null && movieSlugFromSnapshot.equals(movieSlug)) {
+                            if (movieSnapshot.hasChild("tap")) {
+                                DataSnapshot tapSnapshot = movieSnapshot.child("tap");
+                                if (tapSnapshot.exists()) {
+                                    for (DataSnapshot tapDataSnapshot : tapSnapshot.getChildren()) {
+                                        String tap = tapDataSnapshot.getValue(String.class);
+                                        watchedEpisodes.add(tap);
+                                    }
                                 }
                             }
+                            break; // Kết thúc vòng lặp sau khi tìm thấy phim có cùng slug
                         }
                     }
                 }

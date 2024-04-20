@@ -204,6 +204,7 @@ public class WatchMovieActivity extends AppCompatActivity {
                     if (!TextUtils.isEmpty(movieNodeKey)) {
                         HashMap<String, Object> movieData = new HashMap<>();
                         movieData.put("slug", titleTxt.getText().toString());
+                        movieData.put("id", idFilm);
                         movieData.put("addTime", ServerValue.TIMESTAMP);
                         if (movieType != null && (movieType.equals("series") || movieType.equals("hoathinh") || movieType.equals("tvshows"))) {
                             ArrayList<String> tapList = new ArrayList<>();
