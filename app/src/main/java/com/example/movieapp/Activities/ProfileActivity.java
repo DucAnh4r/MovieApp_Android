@@ -2,18 +2,15 @@ package com.example.movieapp.Activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.widget.Button;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.text.HtmlCompat;
@@ -31,21 +28,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 
 public class ProfileActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     private TextView username, email, fav, movieWatch, watchList;
-    private Button logOutBtn;
+    private ImageView avatar;
     private CardView cardList, cardFav, cardRecent;
     private GoogleSignInClient mGoogleSignInClient;
-    private ImageView avatar;
-    private static final int PICK_IMAGE_REQUEST = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +50,10 @@ public class ProfileActivity extends AppCompatActivity {
         movieWatch = findViewById(R.id.movieWatch);
         fav = findViewById(R.id.fav);
         watchList = findViewById(R.id.watchList);
-        logOutBtn = findViewById(R.id.logOutBtn);
+        ImageView settingImageView = findViewById(R.id.setting);
         avatar = findViewById(R.id.avatar);
+
+        settingImageView.setOnClickListener(v -> showPopupMenu(v));
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
@@ -123,91 +115,6 @@ public class ProfileActivity extends AppCompatActivity {
             Intent intent = new Intent(ProfileActivity.this, HistoryActivity.class);
             startActivity(intent);
         });
-
-        logOutBtn.setOnClickListener(v -> {
-            mAuth.signOut();
-            SharedPreferences preferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putBoolean("isLoggedIn", false);
-            editor.putString("userId", null);
-            editor.apply();
-
-            signOutFromGoogle();
-            signOutFromFacebook();
-        });
-
-        avatar.setOnClickListener(v -> {
-            chooseNewAvatar();
-        });
-    }
-
-    private void chooseNewAvatar() {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/*");
-        startActivityForResult(intent, PICK_IMAGE_REQUEST);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            Uri imageUri = data.getData();
-            uploadAndResizeImageToFirebase(imageUri);
-        }
-    }
-
-    private void uploadAndResizeImageToFirebase(Uri uri) {
-        try {
-            // Decode the image file into a Bitmap
-            Bitmap originalBitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri));
-
-            // Calculate the desired dimensions for the resized image
-            int targetWidth = 1024; // Set your desired width
-            int targetHeight = (int) (originalBitmap.getHeight() * (targetWidth / (double) originalBitmap.getWidth()));
-
-            // Resize the Bitmap
-            Bitmap resizedBitmap = Bitmap.createScaledBitmap(originalBitmap, targetWidth, targetHeight, false);
-
-            // Convert the resized Bitmap to JPEG format
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos); // Adjust quality as needed
-            byte[] imageData = baos.toByteArray();
-
-            // Upload the resized image to Firebase Storage
-            StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-            StorageReference imageRef = storageRef.child("avatars").child(mAuth.getCurrentUser().getUid());
-            imageRef.putBytes(imageData)
-                    .addOnSuccessListener(taskSnapshot -> {
-                        // Image uploaded successfully
-                        // Handle success (e.g., update database with image URL)
-
-                        // After successful upload, also save the image URL to Firebase Database
-                        imageRef.getDownloadUrl().addOnSuccessListener(downloadUri -> {
-                            // Get the download URL for the uploaded image
-                            String imageUrl = downloadUri.toString();
-
-                            // Save the image URL to Firebase Realtime Database or Firestore
-                            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getCurrentUser().getUid());
-                            userRef.child("avatarUrl").setValue(imageUrl);
-
-                            // Display the uploaded image
-                            if (!isDestroyed()) {
-                                Glide.with(this).load(imageUrl).into(avatar);
-                            }
-                        }).addOnFailureListener(e -> {
-                            // Handle failure to get image URL
-                            Toast.makeText(ProfileActivity.this, "Error getting image URL: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                        });
-                    })
-                    .addOnFailureListener(e -> {
-                        // Handle failure
-                        Toast.makeText(ProfileActivity.this, "Upload failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    });
-        } catch (IOException e) {
-            e.printStackTrace();
-            Toast.makeText(ProfileActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
     }
 
     private void displayAvatarFromURL(String imageURL) {
@@ -237,5 +144,32 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+    }
+
+    private void showPopupMenu(View view) {
+        PopupMenu popupMenu = new PopupMenu(this, view);
+        popupMenu.inflate(R.menu.popup_menu);
+
+        popupMenu.setOnMenuItemClickListener(item -> {
+            if (item.getItemId() == R.id.menu_edit) {
+                Intent intent = new Intent(ProfileActivity.this, EditProfileActivity.class);
+                startActivity(intent);
+                return true;
+            } else if (item.getItemId() == R.id.menu_logout) {
+                mAuth.signOut();
+                SharedPreferences preferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putBoolean("isLoggedIn", false);
+                editor.putString("userId", null);
+                editor.apply();
+
+                signOutFromGoogle();
+                signOutFromFacebook();
+                return true;
+            } else {
+                return false;
+            }
+        });
+        popupMenu.show();
     }
 }
