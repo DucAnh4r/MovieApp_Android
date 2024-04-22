@@ -87,6 +87,13 @@
                 android:textColor="#CBCDC8"/>
             <ImageView
                 android:layout_width="30dp"
+                android:layout_height="23dp"
+                android:src="@drawable/setting"
+                android:id="@+id/bt_setting"
+                android:theme="@style/ClickableView"
+                app:tint="@color/white" />
+            <ImageView
+                android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/exo_controls_fullscreen_enter"
                 android:id="@+id/bt_fullscreen"

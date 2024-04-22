@@ -34,8 +34,4 @@ public class SearchBarActivity extends LinearLayout {
         inflater.inflate(R.layout.activity_search_bar, this);
         searchInput = findViewById(R.id.searchInput);
     }
-
-    public String getSearchText() {
-        return searchInput.getText().toString();
-    }
 }

@@ -1,0 +1,34 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/speed"
+        android:title="Speed">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/speed_025"
+                    android:title="0.25x" />
+                <item
+                    android:id="@+id/speed_05"
+                    android:title="0.5x" />
+                <item
+                    android:id="@+id/speed_075"
+                    android:title="0.75x" />
+                <item
+                    android:id="@+id/speed_1"
+                    android:title="1x" />
+                <item
+                    android:id="@+id/speed_125"
+                    android:title="1.25x" />
+                <item
+                    android:id="@+id/speed_15"
+                    android:title="1.5x" />
+                <item
+                    android:id="@+id/speed_175"
+                    android:title="1.75x" />
+                <item
+                    android:id="@+id/speed_2"
+                    android:title="2x" />
+            </group>
+        </menu>
+    </item>
+</menu>

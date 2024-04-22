@@ -7,24 +7,13 @@
     tools:context=".Activities.SearchPageActivity"
     android:background="@color/main_color">
 
-    <EditText
-        android:id="@+id/searchInput"
+    <com.example.movieapp.Activities.SearchBarActivity
+        android:id="@+id/searchBar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="16dp"
-        android:background="@drawable/edittext_background"
-        android:drawableStart="@drawable/search"
-        android:drawableEnd="@drawable/microphone"
-        android:drawablePadding="8dp"
-        android:ems="10"
-        android:hint="Search Movie..."
-        android:inputType="text"
-        android:padding="12dp"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"></com.example.movieapp.Activities.SearchBarActivity>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
@@ -32,7 +21,7 @@
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationMenu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchInput">
+        app:layout_constraintTop_toBottomOf="@+id/searchBar">
 
         <TextView
             android:id="@+id/message"

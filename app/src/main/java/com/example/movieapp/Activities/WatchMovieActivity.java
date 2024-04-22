@@ -1,21 +1,20 @@
 package com.example.movieapp.Activities;
 
-import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
-
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.MotionEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.ProgressBar;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +38,7 @@ import com.example.movieapp.Domain.movieDetail.ServerDatum;
 import com.example.movieapp.R;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.MediaItem;
+import com.google.android.exoplayer2.PlaybackParameters;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.source.hls.HlsMediaSource;
 import com.google.android.exoplayer2.ui.PlayerView;
@@ -63,106 +63,30 @@ import java.util.List;
 public class WatchMovieActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private ExoPlayer player;
-    private TextView titleTxt, oMovieName;
+    private TextView titleTxt, oMovieName, tvTap, episodeCountTextView, yearReleased, country;
+    private RecyclerView episodeRecyclerView;
     private String idFilm, tap, movieType;
-    private ImageView pic2;
-    private ScrollView scrollView;
-    private Context mContext;
+    private ImageView pic2, bt_lockscreen, backImg, bt_fullscreen, bt_setting;
     private PlayerView playerView;
     private HlsMediaSource.Factory mediaSourceFactory;
-    ImageView bt_fullscreen;
     boolean isFullScreen=false;
     boolean isLock = false;
     private int originalPlayerViewHeight;
     private String currentEpisodeName;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private float currentSpeed = 1.0f;
+    private MenuItem selectedSpeedMenuItem;
+    private PopupMenu popupMenu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_watch_movie);
-        initScrollViewTouchListener();
-        TextView tvTap = findViewById(R.id.tvTap);
-        PlayerView playerView = findViewById(R.id.videoView2);
-        ProgressBar progressBar = findViewById(R.id.progressBarWatch);
-        bt_fullscreen = findViewById(R.id.bt_fullscreen);
-        ImageView bt_lockscreen = findViewById(R.id.exo_lock);
-
-        currentEpisodeName = getIntent().getStringExtra("currentEpisodeName");
-
-        View.OnTouchListener scrollViewTouchListener = (v, event) -> {
-            if (!isFullScreen) {
-                return  false;
-            }
-            return true;
-        };
-
-        bt_fullscreen.setOnClickListener(view -> {
-            isFullScreen = !isFullScreen;
-            adjustPlayerViewSize(isFullScreen);
-
-            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) playerView.getLayoutParams();
-
-            if (isFullScreen) {
-                bt_fullscreen.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_baseline_fullscreen_exit));
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
-
-                originalPlayerViewHeight = params.height;
-                DisplayMetrics displayMetrics = new DisplayMetrics();
-                getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-
-                int screenWidth = displayMetrics.widthPixels;
-                params.height = screenWidth;
-
-                hideSystemUI();
-
-                scrollView.setOnTouchListener(scrollViewTouchListener);
-
-                scrollView.post(() -> {
-                    int[] location = new int[2];
-                    playerView.getLocationOnScreen(location);
-                    scrollView.smoothScrollTo(0, location[1]);
-                });
-            } else {
-                bt_fullscreen.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_baseline_fullscreen));
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-                scrollView.setOnTouchListener(null);
-                params.height = originalPlayerViewHeight;
-                params.width = MATCH_PARENT;
-                showSystemUI();
-            }
-            playerView.setLayoutParams(params);
-        });
-
-        bt_lockscreen.setOnClickListener(view -> {
-            if (!isLock)
-            {
-                bt_lockscreen.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_baseline_lock));
-            } else
-            {
-                bt_lockscreen.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_outline_lock_open));
-            }
-            isLock = !isLock;
-            lockScreen(isLock);
-        });
-
-        player = new ExoPlayer.Builder(this)
-                .setSeekBackIncrementMs(5000)
-                .setSeekForwardIncrementMs(5000)
-                .build();
-        playerView.setPlayer(player);
-        playerView.setKeepScreenOn(true);
-
-        tap = getIntent().getStringExtra("tap");
-        idFilm = getIntent().getStringExtra("slug");
-        movieType = getIntent().getStringExtra("movieType");
-
-
-        tvTap.setText(tap);
         initView();
         initializePlayerComponents();
         sendRequest();
         swipeRefreshLayout.setOnRefreshListener(this::reloadContent);
+        popupMenu = new PopupMenu(this, bt_setting);
+        popupMenu.inflate(R.menu.setting_movie_popup);
     }
 
     private void reloadContent() {
@@ -230,50 +154,58 @@ public class WatchMovieActivity extends AppCompatActivity {
     private void initializePlayerComponents() {
         player = new SimpleExoPlayer.Builder(this).build();
         playerView.setPlayer(player);
-
-        // Khởi tạo factory cho dataSource
         DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(this, Util.getUserAgent(this, "YourApplicationName"));
-
-        // Khởi tạo factory cho tệp m3u8 (HLS)
         mediaSourceFactory = new HlsMediaSource.Factory(dataSourceFactory);
     }
+
     private void initializePlayer(Uri videoUri) {
-        // Tạo một MediaItem từ Uri của videoUri
         MediaItem mediaItem = MediaItem.fromUri(videoUri);
-
-        // Tạo một HlsMediaSource từ MediaItem đã tạo và HlsMediaSource.Factory đã khởi tạo trước đó
         HlsMediaSource mediaSource = mediaSourceFactory.createMediaSource(mediaItem);
-
-        // Chuẩn bị ExoPlayer với HlsMediaSource
         player.setMediaSource(mediaSource);
-
-        // Bắt đầu phát video khi đã chuẩn bị xong
         player.prepare();
         player.play();
     }
-    // Biến instance của View.OnTouchListener
-    private View.OnTouchListener scrollViewTouchListener;
 
     private void adjustPlayerViewSize(boolean isFullScreen) {
+        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) playerView.getLayoutParams();
         if (isFullScreen) {
+            titleTxt.setVisibility(View.GONE);
+            pic2.setVisibility(View.GONE);
+            oMovieName.setVisibility(View.GONE);
+            backImg.setVisibility(View.GONE);
+            tvTap.setVisibility(View.GONE);
+            country.setVisibility(View.GONE);
+            yearReleased.setVisibility(View.GONE);
+            episodeCountTextView.setVisibility(View.GONE);
+            episodeRecyclerView.setVisibility(View.GONE);
 
+            originalPlayerViewHeight = params.height;
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+            params.width = ConstraintLayout.LayoutParams.MATCH_PARENT;
+            params.height = ConstraintLayout.LayoutParams.MATCH_PARENT;
+
+            hideSystemUI();
         } else {
+            titleTxt.setVisibility(View.VISIBLE);
+            pic2.setVisibility(View.VISIBLE);
+            oMovieName.setVisibility(View.VISIBLE);
+            backImg.setVisibility(View.VISIBLE);
+            tvTap.setVisibility(View.VISIBLE);
+            country.setVisibility(View.VISIBLE);
+            yearReleased.setVisibility(View.VISIBLE);
+            tvTap.setVisibility(View.VISIBLE);
+            episodeCountTextView.setVisibility(View.VISIBLE);
+            episodeRecyclerView.setVisibility(View.VISIBLE);
 
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            params.width = ConstraintLayout.LayoutParams.MATCH_CONSTRAINT;
+            params.height = originalPlayerViewHeight;
+            showSystemUI();
         }
+        playerView.setLayoutParams(params);
     }
 
 
-    // Initialization của scrollViewTouchListener
-    private void initScrollViewTouchListener() {
-        scrollViewTouchListener = new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                // Trả về true khi ở chế độ fullscreen, false khi không
-                return isFullScreen;
-            }
-        };
-    }
-    // Hàm để ẩn thanh trạng thái và thanh điều hướng của hệ thống
     private void hideSystemUI() {
         View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(
@@ -285,7 +217,6 @@ public class WatchMovieActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
     }
 
-    // Hàm để hiện lại thanh trạng thái và thanh điều hướng của hệ thống
     private void showSystemUI() {
         View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(
@@ -294,56 +225,40 @@ public class WatchMovieActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
     }
 
-    void lockScreen(boolean lock)
-    {
-        //just hide the control for lock screen and vise versa
+    void lockScreen(boolean lock) {
         LinearLayout sec_mid = findViewById(R.id.sec_controlvid1);
         LinearLayout sec_bottom = findViewById(R.id.sec_controlvid2);
-        if(lock)
-        {
+        if (lock) {
             sec_mid.setVisibility(View.INVISIBLE);
             sec_bottom.setVisibility(View.INVISIBLE);
-        }
-        else
-        {
+        } else {
             sec_mid.setVisibility(View.VISIBLE);
             sec_bottom.setVisibility(View.VISIBLE);
         }
     }
 
-    //when is in lock screen we not accept for backpress button
     @Override
-    public void onBackPressed()
-    {
-        //on lock screen back press button not work
-        if(isLock) return;
-
-        //if user is in landscape mode we turn to portriat mode first then we can exit the app.
-        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
-        {
+    public void onBackPressed() {
+        if (isLock) return;
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             bt_fullscreen.performClick();
-        }
-        else super.onBackPressed();
+        } else super.onBackPressed();
     }
 
-    // pause or release the player prevent memory leak
     @Override
-    protected void onStop()
-    {
+    protected void onStop() {
         super.onStop();
         player.stop();
     }
 
     @Override
-    protected void onDestroy()
-    {
+    protected void onDestroy() {
         super.onDestroy();
         player.release();
     }
 
     @Override
-    protected void onPause()
-    {
+    protected void onPause() {
         super.onPause();
         player.pause();
     }
@@ -351,11 +266,9 @@ public class WatchMovieActivity extends AppCompatActivity {
     private void sendRequest() {
         RequestQueue mRequestQueue = Volley.newRequestQueue(this);
         progressBar.setVisibility(View.VISIBLE);
-        scrollView.setVisibility(View.GONE);
         StringRequest mStringRequest = new StringRequest(Request.Method.GET, "https://phimapi.com/phim/" + idFilm, response -> {
             Gson gson = new Gson();
             progressBar.setVisibility(View.GONE);
-            scrollView.setVisibility(View.VISIBLE);
 
             LinkFilm item = gson.fromJson(response, LinkFilm.class);
 
@@ -397,17 +310,15 @@ public class WatchMovieActivity extends AppCompatActivity {
                 if (Cepisodes != null && !Cepisodes.isEmpty()) {
                     RecyclerView episodeRecyclerView = findViewById(R.id.episodeRecyclerView);
                     EpisodeAdapter episodeAdapter = new EpisodeAdapter(this, Cepisodes, idFilm);
-                    // Thực hiện các hành động cần thiết với currentEpisodeName
                     episodeAdapter.setCurrentEpisodeName(currentEpisodeName);
                     episodeRecyclerView.setLayoutManager(new LinearLayoutManager(this));
                     episodeRecyclerView.setAdapter(episodeAdapter);
-                }
-                else {
+                } else {
                     RecyclerView episodeRecyclerView = findViewById(R.id.episodeRecyclerView);
                     episodeRecyclerView.setVisibility(View.GONE);
                 }
-            }
-            else {
+            } else {
+                episodeCountTextView.setVisibility(View.GONE);
                 if (episodes != null && !episodes.isEmpty()) {
                     for (Episode episode : episodes) {
                         List<ServerDatum> serverDataList = episode.getServerData();
@@ -431,7 +342,7 @@ public class WatchMovieActivity extends AppCompatActivity {
                 textView.setVisibility(View.GONE);
             }
             if (!foundLinkEmbed) {
-                Toast.makeText(WatchMovieActivity.this,"Không tìm thấy link_embed phù hợp với slug", Toast.LENGTH_SHORT);
+                Toast.makeText(WatchMovieActivity.this, "Không tìm thấy link_embed phù hợp với slug", Toast.LENGTH_SHORT);
             }
             FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
             String userId = null;
@@ -441,21 +352,153 @@ public class WatchMovieActivity extends AppCompatActivity {
             saveWatchedMovie(titleTxt, userId, tap, movieType);
         }, error -> {
             progressBar.setVisibility(View.GONE);
-            Toast.makeText(WatchMovieActivity.this,"Đã xảy ra lỗi khi truy cập dữ liệu từ máy chủ", Toast.LENGTH_SHORT);
+            Toast.makeText(WatchMovieActivity.this, "Đã xảy ra lỗi khi truy cập dữ liệu từ máy chủ", Toast.LENGTH_SHORT);
         });
         mRequestQueue.add(mStringRequest);
     }
 
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+    }
+
+    private boolean isMobileDataConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo mobileInfo = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        return mobileInfo != null && mobileInfo.isConnected();
+    }
+
+    private void fullscreenBtn() {
+        isFullScreen = !isFullScreen;
+        adjustPlayerViewSize(isFullScreen);
+    }
+
+    private void lockscreenBtn() {
+        if (!isLock) {
+            bt_lockscreen.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_baseline_lock));
+        } else {
+            bt_lockscreen.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_outline_lock_open));
+        }
+        isLock = !isLock;
+        lockScreen(isLock);
+    }
+
+    private void settingBtn(View view) {
+        if (selectedSpeedMenuItem == null) {
+            MovieSpeed(1.0f);
+        }
+
+        popupMenu.setOnMenuItemClickListener(item -> {
+            int itemId = item.getItemId();
+            if (selectedSpeedMenuItem != null) {
+                selectedSpeedMenuItem.setChecked(false);
+            }
+            item.setChecked(true);
+            selectedSpeedMenuItem = item;
+
+            if (itemId == R.id.speed_025 && currentSpeed != 0.25f) {
+                MovieSpeed(0.25f);
+            } else if (itemId == R.id.speed_05 && currentSpeed != 0.5f) {
+                MovieSpeed(0.5f);
+            } else if (itemId == R.id.speed_075 && currentSpeed != 0.75f) {
+                MovieSpeed(0.75f);
+            } else if (itemId == R.id.speed_1 && currentSpeed != 1.0f) {
+                MovieSpeed(1.0f);
+            } else if (itemId == R.id.speed_125 && currentSpeed != 1.25f) {
+                MovieSpeed(1.25f);
+            } else if (itemId == R.id.speed_15 && currentSpeed != 1.5f) {
+                MovieSpeed(1.5f);
+            } else if (itemId == R.id.speed_175 && currentSpeed != 1.75f) {
+                MovieSpeed(1.75f);
+            } else if (itemId == R.id.speed_2 && currentSpeed != 2.0f) {
+                MovieSpeed(2.0f);
+            }
+
+            return true;
+        });
+        popupMenu.show();
+    }
+
+    private void MovieSpeed(float speed) {
+        if (playerView != null && player != null) {
+            PlaybackParameters playbackParameters = new PlaybackParameters(speed);
+            player.setPlaybackParameters(playbackParameters);
+            currentSpeed = speed;
+
+            if (selectedSpeedMenuItem != null) {
+                selectedSpeedMenuItem.setChecked(false);
+            }
+
+            int checkedItemId = R.id.speed_1;
+            if (speed == 0.25f) {
+                checkedItemId = R.id.speed_025;
+            } else if (speed == 0.5f) {
+                checkedItemId = R.id.speed_05;
+            } else if (speed == 0.75f) {
+                checkedItemId = R.id.speed_075;
+            } else if (speed == 1.0f) {
+                checkedItemId = R.id.speed_1;
+            } else if (speed == 1.25f) {
+                checkedItemId = R.id.speed_125;
+            } else if (speed == 1.5f) {
+                checkedItemId = R.id.speed_15;
+            } else if (speed == 1.75f) {
+                checkedItemId = R.id.speed_175;
+            } else if (speed == 2.0f) {
+                checkedItemId = R.id.speed_2;
+            }
+
+            selectedSpeedMenuItem = popupMenu.getMenu().findItem(checkedItemId);
+            if (selectedSpeedMenuItem != null) {
+                selectedSpeedMenuItem.setChecked(true);
+            }
+        }
+    }
+
+
     private void initView() {
         titleTxt = findViewById(R.id.movieName);
         progressBar = findViewById(R.id.progressBarWatch);
-        scrollView = findViewById(R.id.scrollViewW);
         pic2 = findViewById(R.id.watchImage);
         oMovieName = findViewById(R.id.originalMovieName);
         playerView = findViewById(R.id.videoView2);
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
-        ImageView backImg = findViewById(R.id.backimg);
+        backImg = findViewById(R.id.backimg);
+        tvTap = findViewById(R.id.tvTap);
+        bt_fullscreen = findViewById(R.id.bt_fullscreen);
+        bt_lockscreen = findViewById(R.id.exo_lock);
+        bt_setting = findViewById(R.id.bt_setting);
+        episodeRecyclerView = findViewById(R.id.episodeRecyclerView);
+        yearReleased = findViewById(R.id.yearReleased);
+        country = findViewById(R.id.country);
+        episodeCountTextView= findViewById(R.id.episodeCountTextView);
+        tvTap.setText(tap);
+
+        if (!isNetworkConnected()) {
+            Toast.makeText(this, "Không có kết nối mạng", Toast.LENGTH_SHORT).show();
+            // Thực hiện các hành động khác nếu cần khi không có kết nối mạng
+        }
+        if (isMobileDataConnected()) {
+            Toast.makeText(this, "Đang sử dụng dữ liệu di động", Toast.LENGTH_SHORT).show();
+            // Thực hiện các hành động khác nếu cần khi sử dụng dữ liệu di động
+        }
+
+        currentEpisodeName = getIntent().getStringExtra("currentEpisodeName");
+        tap = getIntent().getStringExtra("tap");
+        idFilm = getIntent().getStringExtra("slug");
+        movieType = getIntent().getStringExtra("movieType");
+
         backImg.setOnClickListener(v -> finish());
+        bt_fullscreen.setOnClickListener(view -> fullscreenBtn());
+        bt_lockscreen.setOnClickListener(view -> lockscreenBtn());
+        bt_setting.setOnClickListener(this::settingBtn);
+
+        player = new ExoPlayer.Builder(this)
+                .setSeekBackIncrementMs(5000)
+                .setSeekForwardIncrementMs(5000)
+                .build();
+        playerView.setPlayer(player);
+        playerView.setKeepScreenOn(true);
     }
 }
-

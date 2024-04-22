@@ -8,7 +8,6 @@
         android:layout_margin="16dp"
         android:background="@drawable/edittext_background"
         android:drawableStart="@drawable/search"
-        android:drawableEnd="@drawable/microphone"
         android:drawablePadding="8dp"
         android:ems="10"
         android:hint="Tìm kiếm phim..."
