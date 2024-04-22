@@ -154,6 +154,7 @@ public class ProfileActivity extends AppCompatActivity {
             if (item.getItemId() == R.id.menu_edit) {
                 Intent intent = new Intent(ProfileActivity.this, EditProfileActivity.class);
                 startActivity(intent);
+                finish();
                 return true;
             } else if (item.getItemId() == R.id.menu_logout) {
                 mAuth.signOut();

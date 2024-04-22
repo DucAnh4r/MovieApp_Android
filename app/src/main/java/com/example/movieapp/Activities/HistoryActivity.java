@@ -16,8 +16,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.movieapp.Adapters.SearchAdapter;
 import com.example.movieapp.Domain.Search.SearchMovie;
-import com.example.movieapp.R;
 import com.example.movieapp.Domain.WatchedMovie;
+import com.example.movieapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -29,7 +29,6 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class HistoryActivity extends AppCompatActivity {
@@ -60,8 +59,9 @@ public class HistoryActivity extends AppCompatActivity {
                     List<WatchedMovie> currentWatchedMovieList = new ArrayList<>();
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         String slug = snapshot.child("slug").getValue(String.class);
+                        String name = snapshot.child("name").getValue(String.class);
                         Long addTime = snapshot.child("addTime").getValue(Long.class);
-                        WatchedMovie watchedMovie = new WatchedMovie(slug, addTime);
+                        WatchedMovie watchedMovie = new WatchedMovie(slug, name, addTime);
                         currentWatchedMovieList.add(watchedMovie);
                     }
                     sortWatchedListByAddTime(currentWatchedMovieList);

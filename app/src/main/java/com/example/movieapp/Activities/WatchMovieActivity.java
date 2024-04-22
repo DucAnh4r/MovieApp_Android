@@ -2,7 +2,6 @@ package com.example.movieapp.Activities;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
@@ -274,17 +273,6 @@ public class WatchMovieActivity extends AppCompatActivity {
             }
         };
     }
-
-
-
-
-
-
-
-
-
-
-
     // Hàm để ẩn thanh trạng thái và thanh điều hướng của hệ thống
     private void hideSystemUI() {
         View decorView = getWindow().getDecorView();

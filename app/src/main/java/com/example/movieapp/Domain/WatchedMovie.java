@@ -3,11 +3,21 @@ package com.example.movieapp.Domain;
 public class WatchedMovie {
     private String slug;
     private Long addTime;
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     // Constructor
-    public WatchedMovie(String slug, Long addTime) {
+    public WatchedMovie(String slug, String name, Long addTime) {
         this.slug = slug;
         this.addTime = addTime;
+        this.name = name;
     }
 
     // Getter cho slug

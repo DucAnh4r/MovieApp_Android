@@ -40,6 +40,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 
@@ -55,7 +56,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class DetailActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private TextView titleTxt, movieTimeTxt, movieSummaryInfo;
-    private String idFilm;
+    private String idFilm, movieName;
     private ImageView pic2, favBtn, listBtn;
     private NestedScrollView scrollView;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -93,6 +94,7 @@ public class DetailActivity extends AppCompatActivity {
             }
 
             titleTxt.setText(item.getMovie().getName());
+            movieName = item.getMovie().getName().toString();
             movieTimeTxt.setText(item.getMovie().getTime());
             movieSummaryInfo.setText(item.getMovie().getContent());
 
@@ -159,7 +161,10 @@ public class DetailActivity extends AppCompatActivity {
                 if (!TextUtils.isEmpty(movieNodeKey)) {
                     HashMap<String, Object> movieData = new HashMap<>();
                     movieData.put("slug", idFilm);
+                    movieData.put("name", movieName);
+                    movieData.put("addTime", ServerValue.TIMESTAMP);
                     userRef.child("favouriteMovies").child(movieNodeKey).setValue(movieData);
+
                     Toast.makeText(DetailActivity.this, "Lưu thành công", Toast.LENGTH_SHORT).show();
                     favBtn.setImageResource(R.drawable.fav_act);
                     favBtn.setTag("active");
@@ -186,6 +191,8 @@ public class DetailActivity extends AppCompatActivity {
                 if (!TextUtils.isEmpty(movieNodeKey)) {
                     HashMap<String, Object> movieData = new HashMap<>();
                     movieData.put("slug", idFilm);
+                    movieData.put("name", movieName);
+                    movieData.put("addTime", ServerValue.TIMESTAMP);
                     userRef.child("watchList").child(movieNodeKey).setValue(movieData);
                     Toast.makeText(DetailActivity.this, "Lưu thành công", Toast.LENGTH_SHORT).show();
                     listBtn.setColorFilter(getResources().getColor(R.color.yellow));

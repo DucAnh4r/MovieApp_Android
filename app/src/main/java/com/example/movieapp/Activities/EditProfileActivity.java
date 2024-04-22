@@ -44,7 +44,7 @@ public class EditProfileActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         email = findViewById(R.id.email);
-//        password = findViewById(R.id.password);
+        password = findViewById(R.id.password);
         name = findViewById(R.id.name);
 
         save = findViewById(R.id.SaveBtn);
@@ -150,7 +150,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
     private void saveDataToFirebase() {
         String userEmail = email.getText().toString().trim();
-//        String userPassword = password.getText().toString().trim();
+        String userPassword = password.getText().toString().trim();
         String userName = name.getText().toString().trim();
 
         if (mAuth.getCurrentUser() != null) {
@@ -160,7 +160,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
             userRef.child("userName").setValue(userName);
             userRef.child("email").setValue(userEmail);
-//            userRef.child("password").setValue(userPassword);
+            userRef.child("password").setValue(userPassword);
 
             user.updateEmail(userEmail)
                     .addOnCompleteListener(task -> {
@@ -171,15 +171,15 @@ public class EditProfileActivity extends AppCompatActivity {
                         }
                     });
 
-//            user.updatePassword(userPassword)
-//                    .addOnCompleteListener(task -> {
-//                        if (task.isSuccessful()) {
-//                            Toast.makeText(this, "Password updated successfully", Toast.LENGTH_SHORT).show();
-//                        } else {
-//                            Toast.makeText(this, "Failed to update password: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//            Toast.makeText(this, "Profile updated successfully", Toast.LENGTH_SHORT).show();
+            user.updatePassword(userPassword)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(this, "Password updated successfully", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(this, "Failed to update password: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+            Toast.makeText(this, "Profile updated successfully", Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(this, ProfileActivity.class);
             startActivity(intent);
