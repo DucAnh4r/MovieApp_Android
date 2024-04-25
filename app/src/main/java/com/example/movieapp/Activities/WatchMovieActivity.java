@@ -66,7 +66,7 @@ public class WatchMovieActivity extends AppCompatActivity {
     private TextView titleTxt, oMovieName, tvTap, episodeCountTextView, yearReleased, country;
     private RecyclerView episodeRecyclerView;
     private String idFilm, tap, movieType;
-    private ImageView pic2, bt_lockscreen, backImg, bt_fullscreen, bt_setting;
+    private ImageView pic2, bt_lockscreen, backImg, bt_fullscreen, bt_setting, fastForwardButton;
     private PlayerView playerView;
     private HlsMediaSource.Factory mediaSourceFactory;
     boolean isFullScreen=false;
@@ -87,6 +87,12 @@ public class WatchMovieActivity extends AppCompatActivity {
         swipeRefreshLayout.setOnRefreshListener(this::reloadContent);
         popupMenu = new PopupMenu(this, bt_setting);
         popupMenu.inflate(R.menu.setting_movie_popup);
+        fastForwardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                player.seekTo(player.getCurrentPosition() + 5000);
+            }
+        });
     }
 
     private void reloadContent() {
@@ -183,9 +189,14 @@ public class WatchMovieActivity extends AppCompatActivity {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
             params.width = ConstraintLayout.LayoutParams.MATCH_PARENT;
             params.height = ConstraintLayout.LayoutParams.MATCH_PARENT;
-
+            params.setMargins(0,0,0,0);
             hideSystemUI();
         } else {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            params.width = ConstraintLayout.LayoutParams.MATCH_CONSTRAINT;
+            params.height = originalPlayerViewHeight;
+            showSystemUI();
+            swipeRefreshLayout.scrollTo(0,0);
             titleTxt.setVisibility(View.VISIBLE);
             pic2.setVisibility(View.VISIBLE);
             oMovieName.setVisibility(View.VISIBLE);
@@ -196,11 +207,9 @@ public class WatchMovieActivity extends AppCompatActivity {
             tvTap.setVisibility(View.VISIBLE);
             episodeCountTextView.setVisibility(View.VISIBLE);
             episodeRecyclerView.setVisibility(View.VISIBLE);
+            params.setMargins(0,20,0,0);
 
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-            params.width = ConstraintLayout.LayoutParams.MATCH_CONSTRAINT;
-            params.height = originalPlayerViewHeight;
-            showSystemUI();
+
         }
         playerView.setLayoutParams(params);
     }
@@ -475,6 +484,8 @@ public class WatchMovieActivity extends AppCompatActivity {
         episodeCountTextView= findViewById(R.id.episodeCountTextView);
         tvTap.setText(tap);
 
+        fastForwardButton = findViewById(R.id.exo_ffwd);
+
         if (!isNetworkConnected()) {
             Toast.makeText(this, "Không có kết nối mạng", Toast.LENGTH_SHORT).show();
             // Thực hiện các hành động khác nếu cần khi không có kết nối mạng
@@ -495,7 +506,6 @@ public class WatchMovieActivity extends AppCompatActivity {
         bt_setting.setOnClickListener(this::settingBtn);
 
         player = new ExoPlayer.Builder(this)
-                .setSeekBackIncrementMs(5000)
                 .setSeekForwardIncrementMs(5000)
                 .build();
         playerView.setPlayer(player);

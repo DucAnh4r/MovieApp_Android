@@ -91,6 +91,7 @@
                 android:src="@drawable/setting"
                 android:id="@+id/bt_setting"
                 android:theme="@style/ClickableView"
+                android:layout_marginRight="6dp"
                 app:tint="@color/white" />
             <ImageView
                 android:layout_width="30dp"

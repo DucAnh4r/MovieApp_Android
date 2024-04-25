@@ -79,7 +79,6 @@ public class DetailActivity extends AppCompatActivity {
     private void sendRequest() {
         RequestQueue mRequestQueue = Volley.newRequestQueue(this);
         progressBar.setVisibility(View.VISIBLE);
-        scrollView.setVisibility(View.GONE);
         StringRequest mStringRequest = new StringRequest(Request.Method.GET, "https://phimapi.com/phim/" + idFilm, response -> {
             Gson gson = new Gson();
             progressBar.setVisibility(View.GONE);

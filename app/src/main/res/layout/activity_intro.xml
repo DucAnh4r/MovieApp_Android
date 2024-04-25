@@ -43,10 +43,11 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="8dp"
                 android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="24dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingBottom="24dp">
 
                 <TextView
                     android:id="@+id/textView"
@@ -54,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:text="Discover Your"
                     android:textColor="@color/white"
-                    android:textSize="27sp"/>
+                    android:textSize="27sp" />
 
                 <TextView
                     android:id="@+id/textView2"
@@ -62,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:text="Favourite Show"
                     android:textColor="@color/orange"
-                    android:textSize="27dp"/>
+                    android:textSize="27dp" />
 
                 <TextView
                     android:id="@+id/textView3"
@@ -70,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:text="Watch Now or Watch Later"
                     android:textColor="@color/white"
-                    android:textSize="27dp"/>
+                    android:textSize="27dp" />
 
                 <TextView
                     android:id="@+id/textView4"
@@ -78,18 +79,18 @@
                     android:layout_height="wrap_content"
                     android:text="you can browse movies and shows by genre, search for specific title, or check out our recommendation for you"
                     android:textColor="#9F9A9A"
-                    android:textSize="17dp"/>
+                    android:textSize="17dp" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/getInBtn"
                     style="@android:style/Widget.Button"
-                    android:layout_marginTop="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Get Stared"
+                    android:layout_marginTop="8dp"
                     android:background="@drawable/orange_button_background"
+                    android:text="Get Stared"
                     android:textColor="@color/white"
-                    android:textSize="18dp"/>
+                    android:textSize="18dp" />
             </LinearLayout>
 
         </LinearLayout>
