@@ -56,7 +56,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class DetailActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private TextView titleTxt, movieTimeTxt, movieSummaryInfo;
-    private String idFilm, movieName;
+    private String idFilm, movieName, slug;
     private ImageView pic2, favBtn, listBtn;
     private NestedScrollView scrollView;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -96,6 +96,7 @@ public class DetailActivity extends AppCompatActivity {
             movieName = item.getMovie().getName().toString();
             movieTimeTxt.setText(item.getMovie().getTime());
             movieSummaryInfo.setText(item.getMovie().getContent());
+            slug = item.getMovie().getSlug().toString();
 
             List<String> actorNames = item.getMovie().getActor();
             List<ActorModel> actors = new ArrayList<>();
@@ -156,6 +157,9 @@ public class DetailActivity extends AppCompatActivity {
                 if (!snapshot.hasChild("favouriteMovies")) {
                     userRef.child("favouriteMovies").setValue(new HashMap<>());
                 }
+                if (!snapshot.hasChild("message")) {
+                    userRef.child("message").setValue(new HashMap<>());
+                }
                 String movieNodeKey = userRef.child("favouriteMovies").push().getKey();
                 if (!TextUtils.isEmpty(movieNodeKey)) {
                     HashMap<String, Object> movieData = new HashMap<>();
@@ -164,7 +168,15 @@ public class DetailActivity extends AppCompatActivity {
                     movieData.put("addTime", ServerValue.TIMESTAMP);
                     userRef.child("favouriteMovies").child(movieNodeKey).setValue(movieData);
 
-                    Toast.makeText(DetailActivity.this, "Lưu thành công", Toast.LENGTH_SHORT).show();
+                    String messageNodeKey = userRef.child("message").push().getKey();
+                    if (!TextUtils.isEmpty(messageNodeKey)) {
+                        HashMap<String, Object> messageData = new HashMap<>();
+                        messageData.put("content", "Bạn đã thêm phim " + movieName + " vào danh sách yêu thích");
+                        messageData.put("timestamp", ServerValue.TIMESTAMP);
+                        messageData.put("type", "movie");
+                        messageData.put("slug", slug);
+                        userRef.child("message").child(messageNodeKey).setValue(messageData);
+                    }
                     favBtn.setImageResource(R.drawable.fav_act);
                     favBtn.setTag("active");
                 } else {
@@ -186,6 +198,9 @@ public class DetailActivity extends AppCompatActivity {
                 if (!snapshot.hasChild("watchList")) {
                     userRef.child("watchList").setValue(new HashMap<>());
                 }
+                if (!snapshot.hasChild("message")) {
+                    userRef.child("message").setValue(new HashMap<>());
+                }
                 String movieNodeKey = userRef.child("watchList").push().getKey();
                 if (!TextUtils.isEmpty(movieNodeKey)) {
                     HashMap<String, Object> movieData = new HashMap<>();
@@ -193,7 +208,16 @@ public class DetailActivity extends AppCompatActivity {
                     movieData.put("name", movieName);
                     movieData.put("addTime", ServerValue.TIMESTAMP);
                     userRef.child("watchList").child(movieNodeKey).setValue(movieData);
-                    Toast.makeText(DetailActivity.this, "Lưu thành công", Toast.LENGTH_SHORT).show();
+
+                    String messageNodeKey = userRef.child("message").push().getKey();
+                    if (!TextUtils.isEmpty(messageNodeKey)) {
+                        HashMap<String, Object> messageData = new HashMap<>();
+                        messageData.put("content", "Bạn đã thêm phim " + movieName + " vào danh sách phim");
+                        messageData.put("timestamp", ServerValue.TIMESTAMP);
+                        messageData.put("type", "movie");
+                        messageData.put("slug", slug);
+                        userRef.child("message").child(messageNodeKey).setValue(messageData);
+                    }
                     listBtn.setColorFilter(getResources().getColor(R.color.yellow));
                     listBtn.setTag("active");
                 } else {
@@ -219,9 +243,18 @@ public class DetailActivity extends AppCompatActivity {
                         String movieSlug = (String) movieSnapshot.child("slug").getValue();
                         if (movieSlug != null && movieSlug.equals(idFilm)) {
                             userRef.child("favouriteMovies").child(movieKey).removeValue();
-                            Toast.makeText(DetailActivity.this, "Xóa phim khỏi danh sách yêu thích thành công", Toast.LENGTH_SHORT).show();
                             favBtn.setImageResource(R.drawable.fav);
                             favBtn.setTag("inactive");
+
+                            String messageNodeKey = userRef.child("message").push().getKey();
+                            if (!TextUtils.isEmpty(messageNodeKey)) {
+                                HashMap<String, Object> messageData = new HashMap<>();
+                                messageData.put("content", "Bạn đã xóa phim " + movieName + " khỏi danh sách yêu thích");
+                                messageData.put("timestamp", ServerValue.TIMESTAMP);
+                                messageData.put("type", "movie");
+                                messageData.put("slug", slug);
+                                userRef.child("message").child(messageNodeKey).setValue(messageData);
+                            }
                             return;
                         }
                     }
@@ -230,6 +263,7 @@ public class DetailActivity extends AppCompatActivity {
                     Toast.makeText(DetailActivity.this, "Danh sách yêu thích trống", Toast.LENGTH_SHORT).show();
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.w("removeFavouriteMovie", "Error removing data", error.toException());
@@ -237,34 +271,43 @@ public class DetailActivity extends AppCompatActivity {
         });
     }
 
-    private void removeWatchList(String idFilm, String userId) {
-        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(userId);
-        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.hasChild("watchList")) {
-                    DataSnapshot favouriteMoviesSnapshot = snapshot.child("watchList");
-                    for (DataSnapshot movieSnapshot : favouriteMoviesSnapshot.getChildren()) {
-                        String movieKey = movieSnapshot.getKey();
-                        String movieSlug = (String) movieSnapshot.child("slug").getValue();
-                        if (movieSlug != null && movieSlug.equals(idFilm)) {
-                            userRef.child("watchList").child(movieKey).removeValue();
-                            Toast.makeText(DetailActivity.this, "Xóa phim khỏi danh sách thành công", Toast.LENGTH_SHORT).show();
-                            listBtn.setColorFilter(getResources().getColor(R.color.white));
-                            listBtn.setTag("inactive");
-                            return;
+        private void removeWatchList(String idFilm, String userId) {
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(userId);
+            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.hasChild("watchList")) {
+                        DataSnapshot watchListSnapshot = snapshot.child("watchList");
+                        for (DataSnapshot movieSnapshot : watchListSnapshot.getChildren()) {
+                            String movieKey = movieSnapshot.getKey();
+                            String movieSlug = (String) movieSnapshot.child("slug").getValue();
+                            if (movieSlug != null && movieSlug.equals(idFilm)) {
+                                userRef.child("watchList").child(movieKey).removeValue();
+                                listBtn.setColorFilter(getResources().getColor(R.color.white));
+                                listBtn.setTag("inactive");
+
+                                String messageNodeKey = userRef.child("message").push().getKey();
+                                if (!TextUtils.isEmpty(messageNodeKey)) {
+                                    HashMap<String, Object> messageData = new HashMap<>();
+                                    messageData.put("content", "Bạn đã xóa phim " + movieName + " khỏi danh sách");
+                                    messageData.put("timestamp", ServerValue.TIMESTAMP);
+                                    messageData.put("type", "movie");
+                                    messageData.put("slug", slug);
+                                    userRef.child("message").child(messageNodeKey).setValue(messageData);
+                                }
+                                return;
+                            }
                         }
+                        Toast.makeText(DetailActivity.this, "Phim không tồn tại trong danh sách", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(DetailActivity.this, "Danh sách trống", Toast.LENGTH_SHORT).show();
                     }
-                    Toast.makeText(DetailActivity.this, "Phim không tồn tại trong danh sách", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(DetailActivity.this, "Danh sách trống", Toast.LENGTH_SHORT).show();
                 }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.w("removeWatchList", "Error removing data", error.toException());
-            }
-        });
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Log.w("removeWatchList", "Error removing data", error.toException());
+                }
+            });
     }
 
     private void checkFavouriteMovie(String idFilm, String userId) {

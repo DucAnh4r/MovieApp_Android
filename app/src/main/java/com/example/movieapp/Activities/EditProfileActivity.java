@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -22,12 +23,14 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 
 public class EditProfileActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -44,7 +47,7 @@ public class EditProfileActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         email = findViewById(R.id.email);
-        password = findViewById(R.id.password);
+//        password = findViewById(R.id.password);
         name = findViewById(R.id.name);
 
         save = findViewById(R.id.SaveBtn);
@@ -63,11 +66,11 @@ public class EditProfileActivity extends AppCompatActivity {
                     if (dataSnapshot.exists()) {
                         String userName = dataSnapshot.child("userName").getValue(String.class);
                         String userEmail = dataSnapshot.child("email").getValue(String.class);
-                        String userPass = dataSnapshot.child("password").getValue(String.class);
+//                        String userPass = dataSnapshot.child("password").getValue(String.class);
 
                         name.setText(userName);
                         email.setText(userEmail);
-                        password.setText(userPass);
+//                        password.setText(userPass);
 
                         if (dataSnapshot.hasChild("avatarUrl")) {
                             String avatarUrl = dataSnapshot.child("avatarUrl").getValue(String.class);
@@ -150,7 +153,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
     private void saveDataToFirebase() {
         String userEmail = email.getText().toString().trim();
-        String userPassword = password.getText().toString().trim();
+//        String userPassword = password.getText().toString().trim();
         String userName = name.getText().toString().trim();
 
         if (mAuth.getCurrentUser() != null) {
@@ -160,7 +163,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
             userRef.child("userName").setValue(userName);
             userRef.child("email").setValue(userEmail);
-            userRef.child("password").setValue(userPassword);
+//            userRef.child("password").setValue(userPassword);
 
             user.updateEmail(userEmail)
                     .addOnCompleteListener(task -> {
@@ -171,15 +174,24 @@ public class EditProfileActivity extends AppCompatActivity {
                         }
                     });
 
-            user.updatePassword(userPassword)
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(this, "Password updated successfully", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(this, "Failed to update password: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-            Toast.makeText(this, "Profile updated successfully", Toast.LENGTH_SHORT).show();
+//            user.updatePassword(userPassword)
+//                    .addOnCompleteListener(task -> {
+//                        if (task.isSuccessful()) {
+//                            Toast.makeText(this, "Password updated successfully", Toast.LENGTH_SHORT).show();
+//                        } else {
+//                            Toast.makeText(this, "Failed to update password: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
+//            Toast.makeText(this, "Profile updated successfully", Toast.LENGTH_SHORT).show();
+
+            String messageNodeKey = userRef.child("message").push().getKey();
+            if (!TextUtils.isEmpty(messageNodeKey)) {
+                HashMap<String, Object> messageData = new HashMap<>();
+                messageData.put("content", "Bạn đã cập nhật lại thông tin trang cá nhân");
+                messageData.put("timestamp", ServerValue.TIMESTAMP);
+                messageData.put("type", "profile");
+                userRef.child("message").child(messageNodeKey).setValue(messageData);
+            }
 
             Intent intent = new Intent(this, ProfileActivity.class);
             startActivity(intent);
