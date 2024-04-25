@@ -87,16 +87,12 @@ public class WatchMovieActivity extends AppCompatActivity {
         swipeRefreshLayout.setOnRefreshListener(this::reloadContent);
         popupMenu = new PopupMenu(this, bt_setting);
         popupMenu.inflate(R.menu.setting_movie_popup);
-        fastForwardButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                player.seekTo(player.getCurrentPosition() + 5000);
-            }
-        });
     }
 
     private void reloadContent() {
-        sendRequest();
+        if (!isFullScreen) {
+            sendRequest();
+        }
         swipeRefreshLayout.setRefreshing(false);
     }
 
@@ -289,6 +285,8 @@ public class WatchMovieActivity extends AppCompatActivity {
             movieType = item.getMovie().getType();
             titleTxt.setText(item.getMovie().getName());
             oMovieName.setText(item.getMovie().getOriginName());
+            country.setText(item.getMovie().getCountry().get(0).getName());
+            yearReleased.setText(item.getMovie().getYear().toString());
 
             List<Episode> episodes = item.getEpisodes();
 
@@ -482,7 +480,6 @@ public class WatchMovieActivity extends AppCompatActivity {
         yearReleased = findViewById(R.id.yearReleased);
         country = findViewById(R.id.country);
         episodeCountTextView= findViewById(R.id.episodeCountTextView);
-        tvTap.setText(tap);
 
         fastForwardButton = findViewById(R.id.exo_ffwd);
 
@@ -500,6 +497,8 @@ public class WatchMovieActivity extends AppCompatActivity {
         idFilm = getIntent().getStringExtra("slug");
         movieType = getIntent().getStringExtra("movieType");
 
+        tvTap.setText(tap);
+
         backImg.setOnClickListener(v -> finish());
         bt_fullscreen.setOnClickListener(view -> fullscreenBtn());
         bt_lockscreen.setOnClickListener(view -> lockscreenBtn());
@@ -510,5 +509,6 @@ public class WatchMovieActivity extends AppCompatActivity {
                 .build();
         playerView.setPlayer(player);
         playerView.setKeepScreenOn(true);
+        fastForwardButton.setOnClickListener(v -> player.seekTo(player.getCurrentPosition() + 5000));
     }
 }

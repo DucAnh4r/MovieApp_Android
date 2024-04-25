@@ -79,10 +79,10 @@ public class MainActivity extends AppCompatActivity {
             return false;
         });
 
-        setTextViewClickListener(newBtn, "new");
-        setTextViewClickListener(singleBtn, "single");
-        setTextViewClickListener(seriesBtn, "series");
-        setTextViewClickListener(cartoonBtn, "hoathinh");
+        MoreBtn(newBtn, "new");
+        MoreBtn(singleBtn, "single");
+        MoreBtn(seriesBtn, "series");
+        MoreBtn(cartoonBtn, "hoathinh");
 
         swipeRefreshLayout.setOnRefreshListener(this::reloadContent);
     }
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         swipeRefreshLayout.setRefreshing(false);
     }
 
-    private void setTextViewClickListener(TextView textView, String type) {
+    private void MoreBtn(TextView textView, String type) {
         textView.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, MovieTypeActivity.class);
             intent.putExtra("Type", type);
