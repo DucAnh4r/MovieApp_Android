@@ -73,7 +73,7 @@
             app:layout_constraintTop_toBottomOf="@+id/movieName" />
 
         <TextView
-            android:id="@+id/country"
+            android:id="@+id/yearReleased"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -81,23 +81,9 @@
             android:text="Test"
             android:textColor="@color/dark_gray"
             android:textSize="14sp"
-            app:layout_constraintEnd_toStartOf="@+id/yearReleased"
             app:layout_constraintStart_toEndOf="@+id/watchImage"
             app:layout_constraintTop_toBottomOf="@+id/originalMovieName" />
 
-        <TextView
-            android:id="@+id/yearReleased"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="Test"
-            android:textColor="@color/dark_gray"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/country"
-            app:layout_constraintTop_toBottomOf="@+id/originalMovieName" />
 
         <TextView
             android:id="@+id/tvTap"
@@ -105,8 +91,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="@+id/country"
-            app:layout_constraintTop_toBottomOf="@+id/country" />
+            app:layout_constraintStart_toStartOf="@+id/yearReleased"
+            app:layout_constraintTop_toBottomOf="@+id/yearReleased" />
 
         <TextView
             android:id="@+id/episodeCountTextView"
@@ -132,6 +118,24 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/episodeCountTextView" />
+
+        <EditText
+            android:id="@+id/searchEpisode"
+            android:layout_width="170dp"
+            android:layout_height="50dp"
+
+            android:background="@drawable/edittext_background"
+            android:drawableStart="@drawable/search"
+            android:drawablePadding="8dp"
+            android:ems="10"
+            android:hint="Tìm kiếm tập..."
+            android:inputType="text"
+            android:padding="12dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/episodeRecyclerView" />
 
         <ProgressBar
             android:id="@+id/progressBarWatch"

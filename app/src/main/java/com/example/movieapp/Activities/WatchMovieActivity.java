@@ -63,7 +63,7 @@ import java.util.List;
 public class WatchMovieActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private ExoPlayer player;
-    private TextView titleTxt, oMovieName, tvTap, episodeCountTextView, yearReleased, country;
+    private TextView titleTxt, oMovieName, tvTap, episodeCountTextView, yearReleased;
     private RecyclerView episodeRecyclerView;
     private String idFilm, tap, movieType;
     private ImageView pic2, bt_lockscreen, backImg, bt_fullscreen, bt_setting, fastForwardButton;
@@ -180,7 +180,6 @@ public class WatchMovieActivity extends AppCompatActivity {
             oMovieName.setVisibility(View.GONE);
             backImg.setVisibility(View.GONE);
             tvTap.setVisibility(View.GONE);
-            country.setVisibility(View.GONE);
             yearReleased.setVisibility(View.GONE);
             episodeCountTextView.setVisibility(View.GONE);
             episodeRecyclerView.setVisibility(View.GONE);
@@ -202,7 +201,6 @@ public class WatchMovieActivity extends AppCompatActivity {
             oMovieName.setVisibility(View.VISIBLE);
             backImg.setVisibility(View.VISIBLE);
             tvTap.setVisibility(View.VISIBLE);
-            country.setVisibility(View.VISIBLE);
             yearReleased.setVisibility(View.VISIBLE);
             tvTap.setVisibility(View.VISIBLE);
             episodeCountTextView.setVisibility(View.VISIBLE);
@@ -289,6 +287,7 @@ public class WatchMovieActivity extends AppCompatActivity {
             movieType = item.getMovie().getType();
             titleTxt.setText(item.getMovie().getName());
             oMovieName.setText(item.getMovie().getOriginName());
+            yearReleased.setText(String.valueOf(item.getMovie().getYear()));
 
             List<Episode> episodes = item.getEpisodes();
 
@@ -480,7 +479,6 @@ public class WatchMovieActivity extends AppCompatActivity {
         bt_setting = findViewById(R.id.bt_setting);
         episodeRecyclerView = findViewById(R.id.episodeRecyclerView);
         yearReleased = findViewById(R.id.yearReleased);
-        country = findViewById(R.id.country);
         episodeCountTextView= findViewById(R.id.episodeCountTextView);
         tvTap.setText(tap);
 
