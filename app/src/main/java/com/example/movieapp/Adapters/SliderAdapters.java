@@ -15,7 +15,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.movieapp.Activities.DetailActivity;
+import com.example.movieapp.Activities.DetailActivity2;
 import com.example.movieapp.Domain.SliderItems;
 import com.example.movieapp.R;
 
@@ -67,7 +67,7 @@ public class SliderAdapters extends RecyclerView.Adapter<SliderAdapters.SliderVi
                     int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
                         String slug = sliderItems.get(position).getSlug();
-                        Intent intent = new Intent(context, DetailActivity.class);
+                        Intent intent = new Intent(context, DetailActivity2.class);
                         intent.putExtra("slug", slug);
                         context.startActivity(intent);
                     }

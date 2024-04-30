@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.movieapp.Activities.DetailActivity;
+import com.example.movieapp.Activities.DetailActivity2;
 import com.example.movieapp.Activities.ProfileActivity;
 import com.example.movieapp.Domain.NotificationMessage;
 import com.example.movieapp.R;
@@ -40,7 +40,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         holder.itemView.setOnClickListener(v -> {
             Intent intent;
             if (message.getType().equals("movie")) {
-                intent = new Intent(holder.itemView.getContext(), DetailActivity.class);
+                intent = new Intent(holder.itemView.getContext(), DetailActivity2.class);
                 intent.putExtra("slug", message.getSlug());
             } else if (message.getType().equals("profile")) {
                 intent = new Intent(holder.itemView.getContext(), ProfileActivity.class);
