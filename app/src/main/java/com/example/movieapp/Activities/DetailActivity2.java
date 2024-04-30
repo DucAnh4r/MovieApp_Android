@@ -2,6 +2,7 @@ package com.example.movieapp.Activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,6 +29,10 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.example.movieapp.Adapters.ActorsListAdapter;
 import com.example.movieapp.Adapters.DirectorsListAdapter;
 import com.example.movieapp.Adapters.EpisodeAdapter;
@@ -53,9 +59,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class DetailActivity extends AppCompatActivity {
+public class DetailActivity2 extends AppCompatActivity {
     private ProgressBar progressBar;
-    private TextView titleTxt, movieTimeTxt, movieSummaryInfo;
+    private TextView titleTxt, movieTimeTxt, movieSummaryInfo, titleEngTxt;
     private String idFilm, movieName, slug;
     private ImageView pic2, favBtn, listBtn, moviePic;
     private NestedScrollView scrollView;
@@ -63,7 +69,7 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
+        setContentView(R.layout.activity_detail2);
 
         idFilm = getIntent().getStringExtra("slug");
         initView();
@@ -76,6 +82,31 @@ public class DetailActivity extends AppCompatActivity {
         swipeRefreshLayout.setRefreshing(false);
     }
 
+    public void onImageClick(View view, LinkFilm item) {
+        // Lấy tag của ImageView được nhấn
+        String tag = (String) view.getTag();
+
+        // Kiểm tra nếu là ảnh bìa
+        if ("cover_image".equals(tag)) {
+            // Lấy link hiện tại của ảnh bìa và chuyển sang activity mới
+            String coverImageUrl = item.getMovie().getThumbUrl();
+            openFullScreenImageActivity(coverImageUrl);
+        }
+        // Kiểm tra nếu là ảnh đại diện
+        else if ("avatar_image".equals(tag)) {
+            // Lấy link hiện tại của ảnh đại diện và chuyển sang activity mới
+            String avatarImageUrl = item.getMovie().getPosterUrl();
+            openFullScreenImageActivity(avatarImageUrl);
+        }
+    }
+
+    // Phương thức để mở activity mới hiển thị ảnh toàn màn hình
+    private void openFullScreenImageActivity(String imageUrl) {
+        Intent intent = new Intent(this, FullScreenImageActivity.class);
+        intent.putExtra("imagePath", imageUrl);
+        startActivity(intent);
+    }
+
     private void sendRequest() {
         RequestQueue mRequestQueue = Volley.newRequestQueue(this);
         progressBar.setVisibility(View.VISIBLE);
@@ -86,17 +117,41 @@ public class DetailActivity extends AppCompatActivity {
 
             LinkFilm item = gson.fromJson(response, LinkFilm.class);
 
+            // Gọi phương thức onImageClick() với đối tượng item truyền vào
+            pic2.setOnClickListener(view -> onImageClick(view, item));
+            moviePic.setOnClickListener(view -> onImageClick(view, item));
+
             if (!isDestroyed()) {
-                Glide.with(DetailActivity.this)
-                        .load(item.getMovie().getPosterUrl())
+                Glide.with(DetailActivity2.this)
+                        .load(item.getMovie().getThumbUrl())
+                        .listener(new RequestListener<Drawable>() {
+                            @Override
+                            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                // Xử lý khi tải hình ảnh thất bại, ví dụ: giảm kích thước hình ảnh hoặc hiển thị hình ảnh mặc định
+                                return false; // Trả về false để Glide tiếp tục xử lý một cách bình thường
+                            }
+
+                            @Override
+                            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                // Xử lý khi tải hình ảnh thành công
+                                return false; // Trả về false để Glide tiếp tục xử lý một cách bình thường
+                            }
+                        })
                         .into(pic2);
-                Glide.with(DetailActivity.this)
+                Glide.with(DetailActivity2.this)
                         .load(item.getMovie().getPosterUrl())
                         .into(moviePic);
             }
 
             titleTxt.setText(item.getMovie().getName());
+            titleEngTxt.setText(item.getMovie().getOriginName());
             movieName = item.getMovie().getName().toString();
+
+            // Khởi tạo hình ảnh cho drawable
+            Drawable drawable = getResources().getDrawable(R.drawable.time);
+            drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+            // Thiết lập hình ảnh vào TextView sau khi load xong
+            movieTimeTxt.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
             movieTimeTxt.setText(item.getMovie().getTime());
             movieSummaryInfo.setText(item.getMovie().getContent());
             slug = item.getMovie().getSlug().toString();
@@ -183,7 +238,7 @@ public class DetailActivity extends AppCompatActivity {
                     favBtn.setImageResource(R.drawable.fav_act);
                     favBtn.setTag("active");
                 } else {
-                    Toast.makeText(DetailActivity.this, "Không lưu được dữ liệu", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DetailActivity2.this, "Không lưu được dữ liệu", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
@@ -224,7 +279,7 @@ public class DetailActivity extends AppCompatActivity {
                     listBtn.setColorFilter(getResources().getColor(R.color.yellow));
                     listBtn.setTag("active");
                 } else {
-                    Toast.makeText(DetailActivity.this, "Không lưu được dữ liệu", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DetailActivity2.this, "Không lưu được dữ liệu", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
@@ -261,9 +316,9 @@ public class DetailActivity extends AppCompatActivity {
                             return;
                         }
                     }
-                    Toast.makeText(DetailActivity.this, "Phim không tồn tại trong danh sách yêu thích", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DetailActivity2.this, "Phim không tồn tại trong danh sách yêu thích", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(DetailActivity.this, "Danh sách yêu thích trống", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DetailActivity2.this, "Danh sách yêu thích trống", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -274,43 +329,43 @@ public class DetailActivity extends AppCompatActivity {
         });
     }
 
-        private void removeWatchList(String idFilm, String userId) {
-            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(userId);
-            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.hasChild("watchList")) {
-                        DataSnapshot watchListSnapshot = snapshot.child("watchList");
-                        for (DataSnapshot movieSnapshot : watchListSnapshot.getChildren()) {
-                            String movieKey = movieSnapshot.getKey();
-                            String movieSlug = (String) movieSnapshot.child("slug").getValue();
-                            if (movieSlug != null && movieSlug.equals(idFilm)) {
-                                userRef.child("watchList").child(movieKey).removeValue();
-                                listBtn.setColorFilter(getResources().getColor(R.color.white));
-                                listBtn.setTag("inactive");
+    private void removeWatchList(String idFilm, String userId) {
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(userId);
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.hasChild("watchList")) {
+                    DataSnapshot watchListSnapshot = snapshot.child("watchList");
+                    for (DataSnapshot movieSnapshot : watchListSnapshot.getChildren()) {
+                        String movieKey = movieSnapshot.getKey();
+                        String movieSlug = (String) movieSnapshot.child("slug").getValue();
+                        if (movieSlug != null && movieSlug.equals(idFilm)) {
+                            userRef.child("watchList").child(movieKey).removeValue();
+                            listBtn.setColorFilter(getResources().getColor(R.color.white));
+                            listBtn.setTag("inactive");
 
-                                String messageNodeKey = userRef.child("message").push().getKey();
-                                if (!TextUtils.isEmpty(messageNodeKey)) {
-                                    HashMap<String, Object> messageData = new HashMap<>();
-                                    messageData.put("content", "Bạn đã xóa phim " + movieName + " khỏi danh sách");
-                                    messageData.put("timestamp", ServerValue.TIMESTAMP);
-                                    messageData.put("type", "movie");
-                                    messageData.put("slug", slug);
-                                    userRef.child("message").child(messageNodeKey).setValue(messageData);
-                                }
-                                return;
+                            String messageNodeKey = userRef.child("message").push().getKey();
+                            if (!TextUtils.isEmpty(messageNodeKey)) {
+                                HashMap<String, Object> messageData = new HashMap<>();
+                                messageData.put("content", "Bạn đã xóa phim " + movieName + " khỏi danh sách");
+                                messageData.put("timestamp", ServerValue.TIMESTAMP);
+                                messageData.put("type", "movie");
+                                messageData.put("slug", slug);
+                                userRef.child("message").child(messageNodeKey).setValue(messageData);
                             }
+                            return;
                         }
-                        Toast.makeText(DetailActivity.this, "Phim không tồn tại trong danh sách", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(DetailActivity.this, "Danh sách trống", Toast.LENGTH_SHORT).show();
                     }
+                    Toast.makeText(DetailActivity2.this, "Phim không tồn tại trong danh sách", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(DetailActivity2.this, "Danh sách trống", Toast.LENGTH_SHORT).show();
                 }
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    Log.w("removeWatchList", "Error removing data", error.toException());
-                }
-            });
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w("removeWatchList", "Error removing data", error.toException());
+            }
+        });
     }
 
     private void checkFavouriteMovie(String idFilm, String userId) {
@@ -365,21 +420,21 @@ public class DetailActivity extends AppCompatActivity {
 
     private void initView() {
         titleTxt = findViewById(R.id.movieNameTxt);
+        titleEngTxt = findViewById(R.id.movieNameEngTxt);
         progressBar = findViewById(R.id.progressBarDetail);
         scrollView = findViewById(R.id.scrollView2);
         pic2 = findViewById(R.id.picDetail);
         movieTimeTxt = findViewById(R.id.movieTime);
         movieSummaryInfo = findViewById(R.id.movieSummery);
         ImageView backImg = findViewById(R.id.backimg);
-        RecyclerView recyclerViewCategory = findViewById(R.id.genreView);
-        recyclerViewCategory.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
-        moviePic = findViewById(R.id.picDetail);
+        moviePic = findViewById(R.id.imageView8);
         backImg.setOnClickListener(v -> finish());
 
         Button playBtn = findViewById(R.id.playBtn);
         playBtn.setOnClickListener(v -> {
-            Intent intent = new Intent(DetailActivity.this, WatchMovieActivity.class);
+            Intent intent = new Intent(DetailActivity2.this, WatchMovieActivity.class);
             intent.putExtra("slug", idFilm);
             startActivity(intent);
         });
