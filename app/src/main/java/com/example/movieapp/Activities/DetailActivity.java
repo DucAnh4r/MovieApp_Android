@@ -369,7 +369,7 @@ public class DetailActivity extends AppCompatActivity {
         scrollView = findViewById(R.id.scrollView2);
         pic2 = findViewById(R.id.picDetail);
         movieTimeTxt = findViewById(R.id.movieTime);
-        movieSummaryInfo = findViewById(R.id.movieSummery);
+        movieSummaryInfo = findViewById(R.id.movieSummary);
         ImageView backImg = findViewById(R.id.backimg);
         RecyclerView recyclerViewCategory = findViewById(R.id.genreView);
         recyclerViewCategory.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));

@@ -62,6 +62,8 @@ import java.util.concurrent.atomic.AtomicReference;
 public class DetailActivity2 extends AppCompatActivity {
     private ProgressBar progressBar;
     private TextView titleTxt, movieTimeTxt, movieSummaryInfo, titleEngTxt;
+    private TextView summary, actors, directors;
+
     private String idFilm, movieName, slug;
     private ImageView pic2, favBtn, listBtn, moviePic;
     private NestedScrollView scrollView;
@@ -147,6 +149,10 @@ public class DetailActivity2 extends AppCompatActivity {
             titleEngTxt.setText(item.getMovie().getOriginName());
             movieName = item.getMovie().getName().toString();
 
+            summary.setText("Summary");
+            actors.setText("Actors");
+            directors.setText("Directors");
+
             // Khởi tạo hình ảnh cho drawable
             Drawable drawable = getResources().getDrawable(R.drawable.time);
             drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
@@ -190,6 +196,8 @@ public class DetailActivity2 extends AppCompatActivity {
 
                 List<Episode> episodes = item.getEpisodes();
                 if (episodes != null && !episodes.isEmpty()) {
+                    TextView textView = findViewById(R.id.episodeCountTextView);
+                    textView.setText("Episodes");
                     RecyclerView episodeRecyclerView = findViewById(R.id.episodeRecyclerView);
                     EpisodeAdapter episodeAdapter = new EpisodeAdapter(this, episodes, idFilm);
                     episodeRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -202,6 +210,8 @@ public class DetailActivity2 extends AppCompatActivity {
             } else {
                 TextView textView = findViewById(R.id.episodeCountTextView);
                 textView.setVisibility(View.GONE);
+                Button playBtn = findViewById(R.id.playBtn);
+                playBtn.setVisibility(View.VISIBLE);
             }
         }, error -> progressBar.setVisibility(View.GONE));
         mRequestQueue.add(mStringRequest);
@@ -425,8 +435,13 @@ public class DetailActivity2 extends AppCompatActivity {
         scrollView = findViewById(R.id.scrollView2);
         pic2 = findViewById(R.id.picDetail);
         movieTimeTxt = findViewById(R.id.movieTime);
-        movieSummaryInfo = findViewById(R.id.movieSummery);
+        movieSummaryInfo = findViewById(R.id.movieSummary);
         ImageView backImg = findViewById(R.id.backimg);
+
+        summary = findViewById(R.id.textView22);
+        actors = findViewById(R.id.textView24);
+        directors = findViewById(R.id.textView17);
+
 
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
         moviePic = findViewById(R.id.imageView8);
