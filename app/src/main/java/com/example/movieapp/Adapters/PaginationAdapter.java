@@ -1,5 +1,6 @@
 package com.example.movieapp.Adapters;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +17,9 @@ public class PaginationAdapter extends RecyclerView.Adapter<PaginationAdapter.Vi
 
     private PaginationClickListener paginationClickListener;
 
-
     public PaginationAdapter(int totalPages) {
         this.totalPages = totalPages;
+        page = 1; // Mặc định ở trang đầu tiên
     }
 
     @NonNull
@@ -27,26 +28,63 @@ public class PaginationAdapter extends RecyclerView.Adapter<PaginationAdapter.Vi
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_item_page, parent, false);
         return new ViewHolder(view);
     }
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        int displayPage = page + position - 2;
+        int displayPage = calculateDisplayPage(position);
 
-        if (displayPage >= 1 && displayPage <= totalPages) {
+        if (displayPage != -1) {
             holder.btnPage.setVisibility(View.VISIBLE);
-            holder.btnPage.setText(String.valueOf(displayPage));
+            if (position == 0) {
+                holder.btnPage.setText("<");
+            } else if (position == getItemCount() - 1) {
+                holder.btnPage.setText(">");
+            } else {
+                holder.btnPage.setText(String.valueOf(displayPage));
+            }
 
             if (displayPage == page) {
                 int color = ContextCompat.getColor(holder.itemView.getContext(), R.color.light_pink);
                 holder.btnPage.setBackgroundColor(color);
+            } else {
+                holder.btnPage.setBackgroundColor(Color.TRANSPARENT); // Set màu nền trong suốt cho các trang khác
             }
+
             holder.btnPage.setOnClickListener(v -> {
                 if (paginationClickListener != null) {
                     paginationClickListener.onPageClicked(displayPage);
                 }
             });
         } else {
-            holder.btnPage.setVisibility(View.GONE);
+            holder.btnPage.setVisibility(View.INVISIBLE); // Ẩn các trang không hợp lệ
         }
+    }
+
+
+    @Override
+    public int getItemCount() {
+        // Hiển thị tối đa 7 trang: prev + 3 trang ở giữa + next
+        return Math.min(totalPages + 2, 7);
+    }
+
+    private int calculateDisplayPage(int position) {
+        if (position == 0) {
+            return page == 1 ? -1 : page - 1; // Trường hợp prev
+        } else if (position == getItemCount() - 1) {
+            return page == totalPages ? -1 : page + 1; // Trường hợp next
+        } else {
+            int middleIndex = getItemCount() / 2;
+            int middlePage = page - (middleIndex - position);
+            return (middlePage >= 1 && middlePage <= totalPages) ? middlePage : -1;
+        }
+    }
+
+    public interface PaginationClickListener {
+        void onPageClicked(int pageNumber);
+    }
+
+    public void setPaginationClickListener(PaginationClickListener paginationClickListener) {
+        this.paginationClickListener = paginationClickListener;
     }
 
     public void setPage(int page) {
@@ -59,20 +97,6 @@ public class PaginationAdapter extends RecyclerView.Adapter<PaginationAdapter.Vi
     public void getPage(int page) {
         this.page = page;
     }
-
-    @Override
-    public int getItemCount() {
-        return Math.min(totalPages, 5);
-    }
-
-    public interface PaginationClickListener {
-        void onPageClicked(int pageNumber);
-    }
-
-    public void setPaginationClickListener(PaginationClickListener paginationClickListener) {
-        this.paginationClickListener = paginationClickListener;
-    }
-
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         AppCompatButton btnPage;

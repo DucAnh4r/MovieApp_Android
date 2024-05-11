@@ -2,14 +2,18 @@ package com.example.movieapp.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,7 +26,18 @@ import com.android.volley.toolbox.Volley;
 import com.example.movieapp.Adapters.SearchAdapter;
 import com.example.movieapp.Domain.Search.SearchMovie;
 import com.example.movieapp.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SearchPageActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapterSearchMovies;
@@ -31,10 +46,12 @@ public class SearchPageActivity extends AppCompatActivity {
     private StringRequest mStringRequest1;
     private ProgressBar loading1;
     private String searchData;
-    private TextView message;
-
+    private TextView message, searchIntroTxt;
+    private ImageView searchIntroImg;
     private AppCompatButton more;
     private int maxItemCount = 10;
+    private String userId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +59,25 @@ public class SearchPageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_page);
         more = findViewById(R.id.more);
         more.setVisibility(View.GONE);
+
+        initView();
+
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra("searchData")) {
             searchData = intent.getStringExtra("searchData");
+            searchIntroImg.setVisibility(View.GONE);
+            searchIntroTxt.setVisibility(View.GONE);
+            message.setVisibility(View.VISIBLE);
+            loading1.setVisibility(View.VISIBLE);
+            sendRequestSearchMovies();
+
         }
-        initView();
-        sendRequestSearchMovies();
+        else {
+            searchIntroImg.setVisibility(View.VISIBLE);
+            searchIntroTxt.setVisibility(View.VISIBLE);
+            message.setVisibility(View.GONE);
+            loading1.setVisibility(View.GONE);
+        }
 
         EditText editText = findViewById(R.id.searchInput);
         editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
@@ -58,6 +88,9 @@ public class SearchPageActivity extends AppCompatActivity {
                 if(searchData.isEmpty()){
                     return false;
                 }
+                //Lưu lịch sử tìm kiếm
+                saveSearchedData(searchData, userId);
+
                 Intent newIntent = new Intent(SearchPageActivity.this, SearchPageActivity.class);
                 newIntent.putExtra("searchData", searchData);
                 startActivity(newIntent);
@@ -106,10 +139,47 @@ public class SearchPageActivity extends AppCompatActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
 
+    private void saveSearchedData(String searchData, String userId) {
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(userId);
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!snapshot.hasChild("searchedData")) {
+                    userRef.child("searchedData").setValue(new ArrayList<>());
+                }
+                String searchKey = userRef.child("searchedData").push().getKey();
+                if (!TextUtils.isEmpty(searchKey)) {
+                    HashMap<String, Object> searchDataMap = new HashMap<>();
+                    searchDataMap.put("searchQuery", searchData);
+                    searchDataMap.put("searchTime", ServerValue.TIMESTAMP);
+                    userRef.child("searchedData").child(searchKey).setValue(searchDataMap);
+                } else {
+                    Toast.makeText(SearchPageActivity.this, "Không lưu được dữ liệu tìm kiếm", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w("saveSearchedData", "Error saving search data", error.toException());
+            }
+        });
+    }
+
+
     private void initView(){
         recyclerviewSearchMovies = findViewById(R.id.SearchMovieView);
         recyclerviewSearchMovies.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         loading1 = findViewById(R.id.progressBar1);
         message = findViewById(R.id.message);
+        searchIntroImg = findViewById(R.id.imageView7);
+        searchIntroTxt = findViewById(R.id.textView6);
+
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            userId = currentUser.getUid();
+
+        } else {
+            userId = null;
+        }
     }
 }
