@@ -1,9 +1,9 @@
 package com.example.movieapp.Domain.movieDetail;
 
-import java.util.List;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 public class Episode {
 
@@ -25,6 +25,8 @@ public class Episode {
     public List<ServerDatum> getServerData() {
         return serverData;
     }
+
+
 
     public void setServerData(List<ServerDatum> serverData) {
         this.serverData = serverData;

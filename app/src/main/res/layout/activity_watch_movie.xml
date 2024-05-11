@@ -96,6 +96,7 @@
 
         <TextView
             android:id="@+id/episodeCountTextView"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -123,7 +124,7 @@
             android:id="@+id/searchEpisode"
             android:layout_width="170dp"
             android:layout_height="50dp"
-
+            android:visibility="gone"
             android:background="@drawable/edittext_background"
             android:drawableStart="@drawable/search"
             android:drawablePadding="8dp"
@@ -147,5 +148,13 @@
             app:layout_constraintEnd_toEndOf="@+id/videoView2"
             app:layout_constraintStart_toStartOf="@+id/videoView2"
             app:layout_constraintTop_toTopOf="@+id/videoView2" />
+        <!-- Overlay view for dimming effect -->
+        <View
+            android:id="@+id/overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#80000000"
+            android:visibility="gone" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
