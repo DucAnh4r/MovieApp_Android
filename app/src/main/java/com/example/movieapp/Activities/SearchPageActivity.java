@@ -1,5 +1,6 @@
 package com.example.movieapp.Activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -65,6 +66,8 @@ public class SearchPageActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra("searchData")) {
             searchData = intent.getStringExtra("searchData");
+            //Lưu lịch sử tìm kiếm
+            saveSearchedData(searchData, userId);
             searchIntroImg.setVisibility(View.GONE);
             searchIntroTxt.setVisibility(View.GONE);
             message.setVisibility(View.VISIBLE);
@@ -79,7 +82,7 @@ public class SearchPageActivity extends AppCompatActivity {
             loading1.setVisibility(View.GONE);
         }
 
-        EditText editText = findViewById(R.id.searchInput);
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) EditText editText = findViewById(R.id.searchInput);
         editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
         editText.setOnEditorActionListener((v, actionId, event) -> {
 
@@ -88,8 +91,7 @@ public class SearchPageActivity extends AppCompatActivity {
                 if(searchData.isEmpty()){
                     return false;
                 }
-                //Lưu lịch sử tìm kiếm
-                saveSearchedData(searchData, userId);
+
 
                 Intent newIntent = new Intent(SearchPageActivity.this, SearchPageActivity.class);
                 newIntent.putExtra("searchData", searchData);

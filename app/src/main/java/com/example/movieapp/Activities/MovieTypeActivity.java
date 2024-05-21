@@ -1,9 +1,9 @@
 package com.example.movieapp.Activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
@@ -25,6 +25,8 @@ import com.example.movieapp.Adapters.PaginationAdapter;
 import com.example.movieapp.Domain.movieKind.MovieKind;
 import com.example.movieapp.Domain.newRelease.FilmItem;
 import com.example.movieapp.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.gson.Gson;
 
 public class MovieTypeActivity extends AppCompatActivity {
@@ -38,6 +40,7 @@ public class MovieTypeActivity extends AppCompatActivity {
     private TextView movieType;
     private final int initialPage = 1;
     private PaginationAdapter paginationAdapter;
+    private String userId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,11 +69,16 @@ public class MovieTypeActivity extends AppCompatActivity {
         }
 
 
-        EditText editText = findViewById(R.id.searchInput);
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) EditText editText = findViewById(R.id.searchInput);
         editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
         editText.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 String searchData = editText.getText().toString().trim();
+                if(searchData.isEmpty()){
+                    return false;
+                }
+
+
                 Intent intent = new Intent(MovieTypeActivity.this, SearchPageActivity.class);
                 intent.putExtra("searchData", searchData);
                 startActivity(intent);
@@ -177,7 +185,7 @@ public class MovieTypeActivity extends AppCompatActivity {
         paginationAdapter.getPage(page);
     }
 
-    @Override
+        @Override
     protected void onResume(){
         super.onResume();
     }
@@ -189,6 +197,14 @@ public class MovieTypeActivity extends AppCompatActivity {
         LatestMovieType.setLayoutManager(new GridLayoutManager(this, spanCount));
         loading1 = findViewById(R.id.progressBar1);
         movieType = findViewById(R.id.movieTypeName);
+
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            userId = currentUser.getUid();
+
+        } else {
+            userId = null;
+        }
     }
 
 }

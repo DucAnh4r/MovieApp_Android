@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager2 viewPager2;
     private Handler slideHandle = new Handler();
     private SwipeRefreshLayout swipeRefreshLayout;
+    private String userId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +71,9 @@ public class MainActivity extends AppCompatActivity {
                 if(searchData.isEmpty()){
                     return false;
                 }
+
+
+
 
                 Intent intent = new Intent(MainActivity.this, SearchPageActivity.class);
                 intent.putExtra("searchData", searchData);
@@ -255,7 +259,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void initView(){
+       private void initView(){
         viewPager2 = findViewById(R.id.viewpagerSlider);
         recyclerviewNewestMovies = findViewById(R.id.NewestMovieView);
         recyclerviewNewestMovies.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
@@ -276,5 +280,13 @@ public class MainActivity extends AppCompatActivity {
         cartoonBtn = findViewById(R.id.moreCartoon_btn);
 
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
+
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            userId = currentUser.getUid();
+
+        } else {
+            userId = null;
+        }
     }
 }

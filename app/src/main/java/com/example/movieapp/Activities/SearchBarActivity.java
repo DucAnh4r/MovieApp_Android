@@ -1,9 +1,13 @@
 package com.example.movieapp.Activities;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 
@@ -47,6 +51,7 @@ public class SearchBarActivity extends FrameLayout {
         init(context);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void init(Context context) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.activity_search_bar, this);
@@ -67,6 +72,41 @@ public class SearchBarActivity extends FrameLayout {
                 searchHistoryRecyclerView.setVisibility(GONE);
             }
         });
+
+        searchInput.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                hideKeyboardAndRecyclerView();
+                return true;
+            }
+            return false;
+        });
+
+        this.setOnTouchListener((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                if (searchHistoryRecyclerView.getVisibility() == VISIBLE) {
+                    hideKeyboardAndRecyclerView();
+                }
+            }
+            return false;
+        });
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if (event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+            if (searchInput.hasFocus()) {
+                searchInput.clearFocus();
+                return true; // Đã xử lý sự kiện
+            }
+        }
+        return super.dispatchKeyEvent(event);
+    }
+
+    private void hideKeyboardAndRecyclerView() {
+        searchInput.clearFocus();
+        searchHistoryRecyclerView.setVisibility(GONE);
+        InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(searchInput.getWindowToken(), 0);
     }
 
     private void loadSearchHistoryFromFirebase() {
@@ -74,11 +114,17 @@ public class SearchBarActivity extends FrameLayout {
         if (currentUser != null) {
             DatabaseReference searchHistoryRef = FirebaseDatabase.getInstance().getReference()
                     .child("users").child(currentUser.getUid()).child("searchedData");
-            searchHistoryRef.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            searchHistoryRef.orderByChild("searchTime").limitToLast(7).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     searchHistoryList.clear();
+                    List<DataSnapshot> sortedList = new ArrayList<>();
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        sortedList.add(snapshot);
+                    }
+                    sortedList.sort((o1, o2) -> Long.compare(o2.child("searchTime").getValue(Long.class), o1.child("searchTime").getValue(Long.class)));
+                    for (DataSnapshot snapshot : sortedList) {
                         String searchQuery = snapshot.child("searchQuery").getValue(String.class);
                         searchHistoryList.add(searchQuery);
                     }
@@ -87,11 +133,9 @@ public class SearchBarActivity extends FrameLayout {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Log.e("SearchBarActivity", "Database Error: " + databaseError.getMessage());
+                    // Handle error
                 }
             });
-        } else {
-            Log.e("SearchBarActivity", "Current user is null");
         }
     }
 }

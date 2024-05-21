@@ -146,12 +146,9 @@ public class WatchMovieActivity extends AppCompatActivity {
                 // Nếu sự kiện diễn ra ngoài phạm vi của EditText, gỡ bỏ focus của EditText
                 searchBox.clearFocus();
             }
-
             // Trả về false để tiếp tục chuyển sự kiện tới các phần tử khác (nếu có)
             return false;
         });
-
-
     }
 
     private void searchEpisodes(String currentValue) {
@@ -161,13 +158,6 @@ public class WatchMovieActivity extends AppCompatActivity {
         // Gán adapter mới vào RecyclerView
         episodeRecyclerView.setAdapter(searchAdapter);
     }
-
-
-
-
-
-
-
 
     private void reloadContent() {
         if (!isFullScreen) {

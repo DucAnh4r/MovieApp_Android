@@ -54,7 +54,7 @@ public class ActorsListAdapter extends RecyclerView.Adapter<ActorsListAdapter.Ac
         public ActorViewHolder(@NonNull View itemView) {
             super(itemView);
             actorImageView = itemView.findViewById(R.id.itemImages);
-            actorNameTextView = itemView.findViewById(R.id.actorNameTextView);
+            actorNameTextView = itemView.findViewById(R.id.actorNameTextView); //Bên viewholder có gì thì sẽ khai báo ở đây
         }
     }
 }
