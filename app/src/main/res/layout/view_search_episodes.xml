@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+        <EditText
+            android:id="@+id/searchEpisode"
+            android:layout_width="170dp"
+            android:layout_height="50dp"
+            android:background="@drawable/edittext_background"
+            android:drawableStart="@drawable/search"
+            android:drawablePadding="8dp"
+            android:ems="10"
+            android:hint="Tìm kiếm tập..."
+            android:inputType="text"
+            android:padding="12dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:visibility="visible"
+
+             />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/cancel_btn"
+            style="@android:style/Widget.Button"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="56dp"
+            android:visibility="gone"
+            android:layout_marginEnd="100dp"
+            android:background="@drawable/orange_button_background"
+            android:backgroundTint="@color/dark_gray"
+            android:text="Hủy"
+            android:textColor="@color/white"
+            android:textSize="15dp"
+
+           />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/ok_btn"
+            style="@android:style/Widget.Button"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="56dp"
+            android:visibility="gone"
+            android:background="@drawable/orange_button_background"
+            android:text="Tìm"
+            android:textColor="@color/white"
+            android:textSize="15dp"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/reset_btn"
+            style="@android:style/Widget.Button"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="56dp"
+            android:visibility="visible"
+            android:background="@drawable/orange_button_background"
+            android:backgroundTint="@color/dark_gray"
+            android:text="Reset"
+            android:textColor="@color/white"
+            android:textSize="15dp"
+            />
+
+
+
+
+</merge>

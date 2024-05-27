@@ -25,6 +25,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieApp"
         tools:targetApi="31">
+
         <activity
             android:name=".Activities.FullScreenImageActivity"
             android:exported="false" />
@@ -78,7 +79,8 @@
             android:exported="false" />
         <activity
             android:name=".Activities.SearchBarActivity"
-            android:exported="false" />
+            android:exported="false"
+            tools:ignore="Instantiatable" />
         <activity
             android:name=".Activities.MovieTypeActivity"
             android:exported="false" />
@@ -115,6 +117,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

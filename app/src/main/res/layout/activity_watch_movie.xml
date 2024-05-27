@@ -120,23 +120,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/episodeCountTextView" />
 
-        <EditText
-            android:id="@+id/searchEpisode"
-            android:layout_width="170dp"
-            android:layout_height="50dp"
-            android:visibility="gone"
-            android:background="@drawable/edittext_background"
-            android:drawableStart="@drawable/search"
-            android:drawablePadding="8dp"
-            android:ems="10"
-            android:hint="Tìm kiếm tập..."
-            android:inputType="text"
-            android:padding="12dp"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
+
+
+        <com.example.movieapp.Activities.SearchEpisodesView
+            android:id="@+id/searchEpisodesView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/episodeRecyclerView" />
+            app:layout_constraintTop_toBottomOf="@id/episodeRecyclerView"
+            />
 
         <ProgressBar
             android:id="@+id/progressBarWatch"
