@@ -104,8 +104,8 @@ public class MyForegroundService extends Service {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
 
         return new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setContentTitle("MyForegroundService")
-                .setContentText("Running...")
+                .setContentTitle("MovieApp")
+                .setContentText("Những bộ phim đặc sắc nhất đang chờ đón bạn!\nHãy vào ứng dụng và thưởng thúc ngay nhé!")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentIntent(pendingIntent)
                 .build();

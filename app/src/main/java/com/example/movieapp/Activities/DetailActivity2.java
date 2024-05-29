@@ -1,14 +1,19 @@
 package com.example.movieapp.Activities;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -17,6 +22,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,6 +43,7 @@ import com.bumptech.glide.request.target.Target;
 import com.example.movieapp.Adapters.ActorsListAdapter;
 import com.example.movieapp.Adapters.DirectorsListAdapter;
 import com.example.movieapp.Adapters.EpisodeAdapter;
+import com.example.movieapp.Adapters.EpisodeSearchAdapter;
 import com.example.movieapp.Domain.ActorModel;
 import com.example.movieapp.Domain.movieDetail.Episode;
 import com.example.movieapp.Domain.movieDetail.LinkFilm;
@@ -68,6 +76,19 @@ public class DetailActivity2 extends AppCompatActivity {
     private ImageView pic2, favBtn, listBtn, moviePic;
     private NestedScrollView scrollView;
     private SwipeRefreshLayout swipeRefreshLayout;
+
+
+    RecyclerView episodeRecyclerView;
+    private List<Episode> episodes;
+
+    private View searchEpisodesView;
+    private EditText searchBox;
+    private View overlay;
+    AppCompatButton okButton, cancelButton, resetButton;
+    private TextView noMatchingEpisodesText;
+    private String currentSearchValue;
+
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +98,121 @@ public class DetailActivity2 extends AppCompatActivity {
         initView();
         sendRequest();
         swipeRefreshLayout.setOnRefreshListener(this::reloadContent);
+
+        // Lấy chiều cao của màn hình thiết bị
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int screenHeight = displayMetrics.heightPixels;
+
+        // Thiết lập chiều cao của overlay
+        overlay = findViewById(R.id.overlay);
+        ConstraintLayout.LayoutParams overlayParams = (ConstraintLayout.LayoutParams) overlay.getLayoutParams();
+        overlayParams.height = screenHeight;
+        overlay.setLayoutParams(overlayParams);
+        // Khi EditText được tap vào
+        searchBox.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                // Hiển thị lớp mờ
+                overlay.setVisibility(View.VISIBLE);
+
+                // Đưa SearchEpisodesView lên trước
+                searchEpisodesView.bringToFront();
+
+                // Thay đổi các ràng buộc để đưa SearchEpisodesView lên giữa màn hình
+                ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) searchEpisodesView.getLayoutParams();
+                params.topToTop = ConstraintLayout.LayoutParams.PARENT_ID;
+                params.bottomToBottom = ConstraintLayout.LayoutParams.PARENT_ID;
+                searchEpisodesView.setLayoutParams(params);
+
+                // Tuỳ chọn hiển thị bàn phím
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(searchBox, InputMethodManager.SHOW_IMPLICIT);
+
+                okButton.setVisibility(View.VISIBLE);
+                cancelButton.setVisibility(View.VISIBLE);
+                resetButton.setVisibility(View.GONE);
+            } else {
+                // Ẩn lớp mờ
+                overlay.setVisibility(View.GONE);
+
+                okButton.setVisibility(View.GONE);
+                cancelButton.setVisibility(View.GONE);
+                resetButton.setVisibility(View.VISIBLE);
+                // Ẩn bàn phím
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(searchBox.getWindowToken(), 0);
+
+                // Khôi phục vị trí ban đầu của SearchEpisodesView
+                ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) searchEpisodesView.getLayoutParams();
+                layoutParams.topToTop = ConstraintLayout.LayoutParams.UNSET;
+                layoutParams.bottomToBottom = ConstraintLayout.LayoutParams.UNSET;
+                searchEpisodesView.setLayoutParams(layoutParams);
+
+
+            }
+        });
+
+        overlay.setOnTouchListener((v, event) -> {
+            int[] location = new int[2];
+            searchEpisodesView.getLocationOnScreen(location);
+            int x = location[0];
+            int y = location[1];
+            int width = searchEpisodesView.getWidth();
+            int height = searchEpisodesView.getHeight();
+
+            float touchX = event.getRawX();
+            float touchY = event.getRawY();
+
+            if (touchX < x || touchX > x + width || touchY < y || touchY > y + height) {
+                searchBox.setText(currentSearchValue);
+                searchBox.clearFocus();
+            }
+            return true; // Trả về true để chỉ ra rằng sự kiện đã được xử lý
+        });
+
+        okButton.setOnClickListener(v -> {
+            currentSearchValue = searchBox.getText().toString();
+            searchBox.clearFocus();
+            if (currentSearchValue.isEmpty()) {
+                resetButton.performClick();
+                return;
+            }
+            // Thực hiện tìm kiếm
+            noMatchingEpisodesText.setVisibility(View.GONE);
+            episodeRecyclerView.setVisibility(View.VISIBLE);
+            searchEpisodes(currentSearchValue);
+        });
+
+        cancelButton.setOnClickListener(v -> {
+            searchBox.clearFocus();
+            searchBox.setText(currentSearchValue);
+        });
+
+        resetButton.setOnClickListener(v -> {
+            EpisodeAdapter episodeAdapter = new EpisodeAdapter(DetailActivity2.this, episodes, idFilm);
+            episodeRecyclerView.setAdapter(episodeAdapter);
+            searchBox.setText("");
+            noMatchingEpisodesText.setVisibility(View.GONE);
+            episodeRecyclerView.setVisibility(View.VISIBLE);
+        });
+    }
+
+    private void searchEpisodes(String currentValue) {
+        // Tạo một instance mới của EpisodeSearchAdapter với giá trị tìm kiếm
+        EpisodeSearchAdapter searchAdapter = new EpisodeSearchAdapter(DetailActivity2.this, episodes, idFilm, currentValue);
+
+        // Gán adapter mới vào RecyclerView
+        episodeRecyclerView.setAdapter(searchAdapter);
+        searchBox.setText(currentValue);
+        episodeRecyclerView.post(() -> {
+            if (!searchAdapter.hasMatchingEpisodes()) {
+                noMatchingEpisodesText.setVisibility(View.VISIBLE);
+                episodeRecyclerView.setVisibility(View.GONE);
+            } else {
+                noMatchingEpisodesText.setVisibility(View.GONE);
+                episodeRecyclerView.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     private void reloadContent() {
@@ -108,6 +244,8 @@ public class DetailActivity2 extends AppCompatActivity {
         intent.putExtra("imagePath", imageUrl);
         startActivity(intent);
     }
+
+
 
     private void sendRequest() {
         RequestQueue mRequestQueue = Volley.newRequestQueue(this);
@@ -193,12 +331,12 @@ public class DetailActivity2 extends AppCompatActivity {
             if (item.getMovie().getType().equals("series") || item.getMovie().getType().equals("hoathinh") || item.getMovie().getType().equals("tvshows")) {
                 Button playBtn = findViewById(R.id.playBtn);
                 playBtn.setVisibility(View.GONE);
-
-                List<Episode> episodes = item.getEpisodes();
+                searchEpisodesView.setVisibility(View.VISIBLE);
+                episodes = item.getEpisodes();
                 if (episodes != null && !episodes.isEmpty()) {
                     TextView textView = findViewById(R.id.episodeCountTextView);
                     textView.setText("Episodes");
-                    RecyclerView episodeRecyclerView = findViewById(R.id.episodeRecyclerView);
+                    textView.setVisibility(View.VISIBLE);
                     EpisodeAdapter episodeAdapter = new EpisodeAdapter(this, episodes, idFilm);
                     episodeRecyclerView.setLayoutManager(new LinearLayoutManager(this));
                     episodeRecyclerView.setAdapter(episodeAdapter);
@@ -442,6 +580,14 @@ public class DetailActivity2 extends AppCompatActivity {
         actors = findViewById(R.id.textView24);
         directors = findViewById(R.id.textView17);
 
+        episodeRecyclerView = findViewById(R.id.episodeRecyclerView);
+        searchEpisodesView = findViewById(R.id.searchEpisodesView);
+        searchBox = findViewById(R.id.searchEpisode);
+        okButton = findViewById(R.id.ok_btn);
+        cancelButton = findViewById(R.id.cancel_btn);
+        resetButton = findViewById(R.id.reset_btn);
+
+        noMatchingEpisodesText = findViewById(R.id.noMatchingEpisodesText);
 
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
         moviePic = findViewById(R.id.imageView8);

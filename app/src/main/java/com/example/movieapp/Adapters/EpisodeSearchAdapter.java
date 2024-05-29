@@ -36,6 +36,8 @@ public class EpisodeSearchAdapter extends RecyclerView.Adapter<EpisodeSearchAdap
     private List<String> watchedEpisodes = new ArrayList<>();
     private FirebaseAuth mAuth;
     private String searchInput;
+    private boolean hasMatchingEpisodes = false;
+
     public void setCurrentEpisodeName(String currentEpisodeName) {
         this.currentEpisodeName = currentEpisodeName;
     }
@@ -64,6 +66,8 @@ public class EpisodeSearchAdapter extends RecyclerView.Adapter<EpisodeSearchAdap
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Episode episode = episodeList.get(position);
         List<ServerDatum> serverDataList = episode.getServerData();
+        boolean hasMatchingEpisode = false;
+
         if (serverDataList != null && !serverDataList.isEmpty()) {
             holder.episodeContainer.removeAllViews();
 
@@ -77,7 +81,9 @@ public class EpisodeSearchAdapter extends RecyclerView.Adapter<EpisodeSearchAdap
 
             for (ServerDatum serverDatum : serverDataList) {
                 String episodeName = serverDatum.getName();
-                if (episodeName.contains(searchInput)) { // Kiểm tra xem tên tập có chứa giá trị searchInput không
+                if (episodeName.contains(searchInput)) {
+                    hasMatchingEpisode = true;
+
                     View view2 = LayoutInflater.from(context).inflate(R.layout.viewholder_episode, linearLayout, false);
                     AppCompatButton button = view2.findViewById(R.id.episode);
                     button.setText(episodeName);
@@ -107,8 +113,11 @@ public class EpisodeSearchAdapter extends RecyclerView.Adapter<EpisodeSearchAdap
                 }
             }
         }
-    }
 
+        if (hasMatchingEpisode) {
+            hasMatchingEpisodes = true;
+        }
+    }
 
     private void getWatchedEpisodesFromFirebase(String movieSlug) {
         DatabaseReference watchedMoviesRef = FirebaseDatabase.getInstance().getReference().child("users").child(userId);
@@ -118,7 +127,6 @@ public class EpisodeSearchAdapter extends RecyclerView.Adapter<EpisodeSearchAdap
                 if (dataSnapshot.hasChild("watchedMovies")) {
                     DataSnapshot watchedMoviesSnapshot = dataSnapshot.child("watchedMovies");
                     for (DataSnapshot movieSnapshot : watchedMoviesSnapshot.getChildren()) {
-                        // Kiểm tra xem phim trong snapshot có cùng slug với phim hiện tại không
                         String movieSlugFromSnapshot = movieSnapshot.child("id").getValue(String.class);
                         if (movieSlugFromSnapshot != null && movieSlugFromSnapshot.equals(movieSlug)) {
                             if (movieSnapshot.hasChild("tap")) {
@@ -149,8 +157,13 @@ public class EpisodeSearchAdapter extends RecyclerView.Adapter<EpisodeSearchAdap
         return episodeList.size();
     }
 
+    public boolean hasMatchingEpisodes() {
+        return hasMatchingEpisodes;
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         LinearLayout episodeContainer;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             episodeContainer = itemView.findViewById(R.id.episodeContainer);

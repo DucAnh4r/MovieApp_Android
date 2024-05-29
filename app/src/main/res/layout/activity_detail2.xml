@@ -12,16 +12,13 @@
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="100dp">
 
             <ProgressBar
                 android:id="@+id/progressBarDetail"
@@ -35,10 +32,10 @@
 
             <ImageView
                 android:id="@+id/picDetail"
-                android:tag="cover_image"
                 android:layout_width="match_parent"
                 android:layout_height="282dp"
                 android:scaleType="centerCrop"
+                android:tag="cover_image"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -54,10 +51,10 @@
 
             <ImageView
                 android:id="@+id/imageView8"
-                android:tag="avatar_image"
                 android:layout_width="147dp"
                 android:layout_height="215dp"
                 android:layout_marginStart="12dp"
+                android:tag="avatar_image"
                 app:layout_constraintBottom_toBottomOf="@+id/picDetail"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/picDetail"
@@ -116,13 +113,13 @@
                 android:id="@+id/movieNameTxt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
                 android:layout_marginTop="-70dp"
-                android:drawablePadding="5dp"
 
+                android:layout_marginEnd="12dp"
+                android:drawablePadding="5dp"
                 android:textColor="@color/white"
                 android:textSize="24sp"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
 
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.194"
@@ -140,7 +137,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.12"
                 app:layout_constraintStart_toEndOf="@+id/imageView8"
-                app:layout_constraintTop_toBottomOf="@+id/movieNameTxt"/>
+                app:layout_constraintTop_toBottomOf="@+id/movieNameTxt" />
 
             <TextView
                 android:id="@+id/movieTime"
@@ -229,10 +226,26 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/yellow"
                 android:textSize="16sp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/textView17"
                 app:layout_constraintTop_toBottomOf="@+id/directorsRecyclerView" />
+
+            <TextView
+                android:id="@+id/noMatchingEpisodesText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="16dp"
+                android:text="Không tìm thấy tập phù hợp"
+                android:textAlignment="center"
+                android:textColor="@color/yellow"
+                android:textSize="16sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/episodeCountTextView" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/episodeRecyclerView"
@@ -243,20 +256,39 @@
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/episodeCountTextView" />
+                app:layout_constraintTop_toBottomOf="@+id/noMatchingEpisodesText" />
+
+            <com.example.movieapp.Activities.SearchEpisodesView
+                android:id="@+id/searchEpisodesView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginTop="6dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/episodeRecyclerView" />
+
 
             <Button
                 android:id="@+id/playBtn"
-                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/orange_button_background"
                 android:text="Play"
                 android:textColor="@color/white"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/directorsRecyclerView" />
+
+            <View
+                android:id="@+id/overlay"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#80000000"
+                android:visibility="gone"
+                 />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

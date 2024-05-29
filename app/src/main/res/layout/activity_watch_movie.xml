@@ -51,7 +51,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="35dp"
             android:layout_marginEnd="8dp"
-            android:text="Test"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -65,7 +65,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="Test"
+            android:text=""
             android:textColor="@color/gray"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
-            android:text="Test"
+            android:text=""
             android:textColor="@color/dark_gray"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/watchImage"
@@ -103,11 +103,26 @@
             android:layout_marginTop="24dp"
             android:text="Episodes"
             android:textColor="@color/yellow"
-            android:textSize="16sp"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvTap" />
+
+        <TextView
+            android:id="@+id/noMatchingEpisodesText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="Không tìm thấy tập phù hợp"
+            android:textAlignment="center"
+            android:textColor="@color/yellow"
+            android:textSize="16sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/episodeCountTextView" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/episodeRecyclerView"
@@ -118,18 +133,17 @@
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/episodeCountTextView" />
-
+            app:layout_constraintTop_toBottomOf="@+id/noMatchingEpisodesText" />
 
 
         <com.example.movieapp.Activities.SearchEpisodesView
             android:id="@+id/searchEpisodesView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/episodeRecyclerView"
-            />
+            app:layout_constraintTop_toBottomOf="@id/episodeRecyclerView" />
 
         <ProgressBar
             android:id="@+id/progressBarWatch"
