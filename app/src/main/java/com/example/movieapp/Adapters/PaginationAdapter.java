@@ -19,7 +19,7 @@ public class PaginationAdapter extends RecyclerView.Adapter<PaginationAdapter.Vi
 
     public PaginationAdapter(int totalPages) {
         this.totalPages = totalPages;
-        page = 1; // Mặc định ở trang đầu tiên
+        page = 1;
     }
 
     @NonNull
@@ -47,7 +47,7 @@ public class PaginationAdapter extends RecyclerView.Adapter<PaginationAdapter.Vi
                 int color = ContextCompat.getColor(holder.itemView.getContext(), R.color.light_pink);
                 holder.btnPage.setBackgroundColor(color);
             } else {
-                holder.btnPage.setBackgroundColor(Color.TRANSPARENT); // Set màu nền trong suốt cho các trang khác
+                holder.btnPage.setBackgroundColor(Color.TRANSPARENT);
             }
 
             holder.btnPage.setOnClickListener(v -> {
@@ -56,22 +56,21 @@ public class PaginationAdapter extends RecyclerView.Adapter<PaginationAdapter.Vi
                 }
             });
         } else {
-            holder.btnPage.setVisibility(View.INVISIBLE); // Ẩn các trang không hợp lệ
+            holder.btnPage.setVisibility(View.INVISIBLE);
         }
     }
 
 
     @Override
     public int getItemCount() {
-        // Hiển thị tối đa 7 trang: prev + 3 trang ở giữa + next
         return Math.min(totalPages + 2, 7);
     }
 
     private int calculateDisplayPage(int position) {
         if (position == 0) {
-            return page == 1 ? -1 : page - 1; // Trường hợp prev
+            return page == 1 ? -1 : page - 1;
         } else if (position == getItemCount() - 1) {
-            return page == totalPages ? -1 : page + 1; // Trường hợp next
+            return page == totalPages ? -1 : page + 1;
         } else {
             int middleIndex = getItemCount() / 2;
             int middlePage = page - (middleIndex - position);

@@ -15,7 +15,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.movieapp.Activities.DetailActivity2;
+import com.example.movieapp.Activities.DetailActivity;
 import com.example.movieapp.Domain.movieKind.MovieKind;
 import com.example.movieapp.R;
 
@@ -47,7 +47,7 @@ public class KindOfMovieAdapter extends RecyclerView.Adapter<KindOfMovieAdapter.
                 .into(holder.pic);
 
         holder.itemView.setOnClickListener(v -> {
-                Intent intent = new Intent(holder.itemView.getContext(), DetailActivity2.class);
+                Intent intent = new Intent(holder.itemView.getContext(), DetailActivity.class);
                 intent.putExtra("slug", items.getData().getItems().get(position).getSlug());
                 context.startActivity(intent);
         });

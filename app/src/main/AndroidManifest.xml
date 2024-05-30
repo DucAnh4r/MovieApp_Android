@@ -62,7 +62,7 @@
             android:foregroundServiceType="location|dataSync" />
 
         <activity
-            android:name=".Activities.DetailActivity2"
+            android:name=".Activities.DetailActivity"
             android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".Activities.NotificationActivity"
@@ -92,10 +92,6 @@
             android:exported="false"
             android:windowSoftInputMode="adjustNothing"
             />
-        <activity
-            android:name=".Activities.DetailActivity"
-            android:configChanges="orientation|screenSize"
-            android:exported="false" />
         <activity
             android:name=".Activities.WatchMovieActivity"
             android:configChanges="orientation|screenSize"

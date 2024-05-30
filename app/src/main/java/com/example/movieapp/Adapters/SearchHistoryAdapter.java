@@ -20,7 +20,6 @@ public class SearchHistoryAdapter extends RecyclerView.Adapter<SearchHistoryAdap
     private List<String> searchHistoryList;
     Context context;
 
-
     public SearchHistoryAdapter(List<String> searchHistoryList) {
         this.searchHistoryList = searchHistoryList;
     }

@@ -165,14 +165,18 @@ public class EditProfileActivity extends AppCompatActivity {
             userRef.child("email").setValue(userEmail);
 //            userRef.child("password").setValue(userPassword);
 
-            user.updateEmail(userEmail)
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(this, "Email updated successfully", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(this, "Failed to update email: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+            if (!TextUtils.isEmpty(userEmail)) {
+                userRef.child("email").setValue(userEmail);
+
+                user.updateEmail(userEmail)
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(this, "Email updated successfully", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(this, "Failed to update email: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
 
 //            user.updatePassword(userPassword)
 //                    .addOnCompleteListener(task -> {
@@ -193,8 +197,8 @@ public class EditProfileActivity extends AppCompatActivity {
                 userRef.child("message").child(messageNodeKey).setValue(messageData);
             }
 
-            Intent intent = new Intent(this, ProfileActivity.class);
-            startActivity(intent);
+            Intent resultIntent = new Intent();
+            setResult(RESULT_OK, resultIntent);
             finish();
         } else {
             Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show();

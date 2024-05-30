@@ -146,6 +146,17 @@ public class ProfileActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                finish();
+                startActivity(new Intent(ProfileActivity.this, ProfileActivity.class));
+            }
+        }
+    }
+
     private void showPopupMenu(View view) {
         PopupMenu popupMenu = new PopupMenu(this, view);
         popupMenu.inflate(R.menu.popup_menu);
@@ -153,8 +164,7 @@ public class ProfileActivity extends AppCompatActivity {
         popupMenu.setOnMenuItemClickListener(item -> {
             if (item.getItemId() == R.id.menu_edit) {
                 Intent intent = new Intent(ProfileActivity.this, EditProfileActivity.class);
-                startActivity(intent);
-                finish();
+                startActivityForResult(intent, 1);
                 return true;
             } else if (item.getItemId() == R.id.menu_logout) {
                 mAuth.signOut();

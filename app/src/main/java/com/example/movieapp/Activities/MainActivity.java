@@ -14,7 +14,6 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -74,12 +73,9 @@ public class MainActivity extends AppCompatActivity {
 
         setupSearchBarEvents();
 
-
-
         overlayView.setOnClickListener(v -> {
             searchBar.hideKeyboardAndRecyclerView();
         });
-
 
         searchInput.setImeOptions(EditorInfo.IME_ACTION_DONE);
         searchInput.setOnEditorActionListener((v, actionId, event) -> {
@@ -177,8 +173,6 @@ public class MainActivity extends AppCompatActivity {
         }, error -> {
             loading1.setVisibility(View.GONE);
             newBtn.setVisibility(View.VISIBLE);
-
-            Log.i("UILover", "onErrorResponse: " + error.toString());
         });
         mRequestQueue.add(mStringRequest1);
     }
@@ -198,8 +192,6 @@ public class MainActivity extends AppCompatActivity {
         }, error -> {
             loading3.setVisibility(View.GONE);
             singleBtn.setVisibility(View.VISIBLE);
-
-            Log.i("UILover", "onErrorResponse: " + error.toString());
         });
         mRequestQueue.add(mStringRequest3);
     }
@@ -218,8 +210,6 @@ public class MainActivity extends AppCompatActivity {
         }, error -> {
             loading4.setVisibility(View.GONE);
             seriesBtn.setVisibility(View.VISIBLE);
-
-            Log.i("UILover", "onErrorResponse: " + error.toString());
         });
         mRequestQueue.add(mStringRequest4);
     }
@@ -239,8 +229,6 @@ public class MainActivity extends AppCompatActivity {
         }, error -> {
             loading5.setVisibility(View.GONE);
             cartoonBtn.setVisibility(View.VISIBLE);
-
-            Log.i("UILover", "onErrorResponse: " + error.toString());
         });
         mRequestQueue.add(mStringRequest5);
     }
@@ -261,7 +249,6 @@ public class MainActivity extends AppCompatActivity {
         sliderItems.add(new SliderItems(R.drawable.slider10,"cau-be-rung-xanh-2016"));
         sliderItems.add(new SliderItems(R.drawable.slider11, "chung-ta"));
 
-
         viewPager2.setAdapter(new SliderAdapters(sliderItems, viewPager2));
         viewPager2.setClipToPadding(false);
         viewPager2.setClipChildren(false);
@@ -270,12 +257,9 @@ public class MainActivity extends AppCompatActivity {
 
         CompositePageTransformer compositePageTransformer = new CompositePageTransformer();
         compositePageTransformer.addTransformer(new MarginPageTransformer(40));
-        compositePageTransformer.addTransformer(new ViewPager2.PageTransformer() {
-            @Override
-            public void transformPage(@NonNull View page, float position) {
-                float r = 1 - Math.abs(position);
-                page.setScaleY(0.85f + r * 0.15f);
-            }
+        compositePageTransformer.addTransformer((page, position) -> {
+            float r = 1 - Math.abs(position);
+            page.setScaleY(0.85f + r * 0.15f);
         });
 
         viewPager2.setPageTransformer(compositePageTransformer);
@@ -304,6 +288,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onResume(){
+        super.onResume();
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser == null) {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
@@ -337,7 +322,6 @@ public class MainActivity extends AppCompatActivity {
 
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
 
-        // Lấy chiều cao của màn hình thiết bị
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int screenHeight = displayMetrics.heightPixels;

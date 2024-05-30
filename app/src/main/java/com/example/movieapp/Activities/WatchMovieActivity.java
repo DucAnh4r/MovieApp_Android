@@ -103,26 +103,19 @@ public class WatchMovieActivity extends AppCompatActivity {
         swipeRefreshLayout.setOnRefreshListener(this::reloadContent);
         popupMenu = new PopupMenu(this, bt_setting);
         popupMenu.inflate(R.menu.setting_movie_popup);
-        // Khi EditText được tap vào
         searchBox.setOnFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) {
-                // Hiển thị lớp mờ
                 overlay.setVisibility(View.VISIBLE);
 
-                // Đưa SearchEpisodesView lên trước bằng cách thay đổi thứ tự Z
                 searchEpisodesView.bringToFront();
 
-                // Đảm bảo thứ tự Z cao hơn
                 ViewCompat.setZ(searchEpisodesView, ViewCompat.getZ(overlay) + 1);
 
-
-                // Thay đổi các ràng buộc để đưa SearchEpisodesView lên giữa màn hình
                 ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) searchEpisodesView.getLayoutParams();
                 params.topToTop = ConstraintLayout.LayoutParams.PARENT_ID;
                 params.bottomToBottom = ConstraintLayout.LayoutParams.PARENT_ID;
                 searchEpisodesView.setLayoutParams(params);
 
-                // Tuỳ chọn hiển thị bàn phím
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.showSoftInput(searchBox, InputMethodManager.SHOW_IMPLICIT);
 
@@ -130,17 +123,14 @@ public class WatchMovieActivity extends AppCompatActivity {
                 cancelButton.setVisibility(View.VISIBLE);
                 resetButton.setVisibility(View.GONE);
             } else {
-                // Ẩn lớp mờ
                 overlay.setVisibility(View.GONE);
 
                 okButton.setVisibility(View.GONE);
                 cancelButton.setVisibility(View.GONE);
                 resetButton.setVisibility(View.VISIBLE);
-                // Ẩn bàn phím
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(searchBox.getWindowToken(), 0);
 
-                // Khôi phục vị trí ban đầu của SearchEpisodesView
                 ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) searchEpisodesView.getLayoutParams();
                 layoutParams.topToTop = ConstraintLayout.LayoutParams.UNSET;
                 layoutParams.bottomToBottom = ConstraintLayout.LayoutParams.UNSET;
@@ -167,7 +157,7 @@ public class WatchMovieActivity extends AppCompatActivity {
                 }
                 searchBox.clearFocus();
             }
-            return true; // Trả về true để chỉ ra rằng sự kiện đã được xử lý
+            return true;
         });
 
         okButton.setOnClickListener(v -> {
@@ -177,7 +167,6 @@ public class WatchMovieActivity extends AppCompatActivity {
                 resetButton.performClick();
                 return;
             }
-            // Thực hiện tìm kiếm
             noMatchingEpisodesText.setVisibility(View.GONE);
             episodeRecyclerView.setVisibility(View.VISIBLE);
             searchEpisodes(currentSearchValue);
@@ -202,10 +191,8 @@ public class WatchMovieActivity extends AppCompatActivity {
     }
 
     private void searchEpisodes(String currentValue) {
-        // Tạo một instance mới của EpisodeSearchAdapter với giá trị tìm kiếm
         EpisodeSearchAdapter searchAdapter = new EpisodeSearchAdapter(WatchMovieActivity.this, episodes, idFilm, currentValue);
 
-        // Gán adapter mới vào RecyclerView
         episodeRecyclerView.setAdapter(searchAdapter);
         searchBox.setText(currentValue);
         episodeRecyclerView.post(() -> {
@@ -333,8 +320,6 @@ public class WatchMovieActivity extends AppCompatActivity {
             episodeCountTextView.setVisibility(View.VISIBLE);
             episodeRecyclerView.setVisibility(View.VISIBLE);
             params.setMargins(0,20,0,0);
-
-
         }
         playerView.setLayoutParams(params);
     }
@@ -598,7 +583,6 @@ public class WatchMovieActivity extends AppCompatActivity {
         }
     }
 
-
     private void initView() {
         titleTxt = findViewById(R.id.movieName);
         progressBar = findViewById(R.id.progressBarWatch);
@@ -629,17 +613,14 @@ public class WatchMovieActivity extends AppCompatActivity {
 
         if (!isNetworkConnected()) {
             Toast.makeText(this, "Không có kết nối mạng", Toast.LENGTH_SHORT).show();
-            // Thực hiện các hành động khác nếu cần khi không có kết nối mạng
         }
         if (isMobileDataConnected()) {
             Toast.makeText(this, "Đang sử dụng dữ liệu di động", Toast.LENGTH_SHORT).show();
-            // Thực hiện các hành động khác nếu cần khi sử dụng dữ liệu di động
         }
 
         currentEpisodeName = getIntent().getStringExtra("currentEpisodeName");
         idFilm = getIntent().getStringExtra("slug");
         movieType = getIntent().getStringExtra("movieType");
-
 
         backImg.setOnClickListener(v -> finish());
         bt_fullscreen.setOnClickListener(view -> fullscreenBtn());
