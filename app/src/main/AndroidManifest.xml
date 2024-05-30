@@ -61,7 +61,9 @@
             android:exported="false"
             android:foregroundServiceType="location|dataSync" />
 
-        <activity android:name=".Activities.DetailActivity2" />
+        <activity
+            android:name=".Activities.DetailActivity2"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".Activities.NotificationActivity"
             android:exported="false" />
@@ -80,13 +82,16 @@
         <activity
             android:name=".Activities.SearchBarActivity"
             android:exported="false"
-            tools:ignore="Instantiatable" />
+            tools:ignore="Instantiatable"
+            android:windowSoftInputMode="adjustNothing"/>
         <activity
             android:name=".Activities.MovieTypeActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.SearchPageActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustNothing"
+            />
         <activity
             android:name=".Activities.DetailActivity"
             android:configChanges="orientation|screenSize"
@@ -106,7 +111,8 @@
         <activity
             android:name=".Activities.MainActivity"
             android:configChanges="orientation|screenSize"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".Activities.IntroActivity"
             android:configChanges="orientation|screenSize"
