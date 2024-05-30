@@ -96,6 +96,7 @@
             android:name=".Activities.WatchMovieActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="unspecified" />
         <activity
             android:name=".Activities.SignUpActivity"

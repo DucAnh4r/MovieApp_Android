@@ -89,6 +89,7 @@ public class WatchMovieActivity extends AppCompatActivity {
     private View overlay;
     AppCompatButton okButton, cancelButton, resetButton;
     private List<Episode> episodes;
+    private List<Episode> originalEpisodes;
     private TextView noMatchingEpisodesText;
     private String currentSearchValue;
     @SuppressLint("ClickableViewAccessibility")
@@ -320,7 +321,6 @@ public class WatchMovieActivity extends AppCompatActivity {
             episodeCountTextView.setVisibility(View.VISIBLE);
             episodeRecyclerView.setVisibility(View.VISIBLE);
             searchEpisodesView.setVisibility(View.VISIBLE);
-
             params.setMargins(0,20,0,0);
         }
         playerView.setLayoutParams(params);
