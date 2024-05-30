@@ -162,7 +162,9 @@ public class WatchMovieActivity extends AppCompatActivity {
             float touchY = event.getRawY();
 
             if (touchX < x || touchX > x + width || touchY < y || touchY > y + height) {
-                searchBox.setText(currentSearchValue);
+                if(currentSearchValue!=null){
+                    searchBox.setText(currentSearchValue);
+                }
                 searchBox.clearFocus();
             }
             return true; // Trả về true để chỉ ra rằng sự kiện đã được xử lý
@@ -183,7 +185,9 @@ public class WatchMovieActivity extends AppCompatActivity {
 
         cancelButton.setOnClickListener(v -> {
             searchBox.clearFocus();
-            searchBox.setText(currentSearchValue);
+            if(currentSearchValue!=null){
+                searchBox.setText(currentSearchValue);
+            }
         });
 
         resetButton.setOnClickListener(v -> {
@@ -191,6 +195,7 @@ public class WatchMovieActivity extends AppCompatActivity {
             episodeAdapter.setCurrentEpisodeName(currentEpisodeName);
             episodeRecyclerView.setAdapter(episodeAdapter);
             searchBox.setText("");
+            currentSearchValue = null;
             noMatchingEpisodesText.setVisibility(View.GONE);
             episodeRecyclerView.setVisibility(View.VISIBLE);
         });

@@ -1,9 +1,13 @@
 package com.example.movieapp.Activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
@@ -13,6 +17,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -49,6 +54,9 @@ public class MainActivity extends AppCompatActivity {
     private Handler slideHandle = new Handler();
     private SwipeRefreshLayout swipeRefreshLayout;
     private String userId;
+    private View overlayView;
+    private SearchBarActivity searchBar;
+    private EditText searchInput;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,20 +69,25 @@ public class MainActivity extends AppCompatActivity {
         sendRequestSeriesMovies();
         sendRequestCartoon();
 
-        SearchBarActivity searchBar = findViewById(R.id.searchBar);
-        EditText editText = searchBar.findViewById(R.id.searchInput);
+        searchBar = findViewById(R.id.searchBar);
+        searchInput = searchBar.getSearchInput();
 
-        editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
-        editText.setOnEditorActionListener((v, actionId, event) -> {
+        setupSearchBarEvents();
+
+
+
+        overlayView.setOnClickListener(v -> {
+            searchBar.hideKeyboardAndRecyclerView();
+        });
+
+
+        searchInput.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        searchInput.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                String searchData = editText.getText().toString().trim();
+                String searchData = searchInput.getText().toString().trim();
                 if(searchData.isEmpty()){
                     return false;
                 }
-
-
-
-
                 Intent intent = new Intent(MainActivity.this, SearchPageActivity.class);
                 intent.putExtra("searchData", searchData);
                 startActivity(intent);
@@ -89,6 +102,47 @@ public class MainActivity extends AppCompatActivity {
         MoreBtn(cartoonBtn, "hoathinh");
 
         swipeRefreshLayout.setOnRefreshListener(this::reloadContent);
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private void setupSearchBarEvents() {
+        searchInput.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                overlayView.setVisibility(View.VISIBLE);
+                searchBar.loadSearchHistoryFromFirebase();
+                searchBar.getSearchHistoryRecyclerView().setVisibility(View.VISIBLE);
+
+            } else {
+                overlayView.setVisibility(View.GONE);
+                searchBar.getSearchHistoryRecyclerView().setVisibility(View.GONE);
+            }
+        });
+
+        searchInput.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                searchBar.hideKeyboardAndRecyclerView();
+                return true;
+            }
+            return false;
+        });
+
+        findViewById(R.id.mainLayout).setOnTouchListener((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_DOWN && searchBar.getSearchHistoryRecyclerView().getVisibility() == View.VISIBLE) {
+                searchBar.hideKeyboardAndRecyclerView();
+            }
+            return false;
+        });
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if (event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+            if (searchInput.hasFocus()) {
+                searchInput.clearFocus();
+                return true;
+            }
+        }
+        return super.dispatchKeyEvent(event);
     }
 
     private void reloadContent() {
@@ -193,7 +247,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void banners() {
         List<SliderItems> sliderItems = new ArrayList<>();
+
         sliderItems.add(new SliderItems(R.drawable.slider1, "the-chien-1917"));
+        sliderItems.add(new SliderItems(R.drawable.slider99, "the-chien-1917"));
         sliderItems.add(new SliderItems(R.drawable.slider2, "the-avengers-biet-doi-sieu-anh-hung"));
         sliderItems.add(new SliderItems(R.drawable.slider3, "captain-marvel-dai-uy-marvel"));
         sliderItems.add(new SliderItems(R.drawable.slider4, "the-gioi-bi-an"));
@@ -281,6 +337,15 @@ public class MainActivity extends AppCompatActivity {
 
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
 
+        // Lấy chiều cao của màn hình thiết bị
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int screenHeight = displayMetrics.heightPixels;
+        overlayView = findViewById(R.id.overlayView);
+        ConstraintLayout.LayoutParams overlayParams = (ConstraintLayout.LayoutParams) overlayView.getLayoutParams();
+
+        overlayParams.height = screenHeight;
+        overlayView.setLayoutParams(overlayParams);
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
             userId = currentUser.getUid();

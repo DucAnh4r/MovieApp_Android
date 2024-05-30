@@ -164,7 +164,9 @@ public class DetailActivity2 extends AppCompatActivity {
             float touchY = event.getRawY();
 
             if (touchX < x || touchX > x + width || touchY < y || touchY > y + height) {
-                searchBox.setText(currentSearchValue);
+                if(currentSearchValue!=null){
+                    searchBox.setText(currentSearchValue);
+                }
                 searchBox.clearFocus();
             }
             return true; // Trả về true để chỉ ra rằng sự kiện đã được xử lý
@@ -185,13 +187,16 @@ public class DetailActivity2 extends AppCompatActivity {
 
         cancelButton.setOnClickListener(v -> {
             searchBox.clearFocus();
-            searchBox.setText(currentSearchValue);
+            if(currentSearchValue!=null){
+                searchBox.setText(currentSearchValue);
+            }
         });
 
         resetButton.setOnClickListener(v -> {
             EpisodeAdapter episodeAdapter = new EpisodeAdapter(DetailActivity2.this, episodes, idFilm);
             episodeRecyclerView.setAdapter(episodeAdapter);
             searchBox.setText("");
+            currentSearchValue = null;
             noMatchingEpisodesText.setVisibility(View.GONE);
             episodeRecyclerView.setVisibility(View.VISIBLE);
         });
@@ -283,6 +288,8 @@ public class DetailActivity2 extends AppCompatActivity {
                         .into(moviePic);
             }
 
+            favBtn.setVisibility(View.VISIBLE);
+            listBtn.setVisibility(View.VISIBLE);
             titleTxt.setText(item.getMovie().getName());
             titleEngTxt.setText(item.getMovie().getOriginName());
             movieName = item.getMovie().getName().toString();
@@ -299,6 +306,17 @@ public class DetailActivity2 extends AppCompatActivity {
             movieTimeTxt.setText(item.getMovie().getTime());
             movieSummaryInfo.setText(item.getMovie().getContent());
             slug = item.getMovie().getSlug().toString();
+
+            if (titleTxt.getText().length() < 50) {
+                ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) summary.getLayoutParams();
+                params.topToBottom = moviePic.getId();
+                summary.setLayoutParams(params);
+            }
+            else {
+                ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) summary.getLayoutParams();
+                params.topToBottom = movieTimeTxt.getId();
+                summary.setLayoutParams(params);
+            }
 
             List<String> actorNames = item.getMovie().getActor();
             List<ActorModel> actors = new ArrayList<>();
@@ -385,8 +403,10 @@ public class DetailActivity2 extends AppCompatActivity {
                     }
                     favBtn.setImageResource(R.drawable.fav_act);
                     favBtn.setTag("active");
+                    Toast.makeText(DetailActivity2.this, "Đã lưu vào danh sách yêu thích", Toast.LENGTH_SHORT).show();
+
                 } else {
-                    Toast.makeText(DetailActivity2.this, "Không lưu được dữ liệu", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DetailActivity2.this, "Thêm vào danh sách yêu thích thất bại", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
@@ -426,8 +446,10 @@ public class DetailActivity2 extends AppCompatActivity {
                     }
                     listBtn.setColorFilter(getResources().getColor(R.color.yellow));
                     listBtn.setTag("active");
+                    Toast.makeText(DetailActivity2.this, "Đã lưu vào danh sách xem sau", Toast.LENGTH_SHORT).show();
+
                 } else {
-                    Toast.makeText(DetailActivity2.this, "Không lưu được dữ liệu", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DetailActivity2.this, "Thêm vào danh sách xem sau thất bại", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
@@ -451,6 +473,7 @@ public class DetailActivity2 extends AppCompatActivity {
                             userRef.child("favouriteMovies").child(movieKey).removeValue();
                             favBtn.setImageResource(R.drawable.fav);
                             favBtn.setTag("inactive");
+                            Toast.makeText(DetailActivity2.this, "Đã xóa khỏi danh sách yêu thích", Toast.LENGTH_SHORT).show();
 
                             String messageNodeKey = userRef.child("message").push().getKey();
                             if (!TextUtils.isEmpty(messageNodeKey)) {
@@ -491,6 +514,7 @@ public class DetailActivity2 extends AppCompatActivity {
                             userRef.child("watchList").child(movieKey).removeValue();
                             listBtn.setColorFilter(getResources().getColor(R.color.white));
                             listBtn.setTag("inactive");
+                            Toast.makeText(DetailActivity2.this, "Đã xóa khỏi danh sách xem sau", Toast.LENGTH_SHORT).show();
 
                             String messageNodeKey = userRef.child("message").push().getKey();
                             if (!TextUtils.isEmpty(messageNodeKey)) {
@@ -572,11 +596,15 @@ public class DetailActivity2 extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBarDetail);
         scrollView = findViewById(R.id.scrollView2);
         pic2 = findViewById(R.id.picDetail);
+        moviePic = findViewById(R.id.imageView8);
         movieTimeTxt = findViewById(R.id.movieTime);
         movieSummaryInfo = findViewById(R.id.movieSummary);
         ImageView backImg = findViewById(R.id.backimg);
 
         summary = findViewById(R.id.textView22);
+
+
+
         actors = findViewById(R.id.textView24);
         directors = findViewById(R.id.textView17);
 
@@ -590,7 +618,6 @@ public class DetailActivity2 extends AppCompatActivity {
         noMatchingEpisodesText = findViewById(R.id.noMatchingEpisodesText);
 
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
-        moviePic = findViewById(R.id.imageView8);
         backImg.setOnClickListener(v -> finish());
 
         Button playBtn = findViewById(R.id.playBtn);

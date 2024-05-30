@@ -1,12 +1,13 @@
 package com.example.movieapp.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.movieapp.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -18,6 +19,7 @@ public class SignUpActivity extends AppCompatActivity {
     private Button signUpBtn;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
+    private TextView loginTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,13 @@ public class SignUpActivity extends AppCompatActivity {
         passTxt = findViewById(R.id.passTxt);
         cfPassTxt = findViewById(R.id.cfPassTxt);
         signUpBtn = findViewById(R.id.signUpBtn);
+        loginTxt = findViewById(R.id.textView8);
+
+        loginTxt.setOnClickListener(v -> {
+            Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            startActivity(intent);
+        });
 
         signUpBtn.setOnClickListener(v -> {
             String userName = userNameTxt.getText().toString().trim();

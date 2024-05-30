@@ -4,7 +4,10 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
@@ -17,6 +20,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -52,7 +56,9 @@ public class SearchPageActivity extends AppCompatActivity {
     private AppCompatButton more;
     private int maxItemCount = 10;
     private String userId;
-
+    private View overlaySearchPage;
+    private SearchBarActivity searchBar;
+    private EditText searchInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,33 +72,46 @@ public class SearchPageActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra("searchData")) {
             searchData = intent.getStringExtra("searchData");
-            //Lưu lịch sử tìm kiếm
+            // Lưu lịch sử tìm kiếm
             saveSearchedData(searchData, userId);
             searchIntroImg.setVisibility(View.GONE);
             searchIntroTxt.setVisibility(View.GONE);
             message.setVisibility(View.VISIBLE);
             loading1.setVisibility(View.VISIBLE);
             sendRequestSearchMovies();
-
-        }
-        else {
+        } else {
             searchIntroImg.setVisibility(View.VISIBLE);
             searchIntroTxt.setVisibility(View.VISIBLE);
             message.setVisibility(View.GONE);
             loading1.setVisibility(View.GONE);
         }
 
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) EditText editText = findViewById(R.id.searchInput);
-        editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
-        editText.setOnEditorActionListener((v, actionId, event) -> {
+        searchBar = findViewById(R.id.searchBar);
+        searchInput = searchBar.getSearchInput();
 
+        // Lấy chiều cao của màn hình thiết bị
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int screenHeight = displayMetrics.heightPixels;
+        overlaySearchPage = findViewById(R.id.overlaySearchPage);
+        ConstraintLayout.LayoutParams overlayParams = (ConstraintLayout.LayoutParams) overlaySearchPage.getLayoutParams();
+
+        overlayParams.height = screenHeight;
+        overlaySearchPage.setLayoutParams(overlayParams);
+
+        setupSearchBarEvents();
+
+        overlaySearchPage.setOnClickListener(v -> {
+            searchBar.hideKeyboardAndRecyclerView();
+        });
+
+        searchInput.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        searchInput.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                String searchData = editText.getText().toString().trim();
-                if(searchData.isEmpty()){
+                String searchData = searchInput.getText().toString().trim();
+                if (searchData.isEmpty()) {
                     return false;
                 }
-
-
                 Intent newIntent = new Intent(SearchPageActivity.this, SearchPageActivity.class);
                 newIntent.putExtra("searchData", searchData);
                 startActivity(newIntent);
@@ -105,6 +124,46 @@ public class SearchPageActivity extends AppCompatActivity {
             maxItemCount += 10;
             sendRequestSearchMovies();
         });
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private void setupSearchBarEvents() {
+        searchInput.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                overlaySearchPage.setVisibility(View.VISIBLE);
+                searchBar.loadSearchHistoryFromFirebase();
+                searchBar.getSearchHistoryRecyclerView().setVisibility(View.VISIBLE);
+            } else {
+                overlaySearchPage.setVisibility(View.GONE);
+                searchBar.getSearchHistoryRecyclerView().setVisibility(View.GONE);
+            }
+        });
+
+        searchInput.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                searchBar.hideKeyboardAndRecyclerView();
+                return true;
+            }
+            return false;
+        });
+
+        findViewById(R.id.searchLayout).setOnTouchListener((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_DOWN && searchBar.getSearchHistoryRecyclerView().getVisibility() == View.VISIBLE) {
+                searchBar.hideKeyboardAndRecyclerView();
+            }
+            return false;
+        });
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if (event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+            if (searchInput.hasFocus()) {
+                searchInput.clearFocus();
+                return true;
+            }
+        }
+        return super.dispatchKeyEvent(event);
     }
 
     private void sendRequestSearchMovies() {
@@ -121,9 +180,7 @@ public class SearchPageActivity extends AppCompatActivity {
                 more.setText("Xem thêm");
             } else if (items.getData().getParams().getPagination().getTotalItems() <= 10 && items.getData().getParams().getPagination().getTotalItems() > 0) {
                 message.setText("Kết quả của từ khóa: " + searchData);
-            }
-            else if(items.getData().getParams().getPagination().getTotalItems() == 0)
-            {
+            } else if (items.getData().getParams().getPagination().getTotalItems() == 0) {
                 message.setText("Không có kết quả của từ khóa: " + searchData);
             }
 
@@ -167,8 +224,7 @@ public class SearchPageActivity extends AppCompatActivity {
         });
     }
 
-
-    private void initView(){
+    private void initView() {
         recyclerviewSearchMovies = findViewById(R.id.SearchMovieView);
         recyclerviewSearchMovies.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         loading1 = findViewById(R.id.progressBar1);
@@ -176,10 +232,11 @@ public class SearchPageActivity extends AppCompatActivity {
         searchIntroImg = findViewById(R.id.imageView7);
         searchIntroTxt = findViewById(R.id.textView6);
 
+
+
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
             userId = currentUser.getUid();
-
         } else {
             userId = null;
         }
