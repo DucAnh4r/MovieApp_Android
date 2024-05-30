@@ -47,7 +47,6 @@ public class BottomNavigationActivity extends ConstraintLayout {
         if (!(getContext() instanceof MainActivity)) {
             Context context = getContext();
             if (context instanceof MainActivity) {
-                // MainActivity is already visible, do nothing
                 return;
             }
             Intent intent = new Intent(context, MainActivity.class);
@@ -60,7 +59,6 @@ public class BottomNavigationActivity extends ConstraintLayout {
         if (!(getContext() instanceof SearchPageActivity)) {
             Context context = getContext();
             if (context instanceof SearchPageActivity) {
-                // MainActivity is already visible, do nothing
                 return;
             }
             Intent intent = new Intent(context, SearchPageActivity.class);
@@ -73,7 +71,6 @@ public class BottomNavigationActivity extends ConstraintLayout {
         if (!(getContext() instanceof NotificationActivity)) {
             Context context = getContext();
             if (context instanceof NotificationActivity) {
-                // MainActivity is already visible, do nothing
                 return;
             }
             Intent intent = new Intent(context, NotificationActivity.class);
@@ -86,7 +83,6 @@ public class BottomNavigationActivity extends ConstraintLayout {
         if (!(getContext() instanceof ProfileActivity)) {
             Context context = getContext();
             if (context instanceof ProfileActivity) {
-                // MainActivity is already visible, do nothing
                 return;
             }
             Intent intent = new Intent(context, ProfileActivity.class);
