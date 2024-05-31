@@ -1,5 +1,6 @@
 package com.example.movieapp.Activities;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -167,20 +168,30 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivityForResult(intent, 1);
                 return true;
             } else if (item.getItemId() == R.id.menu_logout) {
-                mAuth.signOut();
-                SharedPreferences preferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putBoolean("isLoggedIn", false);
-                editor.putString("userId", null);
-                editor.apply();
+                new AlertDialog.Builder(ProfileActivity.this)
+                        .setTitle("Xác nhận đăng xuất")
+                        .setMessage("Bạn có chắc chắn muốn đăng xuất?")
+                        .setPositiveButton("Đồng ý", (dialog, which) -> {
+                            mAuth.signOut();
+                            SharedPreferences preferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = preferences.edit();
+                            editor.putBoolean("isLoggedIn", false);
+                            editor.putString("userId", null);
+                            editor.apply();
 
-                signOutFromGoogle();
-                signOutFromFacebook();
+                            signOutFromGoogle();
+                            signOutFromFacebook();
+                        })
+                        .setNegativeButton("Hủy", (dialog, which) -> {
+
+                        })
+                        .show();
                 return true;
             } else {
                 return false;
             }
         });
+
         popupMenu.show();
     }
 }

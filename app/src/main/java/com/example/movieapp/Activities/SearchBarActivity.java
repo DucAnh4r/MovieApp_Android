@@ -96,11 +96,12 @@ public class SearchBarActivity extends FrameLayout {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    // Xử lý lỗi
+                    // Handle error
                 }
             });
         }
     }
+
 
     public EditText getSearchInput() {
         return searchInput;

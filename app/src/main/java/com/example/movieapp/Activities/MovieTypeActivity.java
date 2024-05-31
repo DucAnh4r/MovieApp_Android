@@ -51,19 +51,19 @@ public class MovieTypeActivity extends AppCompatActivity {
         type = receivedIntent.getStringExtra("Type");
         switch (type) {
             case "new":
-                movieType.setText("Latest movies");
+                movieType.setText("Phim mới cập nhật");
                 sendRequestNewestMovies();
                 break;
             case "single":
-                movieType.setText("Latest single");
+                movieType.setText("Phim lẻ");
                 sendRequestSingleMovies();
                 break;
             case "series":
-                movieType.setText("Latest series");
+                movieType.setText("Phim bộ");
                 sendRequestSeriesMovies();
                 break;
             case "hoathinh":
-                movieType.setText("Latest cartoon");
+                movieType.setText("Phim hoạt hình");
                 sendRequestCartoon();
                 break;
         }

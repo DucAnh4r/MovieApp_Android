@@ -263,9 +263,9 @@ public class DetailActivity extends AppCompatActivity {
             titleEngTxt.setText(item.getMovie().getOriginName());
             movieName = item.getMovie().getName().toString();
 
-            summary.setText("Summary");
-            actors.setText("Actors");
-            directors.setText("Directors");
+            summary.setText("Tóm tắt");
+            actors.setText("Diễn viên");
+            directors.setText("Đạo diễn");
 
             // Khởi tạo hình ảnh cho drawable
             Drawable drawable = getResources().getDrawable(R.drawable.time);
@@ -321,7 +321,7 @@ public class DetailActivity extends AppCompatActivity {
                 episodes = item.getEpisodes();
                 if (episodes != null && !episodes.isEmpty()) {
                     TextView textView = findViewById(R.id.episodeCountTextView);
-                    textView.setText("Episodes");
+                    textView.setText("Tập");
                     textView.setVisibility(View.VISIBLE);
                     EpisodeAdapter episodeAdapter = new EpisodeAdapter(this, episodes, idFilm);
                     episodeRecyclerView.setLayoutManager(new LinearLayoutManager(this));

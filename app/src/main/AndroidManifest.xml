@@ -25,7 +25,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieApp"
         tools:targetApi="31">
-
+        <activity
+            android:name=".Activities.SearchHistoryPageActivity"
+            android:exported="false" />
         <activity
             android:name=".Activities.FullScreenImageActivity"
             android:exported="false" />
@@ -63,7 +65,7 @@
 
         <activity
             android:name=".Activities.DetailActivity"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Activities.NotificationActivity"
             android:exported="false" />
@@ -82,22 +84,21 @@
         <activity
             android:name=".Activities.SearchBarActivity"
             android:exported="false"
-            tools:ignore="Instantiatable"
-            android:windowSoftInputMode="adjustNothing"/>
+            android:windowSoftInputMode="adjustNothing"
+            tools:ignore="Instantiatable" />
         <activity
             android:name=".Activities.MovieTypeActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.SearchPageActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustNothing"
-            />
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".Activities.WatchMovieActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="unspecified" />
+            android:screenOrientation="unspecified"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Activities.SignUpActivity"
             android:exported="false" />
@@ -109,7 +110,7 @@
             android:name=".Activities.MainActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Activities.IntroActivity"
             android:configChanges="orientation|screenSize"
@@ -120,7 +121,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>
