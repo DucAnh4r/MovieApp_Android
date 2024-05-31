@@ -1,11 +1,8 @@
 package com.example.movieapp.Activities;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -83,16 +80,13 @@ public class WatchMovieActivity extends AppCompatActivity {
     private float currentSpeed = 1.0f;
     private MenuItem selectedSpeedMenuItem;
     private PopupMenu popupMenu;
-
     private View searchEpisodesView;
     private EditText searchBox;
     private View overlay;
-    AppCompatButton okButton, cancelButton, resetButton;
+    private AppCompatButton okButton, cancelButton, resetButton;
     private List<Episode> episodes;
-    private List<Episode> originalEpisodes;
     private TextView noMatchingEpisodesText;
     private String currentSearchValue;
-    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -326,7 +320,6 @@ public class WatchMovieActivity extends AppCompatActivity {
         playerView.setLayoutParams(params);
     }
 
-
     private void hideSystemUI() {
         View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(
@@ -486,18 +479,6 @@ public class WatchMovieActivity extends AppCompatActivity {
         mRequestQueue.add(mStringRequest);
     }
 
-    private boolean isNetworkConnected() {
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
-    }
-
-    private boolean isMobileDataConnected() {
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo mobileInfo = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-        return mobileInfo != null && mobileInfo.isConnected();
-    }
-
     private void fullscreenBtn() {
         isFullScreen = !isFullScreen;
         adjustPlayerViewSize(isFullScreen);
@@ -612,13 +593,6 @@ public class WatchMovieActivity extends AppCompatActivity {
         noMatchingEpisodesText = findViewById(R.id.noMatchingEpisodesText);
 
         fastForwardButton = findViewById(R.id.exo_ffwd);
-
-        if (!isNetworkConnected()) {
-            Toast.makeText(this, "Không có kết nối mạng", Toast.LENGTH_SHORT).show();
-        }
-        if (isMobileDataConnected()) {
-            Toast.makeText(this, "Đang sử dụng dữ liệu di động", Toast.LENGTH_SHORT).show();
-        }
 
         currentEpisodeName = getIntent().getStringExtra("currentEpisodeName");
         idFilm = getIntent().getStringExtra("slug");

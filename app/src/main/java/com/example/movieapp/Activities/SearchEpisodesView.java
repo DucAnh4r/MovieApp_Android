@@ -3,10 +3,8 @@ package com.example.movieapp.Activities;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatButton;
 
@@ -41,11 +39,5 @@ public class SearchEpisodesView extends FrameLayout {
         cancelButton = findViewById(R.id.cancel_btn);
         okButton = findViewById(R.id.ok_btn);
         resetButton = findViewById(R.id.reset_btn);
-
-
-
-
-
-
     }
 }

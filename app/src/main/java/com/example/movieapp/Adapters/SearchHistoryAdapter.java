@@ -63,7 +63,6 @@ public class SearchHistoryAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public int getItemCount() {
-        // Add 1 for the "View All" item
         return searchHistoryList.size() + 1;
     }
 

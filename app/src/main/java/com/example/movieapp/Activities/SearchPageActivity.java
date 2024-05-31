@@ -1,6 +1,6 @@
 package com.example.movieapp.Activities;
 
-import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -72,7 +73,6 @@ public class SearchPageActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra("searchData")) {
             searchData = intent.getStringExtra("searchData");
-            // Lưu lịch sử tìm kiếm
             saveSearchedData(searchData, userId);
             searchIntroImg.setVisibility(View.GONE);
             searchIntroTxt.setVisibility(View.GONE);
@@ -89,21 +89,20 @@ public class SearchPageActivity extends AppCompatActivity {
         searchBar = findViewById(R.id.searchBar);
         searchInput = searchBar.getSearchInput();
 
-        // Lấy chiều cao của màn hình thiết bị
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int screenHeight = displayMetrics.heightPixels;
         overlaySearchPage = findViewById(R.id.overlaySearchPage);
         ConstraintLayout.LayoutParams overlayParams = (ConstraintLayout.LayoutParams) overlaySearchPage.getLayoutParams();
 
-        overlayParams.height = screenHeight;
-        overlaySearchPage.setLayoutParams(overlayParams);
+//        overlayParams.height = screenHeight;
+//        overlaySearchPage.setLayoutParams(overlayParams);
 
         setupSearchBarEvents();
 
-        overlaySearchPage.setOnClickListener(v -> {
-            searchBar.hideKeyboardAndRecyclerView();
-        });
+//        overlaySearchPage.setOnClickListener(v -> {
+//            searchBar.hideKeyboardAndRecyclerView();
+//        });
 
         searchInput.setImeOptions(EditorInfo.IME_ACTION_DONE);
         searchInput.setOnEditorActionListener((v, actionId, event) -> {
@@ -126,17 +125,24 @@ public class SearchPageActivity extends AppCompatActivity {
         });
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     private void setupSearchBarEvents() {
-        searchInput.setOnFocusChangeListener((v, hasFocus) -> {
-            if (hasFocus) {
-                overlaySearchPage.setVisibility(View.VISIBLE);
-                searchBar.loadSearchHistoryFromFirebase();
-                searchBar.getSearchHistoryRecyclerView().setVisibility(View.VISIBLE);
-            } else {
-                overlaySearchPage.setVisibility(View.GONE);
-                searchBar.getSearchHistoryRecyclerView().setVisibility(View.GONE);
+        searchInput.setOnClickListener(v -> {
+            overlaySearchPage.setVisibility(View.VISIBLE);
+            searchBar.loadSearchHistoryFromFirebase();
+            searchBar.getSearchHistoryRecyclerView().setVisibility(View.VISIBLE);
+        });
+
+        overlaySearchPage.setOnTouchListener((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                if (!isTouchInsideView(event, searchBar)) {
+                    overlaySearchPage.setVisibility(View.GONE);
+                    searchBar.getSearchHistoryRecyclerView().setVisibility(View.GONE);
+
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(searchInput.getWindowToken(), 0);
+                }
             }
+            return true;
         });
 
         searchInput.setOnEditorActionListener((v, actionId, event) -> {
@@ -153,6 +159,20 @@ public class SearchPageActivity extends AppCompatActivity {
             }
             return false;
         });
+    }
+
+    private boolean isTouchInsideView(MotionEvent event, View view) {
+        int[] location = new int[2];
+        view.getLocationOnScreen(location);
+        int x = location[0];
+        int y = location[1];
+        int width = view.getWidth();
+        int height = view.getHeight();
+
+        float touchX = event.getRawX();
+        float touchY = event.getRawY();
+
+        return touchX >= x && touchX <= x + width && touchY >= y && touchY <= y + height;
     }
 
     @Override
@@ -231,8 +251,6 @@ public class SearchPageActivity extends AppCompatActivity {
         message = findViewById(R.id.message);
         searchIntroImg = findViewById(R.id.imageView7);
         searchIntroTxt = findViewById(R.id.textView6);
-
-
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {

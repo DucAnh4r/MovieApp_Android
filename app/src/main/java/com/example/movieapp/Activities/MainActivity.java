@@ -1,11 +1,13 @@
 package com.example.movieapp.Activities;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -300,6 +303,18 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+    }
+
+    private boolean isMobileDataConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo mobileInfo = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        return mobileInfo != null && mobileInfo.isConnected();
+    }
+
        private void initView(){
         viewPager2 = findViewById(R.id.viewpagerSlider);
         recyclerviewNewestMovies = findViewById(R.id.NewestMovieView);
@@ -321,6 +336,13 @@ public class MainActivity extends AppCompatActivity {
         cartoonBtn = findViewById(R.id.moreCartoon_btn);
 
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
+
+           if (!isNetworkConnected()) {
+               Toast.makeText(this, "Không có kết nối mạng, vui lòng thử lại sau", Toast.LENGTH_SHORT).show();
+           }
+           if (isMobileDataConnected()) {
+               Toast.makeText(this, "Đang sử dụng dữ liệu di động", Toast.LENGTH_SHORT).show();
+           }
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
