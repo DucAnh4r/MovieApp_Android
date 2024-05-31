@@ -15,7 +15,7 @@
         android:paddingTop="20dp"
         android:paddingBottom="20dp"
         android:paddingEnd="20dp"
-        android:text="History"
+        android:text="Lịch sử xem"
         android:textColor="@color/yellow"
         android:textSize="30sp"
         android:textStyle="bold"

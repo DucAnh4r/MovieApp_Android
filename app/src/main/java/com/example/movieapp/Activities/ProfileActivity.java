@@ -77,9 +77,9 @@ public class ProfileActivity extends AppCompatActivity {
                         fav.setGravity(Gravity.CENTER);
                         movieWatch.setGravity(Gravity.CENTER);
                         watchList.setGravity(Gravity.CENTER);
-                        fav.setText(HtmlCompat.fromHtml("FAVOURITES<br><strong>" + favouriteCount, HtmlCompat.FROM_HTML_MODE_LEGACY));
-                        movieWatch.setText(HtmlCompat.fromHtml("MOVIES<br><strong>" + watchCount, HtmlCompat.FROM_HTML_MODE_LEGACY));
-                        watchList.setText(HtmlCompat.fromHtml("WATCHLIST<br><strong>" + listCount, HtmlCompat.FROM_HTML_MODE_LEGACY));
+                        fav.setText(HtmlCompat.fromHtml("Yêu thích<br><strong>" + favouriteCount, HtmlCompat.FROM_HTML_MODE_LEGACY));
+                        movieWatch.setText(HtmlCompat.fromHtml("Phim đã xem<br><strong>" + watchCount, HtmlCompat.FROM_HTML_MODE_LEGACY));
+                        watchList.setText(HtmlCompat.fromHtml("Xem sau<br><strong>" + listCount, HtmlCompat.FROM_HTML_MODE_LEGACY));
 
                         if (dataSnapshot.hasChild("avatarUrl")) {
                             String avatarUrl = dataSnapshot.child("avatarUrl").getValue(String.class);

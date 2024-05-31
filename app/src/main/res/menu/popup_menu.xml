@@ -2,8 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menu_edit"
-        android:title="Edit" />
+        android:title="Chỉnh sửa thông tin cá nhân" />
     <item
         android:id="@+id/menu_logout"
-        android:title="Logout" />
+        android:title="Đăng xuất" />
 </menu>

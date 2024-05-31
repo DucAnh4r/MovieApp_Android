@@ -171,7 +171,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 user.updateEmail(userEmail)
                         .addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
-                                Toast.makeText(this, "Email updated successfully", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(this, "Chỉnh sửa thông tin cá nhân thành công", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(this, "Failed to update email: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }

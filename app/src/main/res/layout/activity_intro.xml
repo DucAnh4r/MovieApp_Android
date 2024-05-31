@@ -24,7 +24,7 @@
                     android:id="@+id/imageView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/intro_pic"
+                    android:src="@drawable/intro_pic2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -32,7 +32,7 @@
                 <ImageView
                     android:id="@+id/imageView2"
                     android:layout_width="0dp"
-                    android:layout_height="100dp"
+                    android:layout_height="500dp"
                     android:src="@drawable/gradient_background"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -53,7 +53,7 @@
                     android:id="@+id/textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Discover Your"
+                    android:text="Khám phá"
                     android:textColor="@color/white"
                     android:textSize="27sp" />
 
@@ -61,15 +61,15 @@
                     android:id="@+id/textView2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Favourite Show"
+                    android:text="Những bộ phim yêu thích của bạn"
                     android:textColor="@color/orange"
-                    android:textSize="27dp" />
+                    android:textSize="20dp" />
 
                 <TextView
                     android:id="@+id/textView3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Watch Now or Watch Later"
+                    android:text="Xem ngay hoặc xem sau"
                     android:textColor="@color/white"
                     android:textSize="27dp" />
 
@@ -77,7 +77,7 @@
                     android:id="@+id/textView4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="you can browse movies and shows by genre, search for specific title, or check out our recommendation for you"
+                    android:text="Đắm chìm vào thế giới điện ảnh với ứng dụng xem phim tuyệt vời của chúng tôi. Với nhiều chức năng tiện lợi đem lại trải nghiệm xem phim hoàn toàn mới. Đăng nhập, đăng ký một cách dễ dàng!!! "
                     android:textColor="#9F9A9A"
                     android:textSize="17dp" />
 
@@ -88,7 +88,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/orange_button_background"
-                    android:text="Get Stared"
+                    android:text="Bắt đầu ngay"
                     android:textColor="@color/white"
                     android:textSize="18dp" />
             </LinearLayout>
