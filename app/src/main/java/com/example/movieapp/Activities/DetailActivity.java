@@ -40,6 +40,8 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.example.movieapp.Adapters.ActorsListAdapter;
+import com.example.movieapp.Adapters.DirectorsListAdapter;
 import com.example.movieapp.Adapters.EpisodeAdapter;
 import com.example.movieapp.Adapters.EpisodeSearchAdapter;
 import com.example.movieapp.Domain.ActorModel;
@@ -313,8 +315,8 @@ public class DetailActivity extends AppCompatActivity {
             RecyclerView actorsRecyclerView = findViewById(R.id.actorRecyclerView);
             actorsRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
-//            ActorsListAdapter actorsListAdapter = new ActorsListAdapter(actors);
-//            actorsRecyclerView.setAdapter(actorsListAdapter);
+            ActorsListAdapter actorsListAdapter = new ActorsListAdapter(actors);
+            actorsRecyclerView.setAdapter(actorsListAdapter);
 
 
             List<String> directorNames = item.getMovie().getDirector();
@@ -328,8 +330,8 @@ public class DetailActivity extends AppCompatActivity {
             directorsRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
 
-//            DirectorsListAdapter directorListAdapter = new DirectorsListAdapter(director);
-//            directorsRecyclerView.setAdapter(directorListAdapter);
+            DirectorsListAdapter directorListAdapter = new DirectorsListAdapter(director);
+            directorsRecyclerView.setAdapter(directorListAdapter);
 
             if (item.getMovie().getType().equals("series") || item.getMovie().getType().equals("hoathinh") || item.getMovie().getType().equals("tvshows")) {
                 Button playBtn = findViewById(R.id.playBtn);
