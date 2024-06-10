@@ -98,27 +98,43 @@ public class DetailActivity extends AppCompatActivity {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int screenHeight = displayMetrics.heightPixels;
+
         overlay = findViewById(R.id.overlay);
         ConstraintLayout.LayoutParams overlayParams = (ConstraintLayout.LayoutParams) overlay.getLayoutParams();
         overlayParams.height = screenHeight;
         overlay.setLayoutParams(overlayParams);
+        searchBox.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                overlay.setVisibility(View.VISIBLE);
 
-        searchBox.setOnClickListener(v -> {
-            overlay.setVisibility(View.VISIBLE);
+                searchEpisodesView.bringToFront();
 
-            searchEpisodesView.bringToFront();
+                ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) searchEpisodesView.getLayoutParams();
+                params.topToTop = ConstraintLayout.LayoutParams.PARENT_ID;
+                params.bottomToBottom = ConstraintLayout.LayoutParams.PARENT_ID;
+                searchEpisodesView.setLayoutParams(params);
 
-            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) searchEpisodesView.getLayoutParams();
-            params.topToTop = ConstraintLayout.LayoutParams.PARENT_ID;
-            params.bottomToBottom = ConstraintLayout.LayoutParams.PARENT_ID;
-            searchEpisodesView.setLayoutParams(params);
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(searchBox, InputMethodManager.SHOW_IMPLICIT);
 
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.showSoftInput(searchBox, InputMethodManager.SHOW_IMPLICIT);
+                okButton.setVisibility(View.VISIBLE);
+                cancelButton.setVisibility(View.VISIBLE);
+                resetButton.setVisibility(View.GONE);
+            } else {
+                overlay.setVisibility(View.GONE);
 
-            okButton.setVisibility(View.VISIBLE);
-            cancelButton.setVisibility(View.VISIBLE);
-            resetButton.setVisibility(View.GONE);
+                okButton.setVisibility(View.GONE);
+                cancelButton.setVisibility(View.GONE);
+                resetButton.setVisibility(View.VISIBLE);
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(searchBox.getWindowToken(), 0);
+
+                ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) searchEpisodesView.getLayoutParams();
+                layoutParams.topToTop = ConstraintLayout.LayoutParams.UNSET;
+                layoutParams.bottomToBottom = ConstraintLayout.LayoutParams.UNSET;
+                searchEpisodesView.setLayoutParams(layoutParams);
+
+            }
         });
 
         overlay.setOnTouchListener((v, event) -> {
@@ -133,14 +149,13 @@ public class DetailActivity extends AppCompatActivity {
             float touchY = event.getRawY();
 
             if (touchX < x || touchX > x + width || touchY < y || touchY > y + height) {
-                if (currentSearchValue != null) {
+                if(currentSearchValue!=null){
                     searchBox.setText(currentSearchValue);
                 }
                 searchBox.clearFocus();
             }
             return true;
         });
-
 
         okButton.setOnClickListener(v -> {
             currentSearchValue = searchBox.getText().toString();
@@ -152,22 +167,6 @@ public class DetailActivity extends AppCompatActivity {
             noMatchingEpisodesText.setVisibility(View.GONE);
             episodeRecyclerView.setVisibility(View.VISIBLE);
             searchEpisodes(currentSearchValue);
-
-            overlay.setVisibility(View.GONE);
-
-            okButton.setVisibility(View.GONE);
-            cancelButton.setVisibility(View.GONE);
-            resetButton.setVisibility(View.VISIBLE);
-
-            searchBox.postDelayed(() -> {
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(searchBox.getWindowToken(), 0);
-            }, 100);
-
-            ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) searchEpisodesView.getLayoutParams();
-            layoutParams.topToTop = ConstraintLayout.LayoutParams.UNSET;
-            layoutParams.bottomToBottom = ConstraintLayout.LayoutParams.UNSET;
-            searchEpisodesView.setLayoutParams(layoutParams);
         });
 
         cancelButton.setOnClickListener(v -> {
@@ -175,22 +174,6 @@ public class DetailActivity extends AppCompatActivity {
             if(currentSearchValue!=null){
                 searchBox.setText(currentSearchValue);
             }
-            overlay.setVisibility(View.GONE);
-
-            okButton.setVisibility(View.GONE);
-            cancelButton.setVisibility(View.GONE);
-            resetButton.setVisibility(View.VISIBLE);
-
-            searchBox.postDelayed(() -> {
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(searchBox.getWindowToken(), 0);
-            }, 100);
-
-            ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) searchEpisodesView.getLayoutParams();
-            layoutParams.topToTop = ConstraintLayout.LayoutParams.UNSET;
-            layoutParams.bottomToBottom = ConstraintLayout.LayoutParams.UNSET;
-            searchEpisodesView.setLayoutParams(layoutParams);
-
         });
 
         resetButton.setOnClickListener(v -> {

@@ -1,5 +1,6 @@
 package com.example.movieapp.Activities;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -48,6 +49,7 @@ public class SearchBarActivity extends FrameLayout {
         init(context);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void init(Context context) {
         LayoutInflater inflater = LayoutInflater.from(context);
         inflater.inflate(R.layout.activity_search_bar, this, true);
@@ -76,7 +78,7 @@ public class SearchBarActivity extends FrameLayout {
             DatabaseReference searchHistoryRef = FirebaseDatabase.getInstance().getReference()
                     .child("users").child(currentUser.getUid()).child("searchedData");
 
-            searchHistoryRef.orderByChild("searchTime").limitToLast(5).addListenerForSingleValueEvent(new ValueEventListener() {
+            searchHistoryRef.orderByChild("searchTime").limitToLast(7).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     searchHistoryList.clear();

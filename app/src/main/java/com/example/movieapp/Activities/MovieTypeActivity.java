@@ -4,6 +4,9 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
@@ -11,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,6 +44,9 @@ public class MovieTypeActivity extends AppCompatActivity {
     private TextView movieType;
     private final int initialPage = 1;
     private PaginationAdapter paginationAdapter;
+    private SearchBarActivity searchBar;
+    private View overlayMovieTypePage;
+    private EditText searchInput;
     private String userId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,17 +75,28 @@ public class MovieTypeActivity extends AppCompatActivity {
                 break;
         }
 
+        // Lấy chiều cao của màn hình thiết bị
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int screenHeight = displayMetrics.heightPixels;
+        ConstraintLayout.LayoutParams overlayParams = (ConstraintLayout.LayoutParams) overlayMovieTypePage.getLayoutParams();
 
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) EditText editText = findViewById(R.id.searchInput);
-        editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
-        editText.setOnEditorActionListener((v, actionId, event) -> {
+        overlayParams.height = screenHeight;
+        overlayMovieTypePage.setLayoutParams(overlayParams);
+
+        setupSearchBarEvents();
+
+        overlayMovieTypePage.setOnClickListener(v -> {
+            searchBar.hideKeyboardAndRecyclerView();
+        });
+
+        searchInput.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        searchInput.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                String searchData = editText.getText().toString().trim();
+                String searchData = searchInput.getText().toString().trim();
                 if(searchData.isEmpty()){
                     return false;
                 }
-
-
                 Intent intent = new Intent(MovieTypeActivity.this, SearchPageActivity.class);
                 intent.putExtra("searchData", searchData);
                 startActivity(intent);
@@ -86,6 +104,46 @@ public class MovieTypeActivity extends AppCompatActivity {
             }
             return false;
         });
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private void setupSearchBarEvents() {
+        searchInput.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                overlayMovieTypePage.setVisibility(View.VISIBLE);
+                searchBar.loadSearchHistoryFromFirebase();
+                searchBar.getSearchHistoryRecyclerView().setVisibility(View.VISIBLE);
+            } else {
+                overlayMovieTypePage.setVisibility(View.GONE);
+                searchBar.getSearchHistoryRecyclerView().setVisibility(View.GONE);
+            }
+        });
+
+        searchInput.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                searchBar.hideKeyboardAndRecyclerView();
+                return true;
+            }
+            return false;
+        });
+
+        findViewById(R.id.movieTypeLayout).setOnTouchListener((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_DOWN && searchBar.getSearchHistoryRecyclerView().getVisibility() == View.VISIBLE) {
+                searchBar.hideKeyboardAndRecyclerView();
+            }
+            return false;
+        });
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if (event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+            if (searchInput.hasFocus()) {
+                searchInput.clearFocus();
+                return true;
+            }
+        }
+        return super.dispatchKeyEvent(event);
     }
 
     private void sendRequestNewestMovies() {
@@ -197,6 +255,10 @@ public class MovieTypeActivity extends AppCompatActivity {
         LatestMovieType.setLayoutManager(new GridLayoutManager(this, spanCount));
         loading1 = findViewById(R.id.progressBar1);
         movieType = findViewById(R.id.movieTypeName);
+
+        searchBar = findViewById(R.id.searchBar);
+        searchInput = searchBar.getSearchInput();
+        overlayMovieTypePage = findViewById(R.id.overlayMovieTypePage);
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
