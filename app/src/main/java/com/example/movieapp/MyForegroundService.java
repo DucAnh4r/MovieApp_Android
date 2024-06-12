@@ -105,7 +105,7 @@ public class MyForegroundService extends Service {
 
         return new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle("MovieApp")
-                .setContentText("Những bộ phim đặc sắc nhất đang chờ đón bạn!\nHãy vào ứng dụng và thưởng thúc ngay nhé!")
+                .setContentText("Những bộ phim đặc sắc nhất đang chờ đón bạn!\nHãy vào ứng dụng và thưởng thức ngay nhé!")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentIntent(pendingIntent)
                 .build();
