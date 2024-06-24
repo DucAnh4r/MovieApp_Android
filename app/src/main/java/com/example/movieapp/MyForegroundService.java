@@ -1,5 +1,7 @@
 package com.example.movieapp;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.app.AlarmManager;
 import android.app.Notification;
@@ -10,14 +12,16 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.IBinder;
 import android.text.format.DateUtils;
 
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 
-import com.example.movieapp.Activities.MainActivity;
+import com.example.movieapp.Activities.IntroActivity;
 
 import java.util.Calendar;
 
@@ -35,7 +39,9 @@ public class MyForegroundService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        startForeground(NOTIFICATION_ID, createNotification());
+        startForeground(NOTIFICATION_ID, createTemporaryNotification());
+        stopForeground(true); // Dừng thông báo foreground
+        showNotification(); // Hiển thị thông báo bình thường
         scheduleUpdate();
     }
 
@@ -86,7 +92,6 @@ public class MyForegroundService extends Service {
         }
     }
 
-
     public static boolean isServiceRunning(Context context) {
         ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
@@ -97,18 +102,46 @@ public class MyForegroundService extends Service {
         return false;
     }
 
-    private Notification createNotification() {
+    private Notification createTemporaryNotification() {
         createNotificationChannel();
 
-        Intent notificationIntent = new Intent(this, MainActivity.class);
+        return new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setContentTitle("MovieApp")
+                .setContentText("Starting service...")
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .build();
+    }
+
+    @SuppressLint("NotificationPermission")
+    private void showNotification() {
+        createNotificationChannel();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                // Yêu cầu quyền nếu chưa được cấp
+                Intent permissionIntent = new Intent(this, IntroActivity.class);
+                permissionIntent.putExtra("requestPermission", true);
+                permissionIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(permissionIntent);
+                return;
+            }
+        }
+
+        Intent notificationIntent = new Intent(this, IntroActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
 
-        return new NotificationCompat.Builder(this, CHANNEL_ID)
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle("MovieApp")
                 .setContentText("Những bộ phim đặc sắc nhất đang chờ đón bạn!\nHãy vào ứng dụng và thưởng thức ngay nhé!")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentIntent(pendingIntent)
+                .setAutoCancel(true)  // Cho phép người dùng xóa thông báo
                 .build();
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if (notificationManager != null) {
+            notificationManager.notify(NOTIFICATION_ID, notification);
+        }
     }
 
     private void createNotificationChannel() {

@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -30,17 +29,14 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.movieapp.Adapters.FilmListAdapter;
 import com.example.movieapp.Adapters.KindOfMovieAdapter;
-import com.example.movieapp.Adapters.SliderAdapters;
-import com.example.movieapp.Domain.SliderItems;
+import com.example.movieapp.Adapters.SliderAdapter;
+import com.example.movieapp.Domain.Slider.SliderItemList;
 import com.example.movieapp.Domain.movieKind.MovieKind;
 import com.example.movieapp.Domain.newRelease.FilmItem;
 import com.example.movieapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.gson.Gson;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapterNewestMovies, adapterSingleMovies, adapterSeriesMovies, adapterCartoon, adapterCategory;
@@ -50,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private ProgressBar loading1, loading3, loading4, loading5;
     private AppCompatButton newBtn, singleBtn, seriesBtn, cartoonBtn;
     private ViewPager2 viewPager2;
+    private SliderAdapter sliderAdapters;
     private Handler slideHandle = new Handler();
     private SwipeRefreshLayout swipeRefreshLayout;
     private String userId;
@@ -234,43 +231,44 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void banners() {
-        List<SliderItems> sliderItems = new ArrayList<>();
+        mRequestQueue = Volley.newRequestQueue(this);
+        mStringRequest1 = new StringRequest(Request.Method.GET, "https://ducanh4r.github.io/Slider_MovieApp_api/slider.json", response -> {
+            Gson gson = new Gson();
 
-        sliderItems.add(new SliderItems(R.drawable.slider1, "the-chien-1917"));
-        sliderItems.add(new SliderItems(R.drawable.slider99, "the-chien-1917"));
-        sliderItems.add(new SliderItems(R.drawable.slider2, "the-avengers-biet-doi-sieu-anh-hung"));
-        sliderItems.add(new SliderItems(R.drawable.slider3, "captain-marvel-dai-uy-marvel"));
-        sliderItems.add(new SliderItems(R.drawable.slider4, "the-gioi-bi-an"));
-        sliderItems.add(new SliderItems(R.drawable.slider5, "avatar-dong-chay-cua-nuoc"));
-        sliderItems.add(new SliderItems(R.drawable.slider6,"anh-trang"));
-        sliderItems.add(new SliderItems(R.drawable.slider7,"lac-vao-xu-oz-vi-dai-quyen-nang"));
-        sliderItems.add(new SliderItems(R.drawable.slider8, "hanh-tinh-cat"));
-        sliderItems.add(new SliderItems(R.drawable.slider9,"alice-o-xu-so-than-tien-2010"));
-        sliderItems.add(new SliderItems(R.drawable.slider10,"cau-be-rung-xanh-2016"));
-        sliderItems.add(new SliderItems(R.drawable.slider11, "chung-ta"));
+            SliderItemList items = gson.fromJson(response, SliderItemList.class);
+            if (items != null && items.getSliderItems() != null) {
+                sliderAdapters = new SliderAdapter(items, viewPager2);
+                viewPager2.setAdapter(sliderAdapters);
+                viewPager2.setClipToPadding(false);
+                viewPager2.setClipChildren(false);
+                viewPager2.setOffscreenPageLimit(3);
+                viewPager2.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
 
-        viewPager2.setAdapter(new SliderAdapters(sliderItems, viewPager2));
-        viewPager2.setClipToPadding(false);
-        viewPager2.setClipChildren(false);
-        viewPager2.setOffscreenPageLimit(3);
-        viewPager2.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
+                CompositePageTransformer compositePageTransformer = new CompositePageTransformer();
+                compositePageTransformer.addTransformer(new MarginPageTransformer(40));
+                compositePageTransformer.addTransformer((page, position) -> {
+                    float r = 1 - Math.abs(position);
+                    page.setScaleY(0.85f + r * 0.15f);
+                });
 
-        CompositePageTransformer compositePageTransformer = new CompositePageTransformer();
-        compositePageTransformer.addTransformer(new MarginPageTransformer(40));
-        compositePageTransformer.addTransformer((page, position) -> {
-            float r = 1 - Math.abs(position);
-            page.setScaleY(0.85f + r * 0.15f);
-        });
-
-        viewPager2.setPageTransformer(compositePageTransformer);
-        viewPager2.setCurrentItem(1);
-        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                slideHandle.removeCallbacks(sliderRunnable);
+                viewPager2.setPageTransformer(compositePageTransformer);
+                viewPager2.setCurrentItem(0, false); // Set trang hiện tại ở giữa danh sách ảo
+                viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+                    @Override
+                    public void onPageSelected(int position) {
+                        super.onPageSelected(position);
+                        slideHandle.removeCallbacks(sliderRunnable);
+                        slideHandle.postDelayed(sliderRunnable, 4000); // Auto-scroll mỗi 3 giây
+                    }
+                });
+                sliderAdapters.startAutoScroll(); // Bắt đầu auto-scroll
+            } else {
+                Log.i("MainActivity", "Slider items are null or empty.");
             }
+        }, error -> {
+            Log.i("MainActivity", "onErrorResponse: " + error.toString());
         });
+        mRequestQueue.add(mStringRequest1);
     }
 
     private Runnable sliderRunnable = new Runnable() {
@@ -283,7 +281,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause(){
         super.onPause();
-        slideHandle.removeCallbacks(sliderRunnable);
+        if (sliderAdapters != null) {
+            sliderAdapters.stopAutoScroll(); // Stop auto-scroll
+        }
     }
 
     @Override
@@ -296,7 +296,10 @@ public class MainActivity extends AppCompatActivity {
             finish();
         } else {
             super.onResume();
-            slideHandle.postDelayed(sliderRunnable, 2000);
+            if (sliderAdapters != null) {
+                sliderAdapters.startAutoScroll(); // Resume auto-scroll
+            }
+
         }
     }
 
@@ -326,10 +329,7 @@ public class MainActivity extends AppCompatActivity {
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int screenHeight = displayMetrics.heightPixels;
         overlayView = findViewById(R.id.overlayView);
-        ConstraintLayout.LayoutParams overlayParams = (ConstraintLayout.LayoutParams) overlayView.getLayoutParams();
 
-        overlayParams.height = screenHeight;
-        overlayView.setLayoutParams(overlayParams);
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
             userId = currentUser.getUid();

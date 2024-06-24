@@ -8,9 +8,11 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -77,8 +79,8 @@ public class DetailActivity extends AppCompatActivity {
     private SwipeRefreshLayout swipeRefreshLayout;
     RecyclerView episodeRecyclerView;
     private List<Episode> episodes;
-    private View searchEpisodesView;
-    private EditText searchBox;
+    private SearchEpisodesView searchEpisodesView, searchEpisodesView2;
+    private EditText searchBox, searchBox2;
     private View overlay;
     AppCompatButton okButton, cancelButton, resetButton;
     private TextView noMatchingEpisodesText;
@@ -88,78 +90,48 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail2);
+        setContentView(R.layout.activity_detail3);
 
         idFilm = getIntent().getStringExtra("slug");
         initView();
         sendRequest();
         swipeRefreshLayout.setOnRefreshListener(this::reloadContent);
 
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int screenHeight = displayMetrics.heightPixels;
-
         overlay = findViewById(R.id.overlay);
-        ConstraintLayout.LayoutParams overlayParams = (ConstraintLayout.LayoutParams) overlay.getLayoutParams();
-        overlayParams.height = screenHeight;
-        overlay.setLayoutParams(overlayParams);
-        searchBox.setOnFocusChangeListener((v, hasFocus) -> {
-            if (hasFocus) {
-                overlay.setVisibility(View.VISIBLE);
 
-                searchEpisodesView.bringToFront();
-
-                ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) searchEpisodesView.getLayoutParams();
-                params.topToTop = ConstraintLayout.LayoutParams.PARENT_ID;
-                params.bottomToBottom = ConstraintLayout.LayoutParams.PARENT_ID;
-                searchEpisodesView.setLayoutParams(params);
-
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.showSoftInput(searchBox, InputMethodManager.SHOW_IMPLICIT);
-
-                okButton.setVisibility(View.VISIBLE);
-                cancelButton.setVisibility(View.VISIBLE);
-                resetButton.setVisibility(View.GONE);
-            } else {
-                overlay.setVisibility(View.GONE);
-
-                okButton.setVisibility(View.GONE);
-                cancelButton.setVisibility(View.GONE);
-                resetButton.setVisibility(View.VISIBLE);
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(searchBox.getWindowToken(), 0);
-
-                ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) searchEpisodesView.getLayoutParams();
-                layoutParams.topToTop = ConstraintLayout.LayoutParams.UNSET;
-                layoutParams.bottomToBottom = ConstraintLayout.LayoutParams.UNSET;
-                searchEpisodesView.setLayoutParams(layoutParams);
-
+        searchBox.setOnTouchListener((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                showOverlayAndKeyboard();
+                return true;
             }
+            return false;
         });
 
-        overlay.setOnTouchListener((v, event) -> {
+        overlay.setOnClickListener(v -> {
             int[] location = new int[2];
-            searchEpisodesView.getLocationOnScreen(location);
+            searchEpisodesView2.getLocationOnScreen(location);
             int x = location[0];
             int y = location[1];
-            int width = searchEpisodesView.getWidth();
-            int height = searchEpisodesView.getHeight();
+            int width = searchEpisodesView2.getWidth();
+            int height = searchEpisodesView2.getHeight();
 
-            float touchX = event.getRawX();
-            float touchY = event.getRawY();
+            float touchX = v.getX(); // Sử dụng v (View v) để lấy tọa độ X của sự kiện click
+            float touchY = v.getY(); // Sử dụng v (View v) để lấy tọa độ Y của sự kiện click
 
             if (touchX < x || touchX > x + width || touchY < y || touchY > y + height) {
-                if(currentSearchValue!=null){
+                if (currentSearchValue != null) {
                     searchBox.setText(currentSearchValue);
                 }
-                searchBox.clearFocus();
+                // Ẩn overlay và ẩn searchview2, hiện searchview1
+                hideOverlayAndKeyboard();
             }
-            return true;
         });
 
+
+
         okButton.setOnClickListener(v -> {
-            currentSearchValue = searchBox.getText().toString();
-            searchBox.clearFocus();
+            currentSearchValue = searchBox2.getText().toString();
+            hideOverlayAndKeyboard();
             if (currentSearchValue.isEmpty()) {
                 resetButton.performClick();
                 return;
@@ -170,20 +142,59 @@ public class DetailActivity extends AppCompatActivity {
         });
 
         cancelButton.setOnClickListener(v -> {
-            searchBox.clearFocus();
-            if(currentSearchValue!=null){
-                searchBox.setText(currentSearchValue);
-            }
+            hideOverlayAndKeyboard();
         });
 
         resetButton.setOnClickListener(v -> {
             EpisodeAdapter episodeAdapter = new EpisodeAdapter(DetailActivity.this, episodes, idFilm);
             episodeRecyclerView.setAdapter(episodeAdapter);
             searchBox.setText("");
+            searchBox2.setText("");
             currentSearchValue = null;
             noMatchingEpisodesText.setVisibility(View.GONE);
             episodeRecyclerView.setVisibility(View.VISIBLE);
         });
+
+        searchBox2.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                okButton.performClick();
+                return true;
+            }
+            return false;
+        });
+    }
+
+    private void showOverlayAndKeyboard(){
+        overlay.setVisibility(View.VISIBLE);
+        searchEpisodesView.setVisibility(View.GONE);
+        searchEpisodesView2.setVisibility(View.VISIBLE);
+        searchEpisodesView2.getResetButton().setVisibility(View.GONE);
+        okButton.setVisibility(View.VISIBLE);
+        cancelButton.setVisibility(View.VISIBLE);
+
+        searchBox2.requestFocus();
+        if(currentSearchValue!=null){
+            searchBox2.setText(currentSearchValue);
+            searchBox2.setSelection(currentSearchValue.length());
+        }
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.showSoftInput(searchBox2, InputMethodManager.SHOW_IMPLICIT);
+        }
+    }
+
+    private void hideOverlayAndKeyboard(){
+        overlay.setVisibility(View.GONE);
+        searchEpisodesView.setVisibility(View.VISIBLE);
+        searchEpisodesView2.setVisibility(View.GONE);
+        searchBox2.setText("");
+
+        searchBox2.clearFocus();
+
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(searchBox2.getWindowToken(), 0);
+        }
     }
 
     private void searchEpisodes(String currentValue) {
@@ -200,6 +211,19 @@ public class DetailActivity extends AppCompatActivity {
                 episodeRecyclerView.setVisibility(View.VISIBLE);
             }
         });
+    }
+
+
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if (event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+            if (searchBox2.hasFocus()) {
+                hideOverlayAndKeyboard();
+                return true;
+            }
+        }
+        return super.dispatchKeyEvent(event);
     }
 
     private void reloadContent() {
@@ -580,10 +604,12 @@ public class DetailActivity extends AppCompatActivity {
 
         episodeRecyclerView = findViewById(R.id.episodeRecyclerView);
         searchEpisodesView = findViewById(R.id.searchEpisodesView);
-        searchBox = findViewById(R.id.searchEpisode);
-        okButton = findViewById(R.id.ok_btn);
-        cancelButton = findViewById(R.id.cancel_btn);
-        resetButton = findViewById(R.id.reset_btn);
+        searchEpisodesView2 = findViewById(R.id.searchEpisodesView2);
+        searchBox = searchEpisodesView.getSearchEpisodeEditText();
+        searchBox2 = searchEpisodesView2.getSearchEpisodeEditText();
+        okButton = searchEpisodesView2.getOkButton();
+        cancelButton = searchEpisodesView2.getCancelButton();
+        resetButton = searchEpisodesView.getResetButton();
 
         noMatchingEpisodesText = findViewById(R.id.noMatchingEpisodesText);
 
