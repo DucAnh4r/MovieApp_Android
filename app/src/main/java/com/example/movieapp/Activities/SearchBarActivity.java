@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,8 +32,10 @@ public class SearchBarActivity extends FrameLayout {
 
     private EditText searchInput;
     private RecyclerView searchHistoryRecyclerView;
+    private ProgressBar progressBar;
     private SearchHistoryAdapter searchHistoryAdapter;
     private List<String> searchHistoryList;
+
 
     public SearchBarActivity(@NonNull Context context) {
         super(context);
@@ -56,7 +59,7 @@ public class SearchBarActivity extends FrameLayout {
 
         searchInput = findViewById(R.id.searchInput);
         searchHistoryRecyclerView = findViewById(R.id.searchHistoryRecyclerView);
-
+        progressBar = findViewById(R.id.progressBar);
         searchHistoryList = new ArrayList<>();
         searchHistoryAdapter = new SearchHistoryAdapter(searchHistoryList);
 
@@ -73,6 +76,7 @@ public class SearchBarActivity extends FrameLayout {
     }
 
     public void loadSearchHistoryFromFirebase() {
+        progressBar.setVisibility(VISIBLE);
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
             DatabaseReference searchHistoryRef = FirebaseDatabase.getInstance().getReference()
@@ -92,6 +96,7 @@ public class SearchBarActivity extends FrameLayout {
                         searchHistoryList.add(searchQuery);
                     }
                     searchHistoryAdapter.notifyDataSetChanged();
+                    progressBar.setVisibility(GONE);
                 }
 
                 @Override

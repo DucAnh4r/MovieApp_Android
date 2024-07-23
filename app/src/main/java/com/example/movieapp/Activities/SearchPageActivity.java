@@ -41,7 +41,6 @@ import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SearchPageActivity extends AppCompatActivity {
@@ -183,8 +182,9 @@ public class SearchPageActivity extends AppCompatActivity {
                 message.setText("Kết quả của từ khóa: " + searchData);
                 more.setVisibility(View.VISIBLE);
                 more.setText("Xem thêm");
-            } else if (items.getData().getParams().getPagination().getTotalItems() <= 10 && items.getData().getParams().getPagination().getTotalItems() > 0) {
+            } else if (items.getData().getParams().getPagination().getTotalItems() <= maxItemCount && items.getData().getParams().getPagination().getTotalItems() > 0) {
                 message.setText("Kết quả của từ khóa: " + searchData);
+                more.setVisibility(View.GONE);
             } else if (items.getData().getParams().getPagination().getTotalItems() == 0) {
                 message.setText("Không có kết quả của từ khóa: " + searchData);
             }
@@ -208,17 +208,35 @@ public class SearchPageActivity extends AppCompatActivity {
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (!snapshot.hasChild("searchedData")) {
-                    userRef.child("searchedData").setValue(new ArrayList<>());
+                boolean isAlreadySaved = false;
+                String existingSearchKey = null;
+
+                if (snapshot.hasChild("searchedData")) {
+                    for (DataSnapshot movieSnapshot : snapshot.child("searchedData").getChildren()) {
+                        String existingSearchData = movieSnapshot.child("searchQuery").getValue(String.class);
+                        if (existingSearchData != null && existingSearchData.equals(searchData)) {
+                            isAlreadySaved = true;
+                            existingSearchKey = movieSnapshot.getKey();
+                            break;
+                        }
+                    }
                 }
-                String searchKey = userRef.child("searchedData").push().getKey();
-                if (!TextUtils.isEmpty(searchKey)) {
-                    HashMap<String, Object> searchDataMap = new HashMap<>();
-                    searchDataMap.put("searchQuery", searchData);
-                    searchDataMap.put("searchTime", ServerValue.TIMESTAMP);
-                    userRef.child("searchedData").child(searchKey).setValue(searchDataMap);
+
+                if (isAlreadySaved) {
+                    // Cập nhật lại searchTime nếu đã trùng giá trị tìm kiếm
+                    if (existingSearchKey != null) {
+                        userRef.child("searchedData").child(existingSearchKey).child("searchTime").setValue(ServerValue.TIMESTAMP);
+                    }
                 } else {
-                    Toast.makeText(SearchPageActivity.this, "Không lưu được dữ liệu tìm kiếm", Toast.LENGTH_SHORT).show();
+                    String searchKey = userRef.child("searchedData").push().getKey();
+                    if (!TextUtils.isEmpty(searchKey)) {
+                        HashMap<String, Object> searchDataMap = new HashMap<>();
+                        searchDataMap.put("searchQuery", searchData);
+                        searchDataMap.put("searchTime", ServerValue.TIMESTAMP);
+                        userRef.child("searchedData").child(searchKey).setValue(searchDataMap);
+                    } else {
+                        Toast.makeText(SearchPageActivity.this, "Không lưu được dữ liệu tìm kiếm", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 
@@ -228,6 +246,8 @@ public class SearchPageActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     private void initView() {
         recyclerviewSearchMovies = findViewById(R.id.SearchMovieView);

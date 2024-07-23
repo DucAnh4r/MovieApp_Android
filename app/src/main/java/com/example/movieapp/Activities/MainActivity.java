@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerviewNewestMovies, recyclerviewSingleMovies, recyclerviewSeriesMovies, recyclerviewCartoon;
     private RequestQueue mRequestQueue;
     private StringRequest mStringRequest1, mStringRequest3, mStringRequest4, mStringRequest5;
-    private ProgressBar loading1, loading3, loading4, loading5;
+    private ProgressBar loading1, loading3, loading4, loading5, loading6;
     private AppCompatButton newBtn, singleBtn, seriesBtn, cartoonBtn;
     private ViewPager2 viewPager2;
     private SliderAdapter sliderAdapters;
@@ -144,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
         sendRequestSeriesMovies();
         sendRequestCartoon();
         banners();
+        searchInput.setText("");
         swipeRefreshLayout.setRefreshing(false);
     }
 
@@ -231,6 +232,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void banners() {
+        loading6.setVisibility(View.VISIBLE);
         mRequestQueue = Volley.newRequestQueue(this);
         mStringRequest1 = new StringRequest(Request.Method.GET, "https://ducanh4r.github.io/Slider_MovieApp_api/slider.json", response -> {
             Gson gson = new Gson();
@@ -268,6 +270,7 @@ public class MainActivity extends AppCompatActivity {
         }, error -> {
             Log.i("MainActivity", "onErrorResponse: " + error.toString());
         });
+        loading6.setVisibility(View.GONE);
         mRequestQueue.add(mStringRequest1);
     }
 
@@ -317,6 +320,7 @@ public class MainActivity extends AppCompatActivity {
         loading3 = findViewById(R.id.progressBar3);
         loading4 = findViewById(R.id.progressBar4);
         loading5 = findViewById(R.id.progressBar5);
+        loading6 = findViewById(R.id.progressBar2);
 
         newBtn = findViewById(R.id.moreNew_btn);
         singleBtn = findViewById(R.id.moreSingle_btn);

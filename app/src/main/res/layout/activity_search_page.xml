@@ -115,6 +115,7 @@
                 android:text="Xem thêm"
                 android:textColor="@color/white"
                 android:textSize="16sp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/SearchMovieView"
                 app:layout_constraintHorizontal_bias="0.498"

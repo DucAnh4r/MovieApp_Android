@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -238,6 +239,8 @@ public class MovieTypeActivity extends AppCompatActivity {
                         sendRequestCartoon();
                         break;
                 }
+                NestedScrollView nestedScrollView = findViewById(R.id.nestedScrollView);
+                nestedScrollView.smoothScrollTo(0, 0);
             }
         });
         paginationAdapter.getPage(page);

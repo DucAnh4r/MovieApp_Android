@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -94,6 +95,8 @@ public class SearchHistoryPageActivity extends AppCompatActivity {
                         .setMessage("Bạn có chắc chắn muốn xóa các mục đã chọn?")
                         .setPositiveButton("Đồng ý", (dialog, which) -> {
                             adapter.deleteSelectedItems();
+                            Toast.makeText(SearchHistoryPageActivity.this, "Xóa lịch sử tìm kiếm thành công", Toast.LENGTH_SHORT).show();
+
                         })
                         .setNegativeButton("Hủy", (dialog, which) -> {
 
