@@ -9,9 +9,14 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -26,7 +31,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
-import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -84,85 +88,68 @@ public class WatchMovieActivity extends AppCompatActivity {
     private MenuItem selectedSpeedMenuItem;
     private PopupMenu popupMenu;
 
-    private View searchEpisodesView;
-    private EditText searchBox;
+    private SearchEpisodesView searchEpisodesView, searchEpisodesView2;
+    private EditText searchBox, searchBox2;
     private View overlay;
     AppCompatButton okButton, cancelButton, resetButton;
     private List<Episode> episodes;
     private List<Episode> originalEpisodes;
     private TextView noMatchingEpisodesText;
     private String currentSearchValue;
+    private ConstraintLayout backLayout, videoplayerLayout, detailLayout;
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_watch_movie);
+        setContentView(R.layout.activity_watch_movie2);
         initView();
         initializePlayerComponents();
         sendRequest();
         swipeRefreshLayout.setOnRefreshListener(this::reloadContent);
         popupMenu = new PopupMenu(this, bt_setting);
         popupMenu.inflate(R.menu.setting_movie_popup);
-        searchBox.setOnFocusChangeListener((v, hasFocus) -> {
-            if (hasFocus) {
-                overlay.setVisibility(View.VISIBLE);
 
-                searchEpisodesView.bringToFront();
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int screenHeight = displayMetrics.heightPixels;
 
-                ViewCompat.setZ(searchEpisodesView, ViewCompat.getZ(overlay) + 1);
+        // Đặt chiều cao của overlayMovieTypePage bằng chiều cao của màn hình
+        View overlayMovieTypePage = findViewById(R.id.overlay);
+        ViewGroup.LayoutParams overlayParams = overlayMovieTypePage.getLayoutParams();
+        overlayParams.height = screenHeight;
+        overlayMovieTypePage.setLayoutParams(overlayParams);
 
-                ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) searchEpisodesView.getLayoutParams();
-                params.topToTop = ConstraintLayout.LayoutParams.PARENT_ID;
-                params.bottomToBottom = ConstraintLayout.LayoutParams.PARENT_ID;
-                searchEpisodesView.setLayoutParams(params);
-
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.showSoftInput(searchBox, InputMethodManager.SHOW_IMPLICIT);
-
-                okButton.setVisibility(View.VISIBLE);
-                cancelButton.setVisibility(View.VISIBLE);
-                resetButton.setVisibility(View.GONE);
-            } else {
-                overlay.setVisibility(View.GONE);
-
-                okButton.setVisibility(View.GONE);
-                cancelButton.setVisibility(View.GONE);
-                resetButton.setVisibility(View.VISIBLE);
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(searchBox.getWindowToken(), 0);
-
-                ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) searchEpisodesView.getLayoutParams();
-                layoutParams.topToTop = ConstraintLayout.LayoutParams.UNSET;
-                layoutParams.bottomToBottom = ConstraintLayout.LayoutParams.UNSET;
-                searchEpisodesView.setLayoutParams(layoutParams);
-
-
+        searchBox.setOnTouchListener((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                showOverlayAndKeyboard();
+                return true;
             }
+            return false;
         });
 
-        overlay.setOnTouchListener((v, event) -> {
+        overlay.setOnClickListener(v -> {
             int[] location = new int[2];
-            searchEpisodesView.getLocationOnScreen(location);
+            searchEpisodesView2.getLocationOnScreen(location);
             int x = location[0];
             int y = location[1];
-            int width = searchEpisodesView.getWidth();
-            int height = searchEpisodesView.getHeight();
+            int width = searchEpisodesView2.getWidth();
+            int height = searchEpisodesView2.getHeight();
 
-            float touchX = event.getRawX();
-            float touchY = event.getRawY();
+            float touchX = v.getX(); // Sử dụng v (View v) để lấy tọa độ X của sự kiện click
+            float touchY = v.getY(); // Sử dụng v (View v) để lấy tọa độ Y của sự kiện click
 
             if (touchX < x || touchX > x + width || touchY < y || touchY > y + height) {
-                if(currentSearchValue!=null){
+                if (currentSearchValue != null) {
                     searchBox.setText(currentSearchValue);
                 }
-                searchBox.clearFocus();
+                // Ẩn overlay và ẩn searchview2, hiện searchview1
+                hideOverlayAndKeyboard();
             }
-            return true;
         });
 
         okButton.setOnClickListener(v -> {
-            currentSearchValue = searchBox.getText().toString();
-            searchBox.clearFocus();
+            currentSearchValue = searchBox2.getText().toString();
+            hideOverlayAndKeyboard();
             if (currentSearchValue.isEmpty()) {
                 resetButton.performClick();
                 return;
@@ -173,21 +160,60 @@ public class WatchMovieActivity extends AppCompatActivity {
         });
 
         cancelButton.setOnClickListener(v -> {
-            searchBox.clearFocus();
-            if(currentSearchValue!=null){
-                searchBox.setText(currentSearchValue);
-            }
+            hideOverlayAndKeyboard();
         });
 
         resetButton.setOnClickListener(v -> {
             EpisodeAdapter episodeAdapter = new EpisodeAdapter(WatchMovieActivity.this, episodes, idFilm);
-            episodeAdapter.setCurrentEpisodeName(currentEpisodeName);
             episodeRecyclerView.setAdapter(episodeAdapter);
             searchBox.setText("");
+            searchBox2.setText("");
             currentSearchValue = null;
             noMatchingEpisodesText.setVisibility(View.GONE);
             episodeRecyclerView.setVisibility(View.VISIBLE);
         });
+
+        searchBox2.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                okButton.performClick();
+                return true;
+            }
+            return false;
+        });
+
+    }
+
+    private void showOverlayAndKeyboard(){
+        overlay.setVisibility(View.VISIBLE);
+        searchEpisodesView.setVisibility(View.GONE);
+        searchEpisodesView2.setVisibility(View.VISIBLE);
+        searchEpisodesView2.getResetButton().setVisibility(View.GONE);
+        okButton.setVisibility(View.VISIBLE);
+        cancelButton.setVisibility(View.VISIBLE);
+
+        searchBox2.requestFocus();
+        if(currentSearchValue!=null){
+            searchBox2.setText(currentSearchValue);
+            searchBox2.setSelection(currentSearchValue.length());
+        }
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.showSoftInput(searchBox2, InputMethodManager.SHOW_IMPLICIT);
+        }
+    }
+
+    private void hideOverlayAndKeyboard(){
+        overlay.setVisibility(View.GONE);
+        searchEpisodesView.setVisibility(View.VISIBLE);
+        searchEpisodesView2.setVisibility(View.GONE);
+        searchBox2.setText("");
+
+        searchBox2.clearFocus();
+
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(searchBox2.getWindowToken(), 0);
+        }
     }
 
     private void searchEpisodes(String currentValue) {
@@ -204,6 +230,17 @@ public class WatchMovieActivity extends AppCompatActivity {
                 episodeRecyclerView.setVisibility(View.VISIBLE);
             }
         });
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if (event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+            if (searchBox2.hasFocus()) {
+                hideOverlayAndKeyboard();
+                return true;
+            }
+        }
+        return super.dispatchKeyEvent(event);
     }
 
     private void reloadContent() {
@@ -255,12 +292,11 @@ public class WatchMovieActivity extends AppCompatActivity {
                             movieData.put("tap", tapList);
                         }
                         userRef.child("watchedMovies").child(movieNodeKey).setValue(movieData);
-                        Toast.makeText(WatchMovieActivity.this, "Lưu thành công", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(WatchMovieActivity.this, "Không lưu được dữ liệu", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(WatchMovieActivity.this, "Lỗi khi tải dữ liệu", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(WatchMovieActivity.this, "Phim đã được lưu trước đó", Toast.LENGTH_SHORT).show();
+
                 }
             }
 
@@ -289,39 +325,49 @@ public class WatchMovieActivity extends AppCompatActivity {
     private void adjustPlayerViewSize(boolean isFullScreen) {
         ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) playerView.getLayoutParams();
         if (isFullScreen) {
-            titleTxt.setVisibility(View.GONE);
-            pic2.setVisibility(View.GONE);
-            oMovieName.setVisibility(View.GONE);
-            backImg.setVisibility(View.GONE);
-            tvTap.setVisibility(View.GONE);
-            yearReleased.setVisibility(View.GONE);
-            episodeCountTextView.setVisibility(View.GONE);
-            episodeRecyclerView.setVisibility(View.GONE);
-            searchEpisodesView.setVisibility(View.GONE);
+            detailLayout.setVisibility(View.GONE);
+            backLayout.setVisibility(View.GONE);
 
+            // Lưu lại chiều cao ban đầu của playerView
             originalPlayerViewHeight = params.height;
+
+            // Lấy chiều rộng của màn hình
+            DisplayMetrics displayMetrics = new DisplayMetrics();
+            getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+            int screenWidth = displayMetrics.widthPixels;
+
+            // Đặt orientation thành landscape
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+
+            // Đặt chiều rộng và chiều cao của playerView bằng với chiều rộng của màn hình
             params.width = ConstraintLayout.LayoutParams.MATCH_PARENT;
-            params.height = ConstraintLayout.LayoutParams.MATCH_PARENT;
-            params.setMargins(0,0,0,0);
+            params.height = screenWidth;
+            hideSystemUI();
+
+            // Vô hiệu hóa SwipeRefreshLayout và chặn sự kiện kéo xuống
+            swipeRefreshLayout.setEnabled(false);
+            swipeRefreshLayout.setOnTouchListener((v, event) -> true);
+
             hideSystemUI();
         } else {
+            detailLayout.setVisibility(View.VISIBLE);
+            backLayout.setVisibility(View.VISIBLE);
+
+            // Lấy chiều rộng của màn hình
+            DisplayMetrics displayMetrics = new DisplayMetrics();
+            getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+            int screenWidth = displayMetrics.widthPixels;
+
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-            params.width = ConstraintLayout.LayoutParams.MATCH_CONSTRAINT;
+
+            // Đặt chiều rộng và chiều cao của playerView bằng với chiều rộng của màn hình
+            params.width = ConstraintLayout.LayoutParams.MATCH_PARENT;
             params.height = originalPlayerViewHeight;
             showSystemUI();
-            swipeRefreshLayout.scrollTo(0,0);
-            titleTxt.setVisibility(View.VISIBLE);
-            pic2.setVisibility(View.VISIBLE);
-            oMovieName.setVisibility(View.VISIBLE);
-            backImg.setVisibility(View.VISIBLE);
-            tvTap.setVisibility(View.VISIBLE);
-            yearReleased.setVisibility(View.VISIBLE);
-            tvTap.setVisibility(View.VISIBLE);
-            episodeCountTextView.setVisibility(View.VISIBLE);
-            episodeRecyclerView.setVisibility(View.VISIBLE);
-            searchEpisodesView.setVisibility(View.VISIBLE);
-            params.setMargins(0,20,0,0);
+
+            // Bật lại SwipeRefreshLayout và cho phép sự kiện kéo xuống
+            swipeRefreshLayout.setEnabled(true);
+            swipeRefreshLayout.setOnTouchListener(null);
         }
         playerView.setLayoutParams(params);
     }
@@ -340,11 +386,9 @@ public class WatchMovieActivity extends AppCompatActivity {
 
     private void showSystemUI() {
         View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
     }
+
 
     void lockScreen(boolean lock) {
         LinearLayout sec_mid = findViewById(R.id.sec_controlvid1);
@@ -603,16 +647,23 @@ public class WatchMovieActivity extends AppCompatActivity {
         episodeCountTextView= findViewById(R.id.episodeCountTextView);
 
         searchEpisodesView = findViewById(R.id.searchEpisodesView);
-        searchBox = findViewById(R.id.searchEpisode);
+        searchEpisodesView2 = findViewById(R.id.searchEpisodesView2);
+        searchBox = searchEpisodesView.getSearchEpisodeEditText();
+        searchBox2 = searchEpisodesView2.getSearchEpisodeEditText();
+        okButton = searchEpisodesView2.getOkButton();
+        cancelButton = searchEpisodesView2.getCancelButton();
+        resetButton = searchEpisodesView.getResetButton();
+
         overlay = findViewById(R.id.overlay);
-        okButton = findViewById(R.id.ok_btn);
-        cancelButton = findViewById(R.id.cancel_btn);
-        resetButton = findViewById(R.id.reset_btn);
 
         noMatchingEpisodesText = findViewById(R.id.noMatchingEpisodesText);
 
         fastForwardButton = findViewById(R.id.exo_ffwd);
         rewindButton = findViewById(R.id.exo_rew);
+
+        backLayout = findViewById(R.id.backimglayout);
+        videoplayerLayout = findViewById(R.id.videoplayerlayout);
+        detailLayout = findViewById(R.id.detaillayout);
 
         if (!isNetworkConnected()) {
             Toast.makeText(this, "Không có kết nối mạng", Toast.LENGTH_SHORT).show();

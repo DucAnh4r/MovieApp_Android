@@ -8,10 +8,12 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -98,6 +100,16 @@ public class DetailActivity extends AppCompatActivity {
         swipeRefreshLayout.setOnRefreshListener(this::reloadContent);
 
         overlay = findViewById(R.id.overlay);
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int screenHeight = displayMetrics.heightPixels;
+
+        // Đặt chiều cao của overlayMovieTypePage bằng chiều cao của màn hình
+        View overlayMovieTypePage = findViewById(R.id.overlay);
+        ViewGroup.LayoutParams overlayParams = overlayMovieTypePage.getLayoutParams();
+        overlayParams.height = screenHeight;
+        overlayMovieTypePage.setLayoutParams(overlayParams);
 
         searchBox.setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
