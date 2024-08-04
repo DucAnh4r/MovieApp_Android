@@ -1,5 +1,6 @@
 package com.example.movieapp.Adapters;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.movieapp.Activities.SearchPageActivity;
 import com.example.movieapp.Domain.SearchHistoryPage;
 import com.example.movieapp.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -53,9 +55,10 @@ public class SearchHistoryPageAdapter extends RecyclerView.Adapter<SearchHistory
         holder.bind(searchHistoryPage, position);
 
         holder.itemView.setOnClickListener(v -> {
-            boolean newState = !checkBoxStates.get(position);
-            checkBoxStates.put(position, newState);
-            holder.checkBox.setChecked(newState);
+            // Khởi động SearchPageActivity và truyền giá trị tìm kiếm qua Intent
+            Intent intent = new Intent(v.getContext(), SearchPageActivity.class);
+            intent.putExtra("searchData", searchHistoryPage.getSearchQuery());
+            v.getContext().startActivity(intent);
         });
     }
 

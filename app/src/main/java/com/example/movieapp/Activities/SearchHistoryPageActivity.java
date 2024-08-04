@@ -59,9 +59,11 @@ public class SearchHistoryPageActivity extends AppCompatActivity {
                     SearchHistoryPage message = new SearchHistoryPage(searchQuery, searchTime);
                     searchHistoryPageList.add(message);
                 }
-                ArrayList<SearchHistoryPage> reversedList = new ArrayList<>(searchHistoryPageList);
-                Collections.reverse(reversedList);
-                adapter = new SearchHistoryPageAdapter(reversedList); // Initialize the adapter
+
+                // Sắp xếp danh sách theo thời gian giảm dần
+                Collections.sort(searchHistoryPageList, (o1, o2) -> Long.compare(o2.getSearchTime(), o1.getSearchTime()));
+
+                adapter = new SearchHistoryPageAdapter(searchHistoryPageList); // Khởi tạo adapter với danh sách đã sắp xếp
                 SearchHistoryPageRecyclerView.setAdapter(adapter);
                 loading1.setVisibility(View.GONE);
             }
@@ -72,6 +74,7 @@ public class SearchHistoryPageActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private void initView() {
         SearchHistoryPageRecyclerView = findViewById(R.id.SearchHistoryPageRecyclerView);

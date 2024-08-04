@@ -101,7 +101,7 @@ public class WatchMovieActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_watch_movie2);
+        setContentView(R.layout.activity_watch_movie);
         initView();
         initializePlayerComponents();
         sendRequest();

@@ -92,7 +92,7 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail3);
+        setContentView(R.layout.activity_detail);
 
         idFilm = getIntent().getStringExtra("slug");
         initView();
