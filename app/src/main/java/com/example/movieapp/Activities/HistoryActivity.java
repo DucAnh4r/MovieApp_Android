@@ -1,12 +1,15 @@
 package com.example.movieapp.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,8 +36,11 @@ import java.util.List;
 
 public class HistoryActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapterSearchMovies;
+    private AppCompatButton deleteBtn;
     private RecyclerView recyclerviewSearchMovies;
     private ProgressBar loading1;
+    private View loadingView;
+    private TextView emptyText;
     private RequestQueue mRequestQueue;
     private List<WatchedMovie> watchedMovieList = new ArrayList<>();
     private List<WatchedMovie> previousWatchedMovieList = new ArrayList<>();
@@ -64,8 +70,15 @@ public class HistoryActivity extends AppCompatActivity {
                         WatchedMovie watchedMovie = new WatchedMovie(slug, name, addTime);
                         currentWatchedMovieList.add(watchedMovie);
                     }
-                    sortWatchedListByAddTime(currentWatchedMovieList);
-                    sendRequestSearchMovies(currentWatchedMovieList, 0);
+                    if (currentWatchedMovieList.isEmpty()) {
+                        loading1.setVisibility(View.GONE);
+                        loadingView.setVisibility(View.GONE);
+                        emptyText.setVisibility(View.VISIBLE);
+                    } else {
+                        emptyText.setVisibility(View.GONE);
+                        sortWatchedListByAddTime(currentWatchedMovieList);
+                        sendRequestSearchMovies(currentWatchedMovieList, 0);
+                    }
                 }
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -86,6 +99,7 @@ public class HistoryActivity extends AppCompatActivity {
     private void sendRequestSearchMovies(List<WatchedMovie> watchedMovieList, int index) {
         if (index >= watchedMovieList.size()) {
             loading1.setVisibility(View.GONE);
+            loadingView.setVisibility(View.GONE);
             return;
         }
         WatchedMovie watchedMovie = watchedMovieList.get(index);
@@ -100,9 +114,13 @@ public class HistoryActivity extends AppCompatActivity {
             } else {
                 ((SearchAdapter) adapterSearchMovies).addData(searchData);
             }
+            if(index == watchedMovieList.size()-1){
+                loadingView.setVisibility(View.GONE);
+            }
             sendRequestSearchMovies(watchedMovieList, index + 1);
         }, error -> {
             loading1.setVisibility(View.GONE);
+            loadingView.setVisibility(View.GONE);
             Log.i("UILover", "onErrorResponse: " + error.toString());
             sendRequestSearchMovies(watchedMovieList, index + 1);
         });
@@ -115,9 +133,17 @@ public class HistoryActivity extends AppCompatActivity {
 
     private void initView() {
         recyclerviewSearchMovies = findViewById(R.id.HistoryListView);
+        deleteBtn = findViewById(R.id.deleteHistory_btn);
         recyclerviewSearchMovies.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         loading1 = findViewById(R.id.progressBar1);
+        loadingView = findViewById(R.id.loadingView);
+        emptyText = findViewById(R.id.textView11);
         mRequestQueue = Volley.newRequestQueue(this);
+
+        deleteBtn.setOnClickListener(v ->  {
+            Intent intent = new Intent(HistoryActivity.this, WatchHistoryPageActivity.class);
+            startActivity(intent);
+        });
     }
 
 }
