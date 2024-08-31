@@ -198,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
         mRequestQueue = Volley.newRequestQueue(this);
         loading4.setVisibility(View.VISIBLE);
         seriesBtn.setVisibility(View.GONE);
-        mStringRequest4 = new StringRequest(Request.Method.GET, " https://phimapi.com/v1/api/danh-sach/phim-bo", response -> {
+        mStringRequest4 = new StringRequest(Request.Method.GET, "https://phimapi.com/v1/api/danh-sach/phim-bo", response -> {
             Gson gson = new Gson();
             loading4.setVisibility(View.GONE);
             seriesBtn.setVisibility(View.VISIBLE);

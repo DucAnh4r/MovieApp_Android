@@ -4,6 +4,12 @@
         android:id="@+id/menu_edit"
         android:title="Chỉnh sửa thông tin cá nhân" />
     <item
+        android:id="@+id/menu_watch_history"
+        android:title="Xóa lịch sử xem" />
+    <item
+        android:id="@+id/menu_search_history"
+        android:title="Lịch sử tìm kiếm" />
+    <item
         android:id="@+id/menu_logout"
         android:title="Đăng xuất" />
 </menu>

@@ -167,7 +167,18 @@ public class ProfileActivity extends AppCompatActivity {
                 Intent intent = new Intent(ProfileActivity.this, EditProfileActivity.class);
                 startActivityForResult(intent, 1);
                 return true;
-            } else if (item.getItemId() == R.id.menu_logout) {
+            }
+            else if(item.getItemId() == R.id.menu_watch_history){
+                Intent intent = new Intent(ProfileActivity.this, WatchHistoryPageActivity.class);
+                startActivityForResult(intent, 1);
+                return true;
+            }
+            else if(item.getItemId() == R.id.menu_search_history){
+                Intent intent = new Intent(ProfileActivity.this, SearchHistoryPageActivity.class);
+                startActivityForResult(intent, 1);
+                return true;
+            }
+            else if (item.getItemId() == R.id.menu_logout) {
                 new AlertDialog.Builder(ProfileActivity.this)
                         .setTitle("Xác nhận đăng xuất")
                         .setMessage("Bạn có chắc chắn muốn đăng xuất?")
