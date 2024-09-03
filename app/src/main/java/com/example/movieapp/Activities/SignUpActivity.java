@@ -31,6 +31,14 @@ public class SignUpActivity extends AppCompatActivity {
         initView();
     }
 
+    private boolean checkPassword(){
+        String password = passTxt.getText().toString();
+        if(password.length()<6){
+            return false;
+        }
+        return true;
+    }
+
     private void initView() {
         userNameTxt = findViewById(R.id.userName);
         emailTxt = findViewById(R.id.email);
@@ -46,18 +54,25 @@ public class SignUpActivity extends AppCompatActivity {
         });
 
         signUpBtn.setOnClickListener(v -> {
+            if(checkPassword()==false){
+                Toast.makeText(SignUpActivity.this, "Mật khẩu phải có từ 6 kí tự trở lên! Vui lòng nhập lại mật khấu!", Toast.LENGTH_SHORT).show();
+                passTxt.setText("");
+                cfPassTxt.setText("");
+                return;
+            }
             String userName = userNameTxt.getText().toString().trim();
             String email = emailTxt.getText().toString().trim();
             String password = passTxt.getText().toString().trim();
             String confirmPassword = cfPassTxt.getText().toString().trim();
 
             if (userName.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
-                Toast.makeText(SignUpActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignUpActivity.this, "Vui lòng nhập đủ thông tin!", Toast.LENGTH_SHORT).show();
                 return;
             }
 
             if (!password.equals(confirmPassword)) {
-                Toast.makeText(SignUpActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignUpActivity.this, "Mật khẩu nhập lại không trùng khớp!", Toast.LENGTH_SHORT).show();
+                cfPassTxt.setText("");
                 return;
             }
 
@@ -75,9 +90,9 @@ public class SignUpActivity extends AppCompatActivity {
                             startActivity(intent);
                             finish();
 
-                            Toast.makeText(SignUpActivity.this, "User signed up successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUpActivity.this, "Đăng ký thành công! Chúc bạn xem phim vui vẻ <3", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(SignUpActivity.this, "Failed to sign up user", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUpActivity.this, "Đăng ký không thành công!", Toast.LENGTH_SHORT).show();
                         }
                     });
         });
