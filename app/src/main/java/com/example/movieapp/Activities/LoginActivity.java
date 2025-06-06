@@ -3,6 +3,7 @@ package com.example.movieapp.Activities;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -191,10 +192,12 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this, "User is not authenticated.", Toast.LENGTH_SHORT).show();
                             }
                         } else {
+                            Log.e("Auth", "Sign-in failed: " + task.getException().getMessage());
                             Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                         }
                     });
         } else {
+            Log.e("GoogleSignIn", "Google Sign-In failed, status: " + result.getStatus());
             Toast.makeText(LoginActivity.this, "Google Sign-In failed.", Toast.LENGTH_SHORT).show();
         }
     }

@@ -33,10 +33,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     private boolean checkPassword(){
         String password = passTxt.getText().toString();
-        if(password.length()<6){
-            return false;
-        }
-        return true;
+        return password.length() >= 6;
     }
 
     private void initView() {
@@ -92,7 +89,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                             Toast.makeText(SignUpActivity.this, "Đăng ký thành công! Chúc bạn xem phim vui vẻ <3", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(SignUpActivity.this, "Đăng ký không thành công!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUpActivity.this, "Đăng ký không thành công! Hãy kiểm tra lại email hoặc tên đăng nhập!", Toast.LENGTH_SHORT).show();
                         }
                     });
         });

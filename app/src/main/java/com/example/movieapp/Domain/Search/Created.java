@@ -1,9 +1,10 @@
-package com.example.movieapp.Domain.movieKind;
+
+package com.example.movieapp.Domain.Search;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Modified {
+public class Created {
 
     @SerializedName("time")
     @Expose

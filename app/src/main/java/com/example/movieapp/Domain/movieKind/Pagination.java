@@ -1,4 +1,3 @@
-
 package com.example.movieapp.Domain.movieKind;
 
 import com.google.gson.annotations.Expose;

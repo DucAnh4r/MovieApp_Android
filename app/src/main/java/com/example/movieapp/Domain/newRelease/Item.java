@@ -6,6 +6,12 @@ import com.google.gson.annotations.SerializedName;
 
 public class Item {
 
+    @SerializedName("tmdb")
+    @Expose
+    private Tmdb tmdb;
+    @SerializedName("imdb")
+    @Expose
+    private Imdb imdb;
     @SerializedName("modified")
     @Expose
     private Modified modified;
@@ -30,6 +36,22 @@ public class Item {
     @SerializedName("year")
     @Expose
     private Integer year;
+
+    public Tmdb getTmdb() {
+        return tmdb;
+    }
+
+    public void setTmdb(Tmdb tmdb) {
+        this.tmdb = tmdb;
+    }
+
+    public Imdb getImdb() {
+        return imdb;
+    }
+
+    public void setImdb(Imdb imdb) {
+        this.imdb = imdb;
+    }
 
     public Modified getModified() {
         return modified;

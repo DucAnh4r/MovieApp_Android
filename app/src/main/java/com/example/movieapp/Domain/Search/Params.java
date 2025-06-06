@@ -21,10 +21,10 @@ public class Params {
     private List<String> filterCountry;
     @SerializedName("filterYear")
     @Expose
-    private String filterYear;
+    private List<String> filterYear;
     @SerializedName("filterType")
     @Expose
-    private String filterType;
+    private List<String> filterType;
     @SerializedName("sortField")
     @Expose
     private String sortField;
@@ -67,19 +67,19 @@ public class Params {
         this.filterCountry = filterCountry;
     }
 
-    public String getFilterYear() {
+    public List<String> getFilterYear() {
         return filterYear;
     }
 
-    public void setFilterYear(String filterYear) {
+    public void setFilterYear(List<String> filterYear) {
         this.filterYear = filterYear;
     }
 
-    public String getFilterType() {
+    public List<String> getFilterType() {
         return filterType;
     }
 
-    public void setFilterType(String filterType) {
+    public void setFilterType(List<String> filterType) {
         this.filterType = filterType;
     }
 
