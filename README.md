@@ -3,7 +3,7 @@
 
 ## Mục lục
 - [Mô tả](#mô-tả)
-- [Công nghệ được sử dụng](#công-nghệ-được-sử-dụng)
+- [Công nghệ sử dụng](#công-nghệ-sử-dụng)
 - [Tính năng nổi bật](#tính-năng-nổi-bật)
 - [Hướng dẫn cài đặt](#hướng-dẫn-cài-đặt)
 - [Ảnh demo](#ảnh-demo)
