@@ -1,11 +1,20 @@
 
 # MovieApp Android
 
+## Mục lục
+- [Mô tả](#mô-tả)
+- [Công nghệ được sử dụng](#công-nghệ-được-sử-dụng)
+- [Tính năng nổi bật](#tính-năng-nổi-bật)
+- [Hướng dẫn cài đặt](#hướng-dẫn-cài-đặt)
+- [Ảnh demo](#ảnh-demo)
+- [Link tải app](#link-tải-app)
+- [Hỗ trợ](#hỗ-trợ)
+
+## Mô tả
 MovieApp là một ứng dụng Android cho phép người dùng tìm kiếm, xem thông tin và xem các bộ phim. Ứng dụng sử dụng API từ kkPhim để lấy dữ liệu phim, bao gồm tiêu đề, mô tả, hình ảnh, đánh giá và phim. Giao diện người dùng được thiết kế thân thiện và dễ sử dụng, giúp người dùng dễ dàng tìm kiếm và khám phá các bộ phim mới.
 
 
 ## Công nghệ sử dụng
-
 Ngôn ngữ lập trình: Java
 - **Android SDK:** Tối thiểu 21 (Android 5.0 Lollipop)
 Thư viện chính:
@@ -19,7 +28,6 @@ Thư viện chính:
 
 
 ## Tính năng nổi bật
-
 - **Tìm kiếm phim:** Người dùng có thể tìm kiếm các bộ phim theo tên.
 - **Xem thông tin chi tiết:** Hiển thị thông tin chi tiết về bộ phim, bao gồm mô tả, và hình ảnh.
 - **Xem phim:** Người dùng có thể phát và xem các bộ phim trực tiếp trong ứng dụng.
@@ -29,8 +37,8 @@ Thư viện chính:
 - **Lịch sử tìm kiếm:** Lưu lại lịch sử tìm kiếm của người dùng để dễ dàng truy cập lại.
 - **Đăng nhập bằng Google:** Người dùng có thể đăng nhập vào ứng dụng bằng tài khoản Google của họ.
 - **Đăng nhập bằng Facebook:** Người dùng có thể đăng nhập vào ứng dụng bằng tài khoản Facebook của họ.
-## Hướng dẫn cài đặt
 
+## Hướng dẫn cài đặt
 Bước 1: Clone repository
 ```bash
 git clone https://github.com/DucAnh4r/MovieApp_Android.git
@@ -50,6 +58,7 @@ Bước 3: Cấu hình API Key
 Bước 3: Chạy ứng dụng
 - Kết nối thiết bị Android hoặc sử dụng trình giả lập.
 - Nhấn nút "Run" trong Android Studio để biên dịch và chạy ứng dụng.
+
 ## Ảnh demo
 - **Trang chủ**
 ![App Screenshot](https://res.cloudinary.com/dkjwrhxm6/image/upload/v1749218487/3bf61041-de21-459b-82f5-7b5cb727b0f5_jblkdb.jpg)
@@ -64,10 +73,8 @@ Bước 3: Chạy ứng dụng
 ![App Screenshot](https://res.cloudinary.com/dkjwrhxm6/image/upload/v1749218485/a68fb034-e2f1-4e64-9c75-d4a44710556f_i2fvog.jpg)
 
 ## Link tải app
-
 https://drive.google.com/drive/folders/1KGqk0wwrvtfWGBAPDBcADd0brchOPztt
 
 
 ## Hỗ trợ
-
 Để được hỗ trợ, vui lòng gửi email đến manhduc889@gmail.com.
