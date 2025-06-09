@@ -47,7 +47,7 @@ Bước 3: Cấu hình API Key
 <string name="facebook_app_id">YOUR_FACEBOOK_APP_ID</string>
 <string name="facebook_client_token">YOUR_FACEBOOK_CLIENT_TOKEN</string>
 ```
-Bước 4: Chạy ứng dụng
+Bước 3: Chạy ứng dụng
 - Kết nối thiết bị Android hoặc sử dụng trình giả lập.
 - Nhấn nút "Run" trong Android Studio để biên dịch và chạy ứng dụng.
 ## Ảnh demo
