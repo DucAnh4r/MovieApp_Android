@@ -1,0 +1,46 @@
+# Gradle
+.gradle/
+build/
+**/build/
+
+# Firebase
+android/app/google-services.json
+
+# Local configuration
+local.properties
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# MacOS
+.DS_Store
+
+# Log files
+*.log
+
+# Keystore (nếu bạn dùng để ký app)
+*.jks
+*.keystore
+
+# Google Services Plugin (Generated)
+**/google-services.json
+**/google-services.xml
+
+# Android Studio Navigation Editor temp files
+.navigation/
+
+# Coverage reports
+*.ec
+
+# Crashlytics and Firebase Analytics
+crashlytics.properties
+fabric.properties
+
+# Others
+captures/
+output.json
+app/google-services.json
+
