@@ -44,3 +44,5 @@ captures/
 output.json
 app/google-services.json
 
+gradle.properties
+app/src/main/res/values/strings.xml

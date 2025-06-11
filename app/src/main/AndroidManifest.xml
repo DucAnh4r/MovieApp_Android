@@ -50,7 +50,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.gms.signin.API_KEY"
-            android:value="@string/default_web_client_id" />
+            android:value="@string/web_client_id" />
 
         <receiver
             android:name=".AlarmReceiver"
